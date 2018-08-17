@@ -1,0 +1,29 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+html {
+    font-size: 16px;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 40px; /* Margin bottom by footer height */
+}
+
+button, input, textarea {
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    border: none;
+    resize: none;
+
+    &:focus {
+        outline: none !important;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

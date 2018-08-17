@@ -1,0 +1,42 @@
+@import 'src/variables.scss';
+
+nav {
+    a {
+        height: 40px;
+
+        &:link {
+            text-decoration: none;
+        }
+
+        span.title {
+            color: $alto-white;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            line-height: 40px;
+            vertical-align: top;
+        }
+
+        img.logo {
+            vertical-align: initial;
+            height: 40px;
+        }
+    }
+
+    div.ng {
+        position: absolute;
+        top: 10px;
+        left: -30px;
+        transform: rotate(-45deg);
+        line-height: 1rem;
+        opacity: 0.8;
+        color: $white;
+
+        &::before {
+            content: "ANG";
+            padding: 0 30px;
+            background-color: $crimson-red;
+            border: 1px solid yellow;
+        }
+    }
+}
