@@ -1,7 +1,16 @@
 <nav class="navbar sticky-top bg-dark p-2 pr-2">
     <a routerLink="/dashboard">
         <img class="logo mr-2 p-0" src="/assets/small_logo.png">
-        <span class="title">Reporting Platform</span>
+        <span class="title">SNOMED CT Angular Template</span>
     </a>
-    <div class="ng"></div>
+    <ng-container [ngSwitch]="environment">
+        <div *ngSwitchCase="'local'" class="banner local"></div>
+        <div *ngSwitchCase="'dev'" class="banner dev"></div>
+        <div *ngSwitchCase="'uat'" class="banner uat"></div>
+        <div *ngSwitchCase="'training'" class="banner training"></div>
+        <div *ngSwitchDefault class="banner d-none"></div>
+    </ng-container>
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">-->
+        <!--<span class="navbar-toggler-icon"></span>-->
+    <!--</button>-->
 </nav>
