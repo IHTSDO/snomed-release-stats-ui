@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SnomedFooterComponent implements OnInit {
 
+    year: number = new Date().getFullYear();
     constructor() {
     }
 
