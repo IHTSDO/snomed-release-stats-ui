@@ -1,5 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import 'src/variables.scss';
+@import '~src/variables.scss';
 
 html {
     font-size: 62.5%;
@@ -82,4 +82,12 @@ div.typeahead-box {
 
 div.typeahead-textarea {
     top: 10rem;
+}
+
+ngb-typeahead-window.dropdown-menu {
+    font-size: 1.4rem;
+
+    button.dropdown-item {
+        font-weight: 300;
+    }
 }
