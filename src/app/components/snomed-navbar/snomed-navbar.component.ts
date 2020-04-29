@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SnomedNavbarComponent implements OnInit {
 
-    private environment: string;
+    environment: string;
 
     constructor() {
         this.environment = window.location.host.split(/[.]/)[0].split(/[-]/)[0];

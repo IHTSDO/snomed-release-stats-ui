@@ -5,12 +5,15 @@ html {
     font-size: 62.5%;
     position: relative;
     min-height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-body#main-body {
+body {
     font-family: 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    color: $black;
     letter-spacing: 0.5px;
 }
 
@@ -25,32 +28,50 @@ body#main-body {
     src: url('assets/Roboto-Regular.ttf');
 }
 
-div, p, h1, h2, h3, h4, h5, h6 {
+h2 {
+    font-size: 1.8rem;
     font-weight: 300;
 }
 
-.footer-margin {
-    margin-bottom: 40px;
+h3 {
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+
+div, p, a, select, label {
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 button, input, textarea {
+    font-size: 1.2rem;
     font-weight: 300;
     letter-spacing: 0.5px;
     border: none;
     resize: none;
 
-    &:focus {
+    &:focus, &:active {
         outline: none !important;
     }
 
     &:hover {
         cursor: pointer;
     }
+
+    &.btn {
+        font-size: 1.2rem;
+        font-weight: 300;
+        letter-spacing: 1.5px;
+    }
 }
 
-button.btn {
-    font-size: 1.4rem;
-    letter-spacing: 1.5px;
+.footer-margin {
+    margin-bottom: 4rem;
 }
 
 .mat-tooltip {
@@ -60,32 +81,10 @@ button.btn {
     max-width: 30rem !important;
 }
 
-div.typeahead-box {
-    background-color: $gallery-white;
-    //border: 1px solid $alto-white;
-    max-height: 20rem;
-    position: absolute;
-    top: 4.5rem;
-    left: 0;
-    overflow-y: scroll;
-    z-index: 10002;
-
-    div.typeahead {
-        font-size: 1.4rem;
-        cursor: pointer;
-
-        &:hover {
-            background-color: $alto-white;
-        }
-    }
-}
-
-div.typeahead-textarea {
-    top: 10rem;
-}
-
 ngb-typeahead-window.dropdown-menu {
-    font-size: 1.4rem;
+    max-width: 30vw;
+    font-size: 1.2rem;
+    overflow-y: hidden;
 
     button.dropdown-item {
         font-weight: 300;

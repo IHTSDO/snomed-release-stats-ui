@@ -10,13 +10,14 @@
             "prefix": "app",
             "schematics": {
                 "@schematics/angular:component": {
-                    "styleext": "scss"
+                    "style": "scss"
                 }
             },
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+            "aot": true,
                         "outputPath": "dist/angular-template",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -24,12 +25,16 @@
                         "tsConfig": "src/tsconfig.app.json",
                         "assets": [
                             "src/favicon.ico",
+                            "src/favicon_grey.ico",
+                            "src/favicon_red.ico",
+                            "src/favicon_green.ico",
+                            "src/favicon_yellow.ico",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
                             "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "./node_modules/@fortawesome/fontawesome-free/css/all.css"
+                            "./node_modules/@fortawesome/fontawesome-free/css/all.css",
+                            "src/styles.scss"
                         ],
                         "scripts": [
                             "./node_modules/jquery/dist/jquery.min.js",
@@ -39,6 +44,12 @@
                     },
                     "configurations": {
                         "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
