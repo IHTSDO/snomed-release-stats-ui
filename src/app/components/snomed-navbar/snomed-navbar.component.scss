@@ -10,7 +10,7 @@ nav {
         }
 
         span.title {
-            color: $alto-white;
+            color: $white;
             font-weight: 300;
             letter-spacing: 1.5px;
             line-height: 40px;
@@ -36,44 +36,32 @@ nav {
     div.local::before {
         content: 'LOC';
         padding: 0 30px;
-        background-color: $emperor-grey;
-        border: 1px solid $yellow;
+        background-color: $river-bed;
+        border: 1px solid $sea-buckthorn;
     }
 
     div.dev::before {
         content: 'DEV';
         padding: 0 30px;
-        background-color: $crimson-red;
-        border: 1px solid $yellow;
+        background-color: $mandy;
+        border: 1px solid $sea-buckthorn;
     }
 
     div.uat::before {
         content: 'UAT';
         padding: 0 30px;
-        background-color: $curious-blue;
-        border: 1px solid $yellow;
+        background-color: $cerulean;
+        border: 1px solid $sea-buckthorn;
     }
 
     div.training::before {
         content: 'TRN';
         padding: 0 30px;
-        background-color: $forest-green;
-        border: 1px solid $yellow;
+        background-color: $fruit-salad;
+        border: 1px solid $sea-buckthorn;
     }
 
     button {
         border: none;
-    }
-}
-
-div#navbarToggleExternalContent {
-    a {
-        color: $alto-white;
-        font-weight: 300;
-
-        &:hover {
-            color: $pacific-blue;
-            text-decoration: none;
-        }
     }
 }

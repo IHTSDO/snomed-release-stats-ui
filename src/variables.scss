@@ -1,26 +1,3 @@
-// SNOMED COLOURS
-
-// WHITES
-$almost-white: #D2D2D2;
-$alto-white: #E0E0E0;
-$blinding-white: #E9E9E9;
-$gallery-white: #FAFAFA;
-$white: #FFFFFF;
-$antiquewhite: antiquewhite;
-
-// GREYS
-$ghost-grey: #C8CFD6;
-$regent-grey: #9FABB7;
-$slate-grey: #708090;
-$dove-grey: #707070;
-$scorpion-grey: #606060;
-$emperor-grey: #505050;
-
-// BLACK
-$darkish: #666F78;
-$dark: #56606A;
-$bootstrap-black: #343A40;
-$black: #000000;
 
 // BLUES
 $steel-blue: #4682B4;
@@ -33,25 +10,310 @@ $pacific-blue: #009ACD;
 $curious-blue: #1A7DE0;
 $snomed-blue: #00A9E0;
 
-// REDS
-$new-york-red: #D77C7C;
-$crimson-red: #D71431;
-$pomegranate-red: #F0312D;
-$indianred: indianred;
 
-// ORANGES
-$mango-orange: #FBBB5B;
+////////////////////////////////////////////////////////////////////////
+// WHITE ///////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$white: #FFFFFF;
+.text-white {
+    color: $white;
+}
+.bg-white {
+    background-color: $white;
+}
 
-// GREENS
-$forest-green: #2D8C28;
-$apple-green: #38C431;
-$spring-rain-green: #ABD1A9;
-$pixie-green: #C4DEC2;
-$norway-green: #96C593;
+////////////////////////////////////////////////////////////////////////
+// GREY ////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$hit-grey: #A5AAAD;
+.text-hit-grey {
+    color: $hit-grey;
+}
+.bg-hit-grey {
+    background-color: $hit-grey;
+}
 
-// YELLOWS
-$yellow: #FFFF00;
-$lightyellow: lightyellow;
+$hit-grey-lighter: #C0C3C5;
+.text-hit-grey-lighter {
+    color: $hit-grey-lighter;
+}
+.bg-hit-grey-lighter {
+    background-color: $hit-grey-lighter;
+}
 
-// PURPLES
-$purple: #6A1D85;
+$hit-grey-darker: #737679;
+.text-hit-grey-darker {
+    color: $hit-grey-darker;
+}
+.bg-hit-grey-darker {
+    background-color: $hit-grey-darker;
+}
+
+$athens-grey: #E6E9EE;
+.text-athens-grey {
+    color: $athens-grey;
+}
+.bg-athens-grey {
+    background-color: $athens-grey;
+}
+
+$athens-grey-lighter: #F2F4F6;
+.text-athens-grey-lighter {
+    color: $athens-grey-lighter;
+}
+.bg-athens-grey-lighter {
+    background-color: $athens-grey-lighter;
+}
+
+$athens-grey-darker: #D5D7DA;
+.text-athens-grey-darker {
+    color: $athens-grey-darker;
+}
+.bg-athens-grey-darker {
+    background-color: $athens-grey-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// BLACK ///////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$black: #000000;
+.text-black {
+    color: $black;
+}
+.bg-black {
+    background-color: $black;
+}
+
+$river-bed: #434A55;
+.text-river-bed {
+    color: $river-bed;
+}
+.bg-river-bed {
+    background-color: $river-bed;
+}
+
+$river-bed-lighter: #7B8088;
+.text-river-bed-lighter {
+    color: $river-bed-lighter;
+}
+.bg-river-bed-lighter {
+    background-color: $river-bed-lighter;
+}
+
+$river-bed-darker: #2E333B;
+.text-river-bed-darker {
+    color: $river-bed-darker;
+}
+.bg-river-bed-darker {
+    background-color: $river-bed-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// RED /////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$mandy: #EB4C59;
+.text-mandy {
+    color: $mandy;
+}
+.bg-mandy {
+    background-color: $mandy;
+}
+
+$mandy-lighter: #F1818A;
+.text-mandy-lighter {
+    color: $mandy-lighter;
+}
+.bg-mandy-lighter {
+    background-color: $mandy-lighter;
+}
+
+$mandy-darker: #A4353E;
+.text-mandy-darker {
+    color: $mandy-darker;
+}
+.bg-mandy-darker {
+    background-color: $mandy-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// GREEN ///////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$fruit-salad: #4EA24E;
+.text-fruit-salad {
+    color: $fruit-salad;
+}
+.bg-fruit-salad {
+    background-color: $fruit-salad;
+}
+
+$fruit-salad-lighter: #83BD83;
+.text-fruit-salad-lighter {
+    color: $fruit-salad-lighter;
+}
+.bg-fruit-salad-lighter {
+    background-color: $fruit-salad-lighter;
+}
+
+$fruit-salad-darker: #367136;
+.text-fruit-salad-darker {
+    color: $fruit-salad-darker;
+}
+.bg-fruit-salad-darker {
+    background-color: $fruit-salad-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// BLUE ////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$cerulean: #49A8DB;
+.text-cerulean {
+    color: $cerulean;
+}
+.bg-cerulean {
+    background-color: $cerulean;
+}
+
+$cerulean-lighter: #7FC2E5;
+.text-cerulean-lighter {
+    color: $cerulean-lighter;
+}
+.bg-cerulean-lighter {
+    background-color: $cerulean-lighter;
+}
+
+$cerulean-darker: #337599;
+.text-cerulean-darker {
+    color: $cerulean-darker;
+}
+.bg-cerulean-darker {
+    background-color: $cerulean-darker;
+}
+
+$blumine: #124F6B;
+.text-blumine {
+    color: $blumine;
+}
+.bg-blumine {
+    background-color: $blumine;
+}
+
+$blumine-lighter: #598397;
+.text-blumine-lighter {
+    color: $blumine-lighter;
+}
+.bg-blumine-lighter {
+    background-color: $blumine-lighter;
+}
+
+$blumine-darker: #0C374A;
+.text-blumine-darker {
+    color: $blumine-darker;
+}
+.bg-blumine-darker {
+    background-color: $blumine-darker;
+}
+
+$anakiwa: #C3E7FE;
+.text-anakiwa {
+    color: $anakiwa;
+}
+.bg-anakiwa {
+    background-color: $anakiwa;
+}
+
+$anakiwa-lighter: #EBF8FF;
+.text-anakiwa-lighter {
+    color: $anakiwa-lighter;
+}
+.bg-anakiwa-lighter {
+    background-color: $anakiwa-lighter;
+}
+
+$anakiwa-darker: #A5DDFD;
+.text-anakiwa-darker {
+    color: $anakiwa-darker;
+}
+.bg-anakiwa-darker {
+    background-color: $anakiwa-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// ORANGE //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$sea-buckthorn: #F8A73D;
+.text-sea-buckthorn {
+    color: $sea-buckthorn;
+}
+.bg-sea-buckthorn {
+    background-color: $sea-buckthorn;
+}
+
+$sea-buckthorn-lighter: #FAC177;
+.text-sea-buckthorn-lighter {
+    color: $sea-buckthorn-lighter;
+}
+.bg-sea-buckthorn-lighter {
+    background-color: $sea-buckthorn-lighter;
+}
+
+$sea-buckthorn-darker: #AD742A;
+.text-sea-buckthorn-darker {
+    color: $sea-buckthorn-darker;
+}
+.bg-sea-buckthorn-darker {
+    background-color: $sea-buckthorn-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// YELLOW //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$candlelight: #FBDB13;
+.text-candlelight {
+    color: $candlelight;
+}
+.bg-candlelight {
+    background-color: $candlelight;
+}
+
+$candlelight-lighter: #FFF094;
+.text-candlelight-lighter {
+    color: $candlelight-lighter;
+}
+.bg-candlelight-lighter {
+    background-color: $candlelight-lighter;
+}
+
+$candlelight-darker: #D6B800;
+.text-candlelight-darker {
+    color: $candlelight-darker;
+}
+.bg-candlelight-darker {
+    background-color: $candlelight-darker;
+}
+
+////////////////////////////////////////////////////////////////////////
+// PURPLE //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+$wisteria: #A060AE;
+.text-wisteria {
+    color: $wisteria;
+}
+.bg-wisteria {
+    background-color: $wisteria;
+}
+
+$wisteria-lighter: #BC8FC6;
+.text-wisteria-lighter {
+    color: $wisteria-lighter;
+}
+.bg-wisteria-lighter {
+    background-color: $wisteria-lighter;
+}
+
+$wisteria-darker: #704379;
+.text-wisteria-darker {
+    color: $wisteria-darker;
+}
+.bg-wisteria-darker {
+    background-color: $wisteria-darker;
+}
