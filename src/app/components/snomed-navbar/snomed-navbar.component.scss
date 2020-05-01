@@ -1,8 +1,8 @@
-@import 'src/variables.scss';
+@import '~src/variables.scss';
 
 nav {
-    a {
-        height: 40px;
+    a.logo {
+        height: 4rem;
         font-size: 1.6rem;
 
         &:link {
@@ -10,58 +10,85 @@ nav {
         }
 
         span.title {
-            color: $white;
             font-weight: 300;
             letter-spacing: 1.5px;
-            line-height: 40px;
+            line-height: 4rem;
             vertical-align: top;
         }
 
         img.logo {
             vertical-align: initial;
-            height: 40px;
+            height: 4rem;
         }
     }
 
     div.banner {
         position: absolute;
-        top: 10px;
-        left: -30px;
+        top: 1rem;
+        left: -3rem;
         transform: rotate(-45deg);
         line-height: 1rem;
         opacity: 0.8;
-        color: $white;
+        font-size: 1.4rem;
     }
 
     div.local::before {
         content: 'LOC';
-        padding: 0 30px;
+        padding: 0 3rem;
         background-color: $river-bed;
         border: 1px solid $sea-buckthorn;
     }
 
     div.dev::before {
         content: 'DEV';
-        padding: 0 30px;
+        padding: 0 3rem;
         background-color: $mandy;
         border: 1px solid $sea-buckthorn;
     }
 
     div.uat::before {
         content: 'UAT';
-        padding: 0 30px;
+        padding: 0 3rem;
         background-color: $cerulean;
         border: 1px solid $sea-buckthorn;
     }
 
     div.training::before {
         content: 'TRN';
-        padding: 0 30px;
+        padding: 0 3rem;
         background-color: $fruit-salad;
         border: 1px solid $sea-buckthorn;
     }
 
-    button {
-        border: none;
+    div.user {
+        height: 3rem;
+        font-size: 1.2rem;
+
+        span {
+            line-height: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+        }
+
+        img {
+            height: 3rem;
+            width: 3rem;
+        }
+    }
+
+    div.logout {
+        cursor: pointer;
+        height: 3rem;
+
+        span {
+            font-size: 1.2rem;
+            line-height: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+
+            &:hover {
+                color: $cerulean;
+            }
+        }
     }
 }

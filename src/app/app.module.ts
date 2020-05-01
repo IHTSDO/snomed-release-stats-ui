@@ -14,17 +14,17 @@ import { SnomedNavbarComponent } from './components/snomed-navbar/snomed-navbar.
 import { SnomedFooterComponent } from './components/snomed-footer/snomed-footer.component';
 
 // PIPE IMPORTS
-import { ExampleConceptSearchPipe } from './pipes/example-concept-search.pipe';
+import { AuthenticationService } from './services/authentication/authentication.service';
+import { AuthoringService } from './services/authoring/authoring.service';
 
 // SERVICE IMPORTS
-import { ExampleServiceService } from './services/example-service.service';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         SnomedNavbarComponent,
-        SnomedFooterComponent,
-        ExampleConceptSearchPipe
+        SnomedFooterComponent
     ],
     imports: [
         BrowserModule,
@@ -34,7 +34,8 @@ import { ExampleServiceService } from './services/example-service.service';
         NgbTypeaheadModule
     ],
     providers: [
-        ExampleServiceService,
+        AuthenticationService,
+        AuthoringService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,
