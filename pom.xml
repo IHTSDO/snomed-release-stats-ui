@@ -1,8 +1,8 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ihtsdo.otf</groupId>
-    <artifactId>angular-template</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
+    <artifactId>snomed-release-statistics-ui</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <properties>
         <packageName>${project.artifactId}</packageName>
     </properties>
@@ -29,7 +29,7 @@
                             <signPackage>false</signPackage>
                             <dataSet>
                                 <data>
-                                    <src>${basedir}/dist/angular-template</src>
+                                    <src>${basedir}/dist/snomed-release-statistics-ui</src>
                                     <type>directory</type>
                                     <mapper>
                                         <type>perm</type>
