@@ -8,14 +8,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-
 // COMPONENT IMPORTS
 import { SnomedNavbarComponent } from './components/snomed-navbar/snomed-navbar.component';
 import { SnomedFooterComponent } from './components/snomed-footer/snomed-footer.component';
-
 // PIPE IMPORTS
-import { AuthenticationService } from './services/authentication/authentication.service';
 import { AuthoringService } from './services/authoring/authoring.service';
+import { ChartModule } from 'primeng/chart';
+import { AppRoutingModule } from './app-routing.module';
+import { GeneralReleaseStatisticsComponent } from './components/general-release-statistics/general-release-statistics.component';
+import { NewConceptsComponent } from './components/new-concepts/new-concepts.component';
+import { InactivatedConceptsComponent } from './components/inactivated-concepts/inactivated-concepts.component';
+import { ConceptChangesCountsComponent } from './components/concept-changes-counts/concept-changes-counts.component';
+import { ConceptChangesPercentagesComponent } from './components/concept-changes-percentages/concept-changes-percentages.component';
+import { PatternsComponent } from './components/patterns/patterns.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StatisticsService } from './services/statistics.service';
 
 // SERVICE IMPORTS
 
@@ -24,18 +31,27 @@ import { AuthoringService } from './services/authoring/authoring.service';
     declarations: [
         AppComponent,
         SnomedNavbarComponent,
-        SnomedFooterComponent
+        SnomedFooterComponent,
+        GeneralReleaseStatisticsComponent,
+        NewConceptsComponent,
+        InactivatedConceptsComponent,
+        ConceptChangesCountsComponent,
+        ConceptChangesPercentagesComponent,
+        PatternsComponent,
+        DashboardComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        NgbTypeaheadModule
+        NgbTypeaheadModule,
+        ChartModule,
+        AppRoutingModule,
     ],
     providers: [
-        AuthenticationService,
         AuthoringService,
+        StatisticsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,

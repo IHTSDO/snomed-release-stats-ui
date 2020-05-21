@@ -3,6 +3,7 @@ import 'jquery';
 import { Title } from '@angular/platform-browser';
 import { AuthoringService } from './services/authoring/authoring.service';
 import { BranchingService } from './services/branching/branching.service';
+import { StatisticsService } from './services/statistics.service';
 
 @Component({
     selector: 'app-root',
@@ -14,10 +15,12 @@ export class AppComponent implements OnInit {
     versions: object;
     environment: string;
 
+    statistics: any;
+
     constructor(private authoringService: AuthoringService,
                 private branchingService: BranchingService,
+                private statisticsService: StatisticsService,
                 private titleService: Title) {
-
     }
 
     ngOnInit() {
@@ -34,6 +37,11 @@ export class AppComponent implements OnInit {
 
         this.branchingService.setBranchPath('MAIN');
         this.assignFavicon();
+
+        // this.statisticsService.getStatistics().subscribe(data => {
+        //     this.statistics = data;
+        //     console.log('STATS: ', data);
+        // });
     }
 
     assignFavicon() {

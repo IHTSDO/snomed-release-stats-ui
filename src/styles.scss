@@ -5,8 +5,6 @@ html {
     font-size: 62.5%;
     position: relative;
     min-height: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
 }
 
 body {
@@ -26,6 +24,23 @@ body {
 @font-face {
     font-family: 'Roboto';
     src: url('assets/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('assets/Raleway-Light.ttf');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('assets/Raleway-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('assets/Raleway-Medium.ttf');
+    font-weight: 500;
 }
 
 h2 {
