@@ -19,10 +19,10 @@ import { GeneralReleaseStatisticsComponent } from './components/general-release-
 import { NewConceptsComponent } from './components/new-concepts/new-concepts.component';
 import { InactivatedConceptsComponent } from './components/inactivated-concepts/inactivated-concepts.component';
 import { ConceptChangesCountsComponent } from './components/concept-changes-counts/concept-changes-counts.component';
-import { ConceptChangesPercentagesComponent } from './components/concept-changes-percentages/concept-changes-percentages.component';
 import { PatternsComponent } from './components/patterns/patterns.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 import { StatisticsService } from './services/statistics.service';
+import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 
 // SERVICE IMPORTS
 
@@ -36,9 +36,9 @@ import { StatisticsService } from './services/statistics.service';
         NewConceptsComponent,
         InactivatedConceptsComponent,
         ConceptChangesCountsComponent,
-        ConceptChangesPercentagesComponent,
         PatternsComponent,
-        DashboardComponent
+        DescriptiveStatisticsComponent,
+        BreadcrumbBarComponent
     ],
     imports: [
         BrowserModule,

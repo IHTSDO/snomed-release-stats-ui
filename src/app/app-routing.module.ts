@@ -4,18 +4,16 @@ import { GeneralReleaseStatisticsComponent } from './components/general-release-
 import { NewConceptsComponent } from './components/new-concepts/new-concepts.component';
 import { InactivatedConceptsComponent } from './components/inactivated-concepts/inactivated-concepts.component';
 import { ConceptChangesCountsComponent } from './components/concept-changes-counts/concept-changes-counts.component';
-import { ConceptChangesPercentagesComponent } from './components/concept-changes-percentages/concept-changes-percentages.component';
 import { PatternsComponent } from './components/patterns/patterns.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: '', redirectTo: '/descriptive-statistics', pathMatch: 'full' },
+    { path: 'descriptive-statistics', component: DescriptiveStatisticsComponent },
     { path: 'generalReleaseStatistics', component: GeneralReleaseStatisticsComponent },
     { path: 'newConcepts', component: NewConceptsComponent },
     { path: 'inactivatedConcepts', component: InactivatedConceptsComponent },
     { path: 'conceptChangesCounts', component: ConceptChangesCountsComponent },
-    { path: 'conceptChangesPercentages', component: ConceptChangesPercentagesComponent },
     { path: 'patterns', component: PatternsComponent}
 ];
 

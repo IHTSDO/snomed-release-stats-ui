@@ -1,0 +1,17 @@
+@import '~src/variables.scss';
+
+nav.navbar {
+    height: 3rem;
+    //z-index: auto;
+    margin-top: 5rem;
+    z-index: 1000;
+
+    a {
+        line-height: 3rem;
+
+        &:hover, &.active {
+            text-decoration: none;
+            background-color: $river-bed-lighter;
+        }
+    }
+}

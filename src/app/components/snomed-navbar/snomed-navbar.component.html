@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-dark bg-dark p-2 pr-2">
-    <a class="logo" routerLink="/dashboard">
+    <a class="logo" routerLink="/descriptive-statistics">
         <img class="logo mr-2 p-0" src="/assets/small_logo.png">
         <span class="title text-athens-grey">SNOMED CT Release Statistics</span>
     </a>
@@ -11,34 +11,6 @@
         <div *ngSwitchCase="'training'" class="banner text-white training"></div>
         <div *ngSwitchDefault class="banner text-white d-none"></div>
     </ng-container>
-
-    <ul class="dropdown-nav my-2 float-right">
-        <li class="nav-item dropdown px-3">
-            <a class="nav-link dropdown-toggle px-3" href="#" id="tableReportsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Table Reports
-            </a>
-            <div class="dropdown-menu" aria-labelledby="tableReportsDropdown">
-                <a class="dropdown-item" routerLink="/generalReleaseStatistics">General Release Statistics</a>
-                <a class="dropdown-item" routerLink="/newConcepts">New Concepts</a>
-                <a class="dropdown-item" routerLink="/inactivatedConcepts">Inactivated Concepts</a>
-                <a class="dropdown-item" routerLink="/conceptChangesCounts">Changes to Existing Concepts (counts)</a>
-                <a class="dropdown-item" routerLink="/conceptChangesPercentages">Changes to Existing Concepts (percentages)</a>
-            </div>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link px-3" routerLink="/patterns" role="button">Patterns</a>
-        </li>
-        <li class="nav-item dropdown px-3">
-            <a class="nav-link dropdown-toggle px-3" href="#" id="documentationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Documentation
-            </a>
-            <div class="dropdown-menu" aria-labelledby="documentationDropdown">
-                <a class="dropdown-item" href="#">Overview</a>
-                <a class="dropdown-item" href="#">Site Guide</a>
-                <a class="dropdown-item" href="#">Data Explorer Guide</a>
-            </div>
-        </li>
-    </ul>
 </nav>
 
 

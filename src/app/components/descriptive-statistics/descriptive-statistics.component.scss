@@ -1,4 +1,4 @@
-div.concept-changes-percentages {
+div.descriptive-statistics {
     font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;
     font-weight: 300;
     position: relative;
@@ -8,8 +8,12 @@ div.concept-changes-percentages {
         font-weight: 400;
     }
 
-    table {
+    p {
         font-size: 1.4rem;
+    }
+
+    div.secondary-charts {
+        margin-bottom: 8rem;
     }
 }
 
