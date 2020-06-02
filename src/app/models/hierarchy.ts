@@ -5,6 +5,7 @@ export class Hierarchy {
     newlyCreated: number;
     changedStatus: number;
     inactivated: number;
+    reactivated: number;
     newWithNewConcept: number;
     newSD: number;
     newP: number;

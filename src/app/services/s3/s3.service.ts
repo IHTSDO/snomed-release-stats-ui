@@ -21,16 +21,17 @@ export class S3Service {
             response.forEach((item, index) => {
                 if (index !== 0) {
                     const hierarchy: Hierarchy = new Hierarchy();
-                    hierarchy.sctId = item[0];
-                    hierarchy.name = item[1];
-                    hierarchy.semTag = item[2];
-                    hierarchy.newlyCreated = item[3];
-                    hierarchy.changedStatus = item[4];
-                    hierarchy.inactivated = item[5];
-                    hierarchy.newWithNewConcept = item[6];
-                    hierarchy.newSD = item[7];
-                    hierarchy.newP = item[8];
-                    hierarchy.total = item[9];
+                    hierarchy.sctId = item['Sctid'];
+                    hierarchy.name = item['Hierarchy'];
+                    hierarchy.semTag = item['SemTag'];
+                    hierarchy.newlyCreated = item['New'];
+                    hierarchy.changedStatus = item['Changed DefnStatus'];
+                    hierarchy.inactivated = item['Inactivated'];
+                    hierarchy.reactivated = item['Reactivated'];
+                    hierarchy.newWithNewConcept = item['New with New Concept'];
+                    hierarchy.newSD = item['New SD'];
+                    hierarchy.newP = item['New P'];
+                    hierarchy.total = item['Total'];
                     report.push(hierarchy);
                 }
             });
