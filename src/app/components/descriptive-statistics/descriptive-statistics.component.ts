@@ -1,5 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { StatisticsService } from '../../services/statistics/statistics.service';
+import { Subscription } from 'rxjs';
+import { Hierarchy } from '../../models/hierarchy';
+
+export class DataSet {
+    labels: string[];
+    datasets: object[];
+
+    constructor(labels, datasets) {
+        this.labels = labels;
+        this.datasets = datasets;
+    }
+}
 
 @Component({
     selector: 'app-descriptive-statistics',
@@ -8,90 +21,81 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 })
 export class DescriptiveStatisticsComponent implements OnInit {
 
-    activeConceptsData: any;
-    newConceptsData: any;
+    chart1Data: any;
+    chart2Data: any;
+    chart3Data: any;
+    chart4Data: any;
+    newData: any = {
+        labels: [
+            'Clinical Finding',
+            'Procedure',
+            'Body Structure',
+            'Organism',
+            'Substance',
+            'Pharmaceutical Product',
+            'Physical Object',
+            'Qualifier Value'
+        ],
+        datasets: [
+            {
+                data: [],
+                dataLabel: '#FFFFFF',
+                backgroundColor: [
+                    '#1d6a9a',
+                    '#51851a',
+                    '#62536d',
+                    '#804a45',
+                    '#781515',
+                    '#ada82e',
+                    '#ba671e',
+                    '#a65d30'
+                ],
+                hoverBackgroundColor: [
+                    '#1d6a9a',
+                    '#51851a',
+                    '#62536d',
+                    '#804a45',
+                    '#781515',
+                    '#ada82e',
+                    '#ba671e',
+                    '#a65d30'
+                ]
+            }]
+    };
     pieChartOptions: any;
     barChartOptions: any;
     countPieChartOptions: any;
 
-    constructor() {
-        this.activeConceptsData = {
-            labels: [
-                'Clinical Finding',
-                'Procedure',
-                'Body Structure',
-                'Organism',
-                'Substance',
-                'Pharmaceutical Product',
-                'Physical Object',
-                'Qualifier Value'
-            ],
-            datasets: [
-                {
-                    data: [32, 17, 11, 10, 8, 6, 4, 2],
-                    dataLabel: '#FFFFFF',
-                    backgroundColor: [
-                        '#1d6a9a',
-                        '#51851a',
-                        '#62536d',
-                        '#804a45',
-                        '#781515',
-                        '#ada82e',
-                        '#ba671e',
-                        '#a65d30'
-                    ],
-                    hoverBackgroundColor: [
-                        '#1d6a9a',
-                        '#51851a',
-                        '#62536d',
-                        '#804a45',
-                        '#781515',
-                        '#ada82e',
-                        '#ba671e',
-                        '#a65d30'
-                    ]
-                }]
-        };
+    summaryComponentStats: Hierarchy[];
+    SCSSubscription: Subscription;
 
-        this.newConceptsData = {
-            labels: [
-                'Clinical Finding',
-                'Procedure',
-                'Body Structure',
-                'Organism',
-                'Substance',
-                'Pharmaceutical Product',
-                'Physical Object',
-                'Qualifier Value'
-            ],
-            datasets: [
-                {
-                    data: [1206, 215, 451, 141, 125, 1929, 44, 149],
-                    backgroundColor: [
-                        '#1d6a9a',
-                        '#51851a',
-                        '#62536d',
-                        '#804a45',
-                        '#781515',
-                        '#ada82e',
-                        '#ba671e',
-                        '#a65d30'
-                    ],
-                    hoverBackgroundColor: [
-                        '#1d6a9a',
-                        '#51851a',
-                        '#62536d',
-                        '#804a45',
-                        '#781515',
-                        '#ada82e',
-                        '#ba671e',
-                        '#a65d30'
-                    ]
-                }]
-        };
+    labels: string[] = [
+        'Clinical Finding',
+        'Procedure',
+        'Body Structure',
+        'Organism',
+        'Substance',
+        'Pharmaceutical Product',
+        'Physical Object',
+        'Qualifier Value'
+    ];
+    dataLabel: '#FFFFFF';
+    backgroundColors: string[] = [
+        '#1d6a9a',
+        '#51851a',
+        '#62536d',
+        '#804a45',
+        '#781515',
+        '#ada82e',
+        '#ba671e',
+        '#a65d30'
+    ];
 
+    constructor(private statisticsService: StatisticsService) {
+        this.SCSSubscription = this.statisticsService.getSummaryComponentStats().subscribe(data => this.summaryComponentStats = data);
         this.pieChartOptions = {
             legend: {
+                display: true,
                 position: 'right'
             },
             plugins: {
@@ -125,6 +129,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
 
         this.countPieChartOptions = {
             legend: {
+                display: true,
                 position: 'right'
             },
             plugins: {
@@ -146,5 +151,4 @@ export class DescriptiveStatisticsComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
 }
