@@ -12,28 +12,74 @@ export class S3Service {
     constructor(private http: HttpClient) {
     }
 
-    getSummaryComponentStats(): Observable<Hierarchy[]> {
+    getConceptStatistics(): Observable<Hierarchy[]> {
         return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet1.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
-            // console.log('RAW: ', response);
+            console.log('CONCEPTS: ', response);
 
-            response.forEach((item, index) => {
-                if (index !== 0) {
-                    const hierarchy: Hierarchy = new Hierarchy();
-                    hierarchy.sctId = item['Sctid'];
-                    hierarchy.name = item['Hierarchy'];
-                    hierarchy.semTag = item['SemTag'];
-                    hierarchy.newlyCreated = item['New'];
-                    hierarchy.changedStatus = item['Changed DefnStatus'];
-                    hierarchy.inactivated = item['Inactivated'];
-                    hierarchy.reactivated = item['Reactivated'];
-                    hierarchy.newWithNewConcept = item['New with New Concept'];
-                    hierarchy.newSD = item['New SD'];
-                    hierarchy.newP = item['New P'];
-                    hierarchy.total = item['Total'];
-                    report.push(hierarchy);
-                }
+            response.forEach(item => {
+                const hierarchy: Hierarchy = new Hierarchy();
+                hierarchy.sctId = item['Sctid'];
+                hierarchy.name = item['Hierarchy'];
+                hierarchy.semTag = item['SemTag'];
+                hierarchy.newlyCreated = parseInt(item['New'], 10);
+                hierarchy.changedStatus = parseInt(item['Changed DefnStatus'], 10);
+                hierarchy.inactivated = parseInt(item['Inactivated'], 10);
+                hierarchy.reactivated = parseInt(item['Reactivated'], 10);
+                hierarchy.newWithNewConcept = parseInt(item['New with New Concept'], 10);
+                hierarchy.sd = parseInt(item['New SD'], 10);
+                hierarchy.p = parseInt(item['New P'], 10);
+                hierarchy.total = parseInt(item['Total'], 10);
+                report.push(hierarchy);
+            });
+
+            return report;
+        }));
+    }
+
+    getDescriptionStatistics(): Observable<Hierarchy[]> {
+        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet2.json').pipe(map(response => {
+            const report: Hierarchy[] = [];
+
+            console.log('DESCRIPTIONS: ', response);
+
+            response.forEach(item => {
+                const hierarchy: Hierarchy = new Hierarchy();
+                hierarchy.sctId = item['Sctid'];
+                hierarchy.name = item['Hierarchy'];
+                hierarchy.semTag = item['SemTag'];
+                hierarchy.newlyCreated = parseInt(item['New / Reactivated'], 10);
+                hierarchy.changedStatus = parseInt(item['Changed'], 10);
+                hierarchy.inactivated = parseInt(item['Inactivated'], 10);
+                hierarchy.newWithNewConcept = parseInt(item['New with New Concept'], 10);
+                hierarchy.total = parseInt(item['Total'], 10);
+                hierarchy.conceptsAffected = parseInt(item['Concepts Affected'], 10);
+                report.push(hierarchy);
+            });
+
+            return report;
+        }));
+    }
+
+    getRelationshipStatistics(): Observable<Hierarchy[]> {
+        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet3.json').pipe(map(response => {
+            const report: Hierarchy[] = [];
+
+            console.log('RELATIONSHIPS: ', response);
+
+            response.forEach(item => {
+                const hierarchy: Hierarchy = new Hierarchy();
+                hierarchy.sctId = item['Sctid'];
+                hierarchy.name = item['Hierarchy'];
+                hierarchy.semTag = item['SemTag'];
+                hierarchy.newlyCreated = parseInt(item['New'], 10);
+                hierarchy.changedStatus = parseInt(item['Changed'], 10);
+                hierarchy.inactivated = parseInt(item['Inactivated'], 10);
+                hierarchy.newWithNewConcept = parseInt(item['New with New Concept'], 10);
+                hierarchy.total = parseInt(item['Total'], 10);
+                hierarchy.conceptsAffected = parseInt(item['Concepts Affected'], 10);
+                report.push(hierarchy);
             });
 
             return report;

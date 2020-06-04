@@ -21,7 +21,6 @@ import { InactivatedConceptsComponent } from './components/inactivated-concepts/
 import { ConceptChangesCountsComponent } from './components/concept-changes-counts/concept-changes-counts.component';
 import { PatternsComponent } from './components/patterns/patterns.component';
 import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
-import { StatisticsService } from './services/statistics/statistics.service';
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 import { S3Service } from './services/s3/s3.service';
 
@@ -52,7 +51,6 @@ import { S3Service } from './services/s3/s3.service';
     ],
     providers: [
         AuthoringService,
-        StatisticsService,
         S3Service,
         {
             provide: HTTP_INTERCEPTORS,

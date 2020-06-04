@@ -1,5 +1,5 @@
 export class Hierarchy {
-    sctId: number;
+    sctId: string;
     name: string;
     semTag: string;
     newlyCreated: number;
@@ -7,7 +7,8 @@ export class Hierarchy {
     inactivated: number;
     reactivated: number;
     newWithNewConcept: number;
-    newSD: number;
-    newP: number;
+    sd: number;
+    p: number;
     total: number;
+    conceptsAffected: number;
 }

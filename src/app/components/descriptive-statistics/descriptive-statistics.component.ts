@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { StatisticsService } from '../../services/statistics/statistics.service';
-import { Hierarchy } from '../../models/hierarchy';
 import { S3Service } from '../../services/s3/s3.service';
 
 export class GraphData {
@@ -30,9 +28,6 @@ export class DataSet {
     styleUrls: ['./descriptive-statistics.component.scss']
 })
 export class DescriptiveStatisticsComponent implements OnInit {
-
-    summaryComponentStats: Hierarchy[];
-    // subscription: Subscription;
 
     chart1Data: any;
     chart2Data: any;
@@ -111,14 +106,13 @@ export class DescriptiveStatisticsComponent implements OnInit {
         '#166fce'
     ];
 
-    constructor(private s3Service: S3Service, private statisticsService: StatisticsService) {
+    constructor(private s3Service: S3Service) {
     }
 
     public pieChartPlugins = [pluginDataLabels];
 
     ngOnInit(): void {
-        this.s3Service.getSummaryComponentStats().subscribe(data => {
-            this.statisticsService.setSummaryComponentStats(data);
+        this.s3Service.getConceptStatistics().subscribe(data => {
             this.constructChart1Data(data);
             this.constructChart2Data(data);
             this.constructChart3Data(data);
@@ -158,7 +152,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'total');
 
         data.forEach(item => {
-            if (parseInt(item.total, 10) > 2000) {
+            if (parseInt(item.total, 10) > 4000) {
                 labels.push(item.name.slice(0, -item.semTag.length));
                 dataSet.data.push(Math.floor((parseInt(item.total, 10) / total) * 100));
             }
