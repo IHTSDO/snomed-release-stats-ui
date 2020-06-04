@@ -29,7 +29,7 @@
                             <signPackage>false</signPackage>
                             <dataSet>
                                 <data>
-                                    <src>${basedir}/dist/snomed-release-statistics-ui</src>
+                                    <src>${basedir}/dist/snomed-release-stats-ui</src>
                                     <type>directory</type>
                                     <mapper>
                                         <type>perm</type>
