@@ -13,7 +13,7 @@ export class S3Service {
     }
 
     getConceptStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet1.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet1.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('CONCEPTS: ', response);
@@ -39,7 +39,7 @@ export class S3Service {
     }
 
     getDescriptionStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet2.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet2.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('DESCRIPTIONS: ', response);
@@ -63,7 +63,7 @@ export class S3Service {
     }
 
     getRelationshipStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet3.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet3.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('RELATIONSHIPS: ', response);
@@ -87,7 +87,7 @@ export class S3Service {
     }
 
     getAxiomStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet4.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet4.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('AXIOMS: ', response);
@@ -111,7 +111,7 @@ export class S3Service {
     }
 
     getInactivationStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet6.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet6.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('INACTIVATIONS: ', response);
