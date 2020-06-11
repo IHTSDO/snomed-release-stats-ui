@@ -86,6 +86,30 @@ export class S3Service {
         }));
     }
 
+    getAxiomStatistics(): Observable<Hierarchy[]> {
+        return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet4.json').pipe(map(response => {
+            const report: Hierarchy[] = [];
+
+            console.log('AXIOMS: ', response);
+
+            response.forEach(item => {
+                const hierarchy: Hierarchy = new Hierarchy();
+                hierarchy.sctId = item['Sctid'];
+                hierarchy.name = item['Hierarchy'];
+                hierarchy.semTag = item['SemTag'];
+                hierarchy.newlyCreated = parseInt(item['New Axioms'], 10);
+                hierarchy.changed = parseInt(item['Changed Axioms'], 10);
+                hierarchy.inactivated = parseInt(item['Inactivated Axioms'], 10);
+                hierarchy.newWithNewConcept = parseInt(item['New with New Concept'], 10);
+                hierarchy.total = parseInt(item['Total'], 10);
+                hierarchy.conceptsAffected = parseInt(item['Concepts Affected'], 10);
+                report.push(hierarchy);
+            });
+
+            return report;
+        }));
+    }
+
     getInactivationStatistics(): Observable<Hierarchy[]> {
         return this.http.get<Hierarchy[]>('s3/MAIN/latest/sheet6.json').pipe(map(response => {
             const report: Hierarchy[] = [];
