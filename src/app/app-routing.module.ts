@@ -8,7 +8,7 @@ import { PatternsComponent } from './components/patterns/patterns.component';
 import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/descriptive-statistics', pathMatch: 'full' },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'descriptive-statistics', component: DescriptiveStatisticsComponent },
     { path: 'generalReleaseStatistics', component: GeneralReleaseStatisticsComponent },
     { path: 'newConcepts', component: NewConceptsComponent },
