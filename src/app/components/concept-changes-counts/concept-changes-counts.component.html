@@ -40,11 +40,20 @@
                 <td>{{percentage(overviewRow.descriptionChanged, overviewRow.total) | number:'1.2-2'}}%</td>
             </tr>
             <tr *ngFor="let row of tableRows">
-                <td>{{row.name}}</td>
-                <td>{{percentage(row.statedChanged + row.inferredChanged + row.descriptionChanged, row.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(row.statedChanged, row.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(row.inferredChanged, row.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(row.descriptionChanged, row.total) | number:'1.2-2'}}%</td>
+                <ng-container *ngIf="row.statedChanged + row.inferredChanged + row.descriptionChanged">
+                    <td>{{row.name}}</td>
+                    <td>{{percentage(row.statedChanged + row.inferredChanged + row.descriptionChanged, row.total) | number:'1.2-2'}}%</td>
+                    <td>{{percentage(row.statedChanged, row.total) | number:'1.2-2'}}%</td>
+                    <td>{{percentage(row.inferredChanged, row.total) | number:'1.2-2'}}%</td>
+                    <td>{{percentage(row.descriptionChanged, row.total) | number:'1.2-2'}}%</td>
+                </ng-container>
+                <ng-container *ngIf="!(row.statedChanged + row.inferredChanged + row.descriptionChanged)">
+                    <td>{{row.name}}</td>
+                    <td>{{percentage(row.statedChanged + row.inferredChanged + row.descriptionChanged, row.total) | number:'1.0'}}%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </ng-container>
             </tr>
             </tbody>
         </table>

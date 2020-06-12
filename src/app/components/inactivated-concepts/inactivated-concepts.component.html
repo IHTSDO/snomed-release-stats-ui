@@ -25,25 +25,25 @@
             <tr *ngIf="overviewRow">
                 <td>{{overviewRow.name}}</td>
                 <td>{{overviewRow.inactivated | number}}</td>
-                <td>{{percentage(overviewRow.inactivated, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.inactivated, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.ambiguous, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.movedElsewhere, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.conceptNonCurrent, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.duplicate, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.erroneous, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.inappropriate, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.limited, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.outdated, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.pendingMove, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.nonConformance, overviewRow.inactivated) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.notEquivalent, overviewRow.inactivated) | number:'1.2-2'}}%</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.inactivated, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.inactivated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.ambiguous, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.movedElsewhere, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.conceptNonCurrent, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.duplicate, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.erroneous, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.inappropriate, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.limited, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.outdated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.pendingMove, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.nonConformance, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.inactivated ? (percentage(overviewRow.notEquivalent, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
             <tr *ngFor="let row of tableRows">
                 <td>{{row.name}}</td>
                 <td>{{row.inactivated | number}}</td>
-                <td>{{percentage(row.inactivated, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(row.inactivated, overviewRow.inactivated) | number:'1.2-2'}}%</td>
+                <td>{{row.inactivated ? (percentage(row.inactivated, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{row.inactivated ? (percentage(row.inactivated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.inactivated ? (percentage(row.ambiguous, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.inactivated ? (percentage(row.movedElsewhere, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.inactivated ? (percentage(row.conceptNonCurrent, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>

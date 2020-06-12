@@ -13,7 +13,7 @@ export class GraphData {
 }
 
 export class DataSet {
-    data: number[];
+    data: any;
     backgroundColor: string[];
 
     constructor(data, backgroundColor) {
@@ -75,14 +75,14 @@ export class DescriptiveStatisticsComponent implements OnInit {
         },
         plugins: {
             datalabels: {
-                color: '#EEEEEE',
-                formatter: (value) => {
-                    if (value < 10) {
-                        return '';
-                    } else {
-                        return value;
-                    }
-                },
+                color: '#EEEEEE'
+                // formatter: (value) => {
+                //     if (value < 1) {
+                //         return '';
+                //     } else {
+                //         return value;
+                //     }
+                // },
             }
         }
     };
@@ -104,8 +104,12 @@ export class DescriptiveStatisticsComponent implements OnInit {
         '#96823b',
         '#589965',
         '#b58982',
-        '#166fce'
+        '#166fce',
+        '#c6cb6d',
+        '#367ba5'
     ];
+
+
 
     constructor(private s3Service: S3Service) {
     }
@@ -178,6 +182,10 @@ export class DescriptiveStatisticsComponent implements OnInit {
             dataSet.data.push(parseInt(item.newlyCreated, 10));
         });
 
+        if (dataSet.data.every(item => item === 0)) {
+            dataSet.data = false;
+        }
+
         this.chart3Data = new GraphData(labels, [dataSet]);
     }
 
@@ -197,6 +205,10 @@ export class DescriptiveStatisticsComponent implements OnInit {
             dataSet.data.push(parseInt(item.inactivated, 10));
         });
 
+        if (dataSet.data.every(item => item === 0)) {
+            dataSet.data = false;
+        }
+
         this.chart4Data = new GraphData(labels, [dataSet]);
     }
 
@@ -215,6 +227,10 @@ export class DescriptiveStatisticsComponent implements OnInit {
             labels.push(item.name.slice(0, -item.semTag.length));
             dataSet.data.push(parseInt(item.changedStatus, 10));
         });
+
+        if (dataSet.data.every(item => item === 0)) {
+            dataSet.data = false;
+        }
 
         this.chart5Data = new GraphData(labels, [dataSet]);
     }

@@ -22,15 +22,18 @@
         <div class="row">
             <div class="col-4">
                 <h2 class="m-5">New Concepts</h2>
-                <p-chart id="pieChart2" type="pie" [data]="chart3Data" [options]="countPieChartOptions"></p-chart>
+                <p-chart *ngIf="chart3Data?.data" id="pieChart2" type="pie" [data]="chart3Data" [options]="countPieChartOptions"></p-chart>
+                <div *ngIf="!chart3Data?.data">- No new concepts -</div>
             </div>
             <div class="col-4">
                 <h2 class="m-5">Inactivated Concepts</h2>
-                <p-chart id="pieChart3" type="pie" [data]="chart4Data" [options]="countPieChartOptions"></p-chart>
+                <p-chart *ngIf="chart4Data?.data" id="pieChart3" type="pie" [data]="chart4Data" [options]="countPieChartOptions"></p-chart>
+                <div *ngIf="!chart4Data?.data">- No inactivated concepts -</div>
             </div>
             <div class="col-4">
                 <h2 class="m-5">Changed Concepts</h2>
-                <p-chart id="pieChart4" type="pie" [data]="chart5Data" [options]="countPieChartOptions"></p-chart>
+                <p-chart *ngIf="chart5Data?.data" id="pieChart4" type="pie" [data]="chart5Data" [options]="countPieChartOptions"></p-chart>
+                <div *ngIf="!chart5Data?.data">- No changed concepts -</div>
             </div>
         </div>
     </div>

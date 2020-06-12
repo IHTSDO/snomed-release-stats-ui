@@ -16,16 +16,16 @@
             <tr *ngIf="overviewRow">
                 <td>{{overviewRow.name}}</td>
                 <td>{{overviewRow.newConcepts | number}}</td>
-                <td>{{percentage(overviewRow.newConcepts, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.total, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.sd, overviewRow.newConcepts) | number:'1.2-2'}}%</td>
-                <td>{{percentage(overviewRow.p, overviewRow.newConcepts) | number:'1.2-2'}}%</td>
+                <td>{{overviewRow.newConcepts ? (percentage(overviewRow.newConcepts, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.newConcepts ? (percentage(overviewRow.total, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.newConcepts ? (percentage(overviewRow.sd, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.newConcepts ? (percentage(overviewRow.p, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
             <tr *ngFor="let row of tableRows">
                 <td>{{row.name}}</td>
                 <td>{{row.newConcepts | number}}</td>
-                <td>{{percentage(row.newConcepts, row.total) | number:'1.2-2'}}%</td>
-                <td>{{percentage(row.newConcepts, overviewRow.newConcepts) | number:'1.2-2'}}%</td>
+                <td>{{row.newConcepts ? (percentage(row.newConcepts, row.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{row.newConcepts ? (percentage(row.newConcepts, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.newConcepts ? (percentage(row.sd, row.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.newConcepts ? (percentage(row.p, row.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
