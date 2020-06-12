@@ -2,8 +2,8 @@
     <div class="container-xl">
         <h1 class="text-center p-5">
             Concepts Changed
-            <span *ngIf="!percentages" class="rounded-circle float-right bg-cerulean" (click)="percentages = true">%</span>
-            <span *ngIf="percentages" class="rounded-circle float-right bg-cerulean" (click)="percentages = false">#</span>
+            <span *ngIf="!percentages" class="rounded-lg p-2 float-right bg-wisteria-lighter" (click)="percentages = true">to Percentages</span>
+            <span *ngIf="percentages" class="rounded-lg p-2 float-right bg-wisteria-lighter" (click)="percentages = false">to Counts</span>
         </h1>
         <table class="table table-striped">
             <thead>

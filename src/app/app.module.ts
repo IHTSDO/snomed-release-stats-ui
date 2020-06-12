@@ -23,6 +23,7 @@ import { PatternsComponent } from './components/patterns/patterns.component';
 import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 import { S3Service } from './services/s3/s3.service';
+import { BranchingService } from './services/branching/branching.service';
 
 // SERVICE IMPORTS
 
@@ -51,6 +52,7 @@ import { S3Service } from './services/s3/s3.service';
     ],
     providers: [
         AuthoringService,
+        BranchingService,
         S3Service,
         {
             provide: HTTP_INTERCEPTORS,

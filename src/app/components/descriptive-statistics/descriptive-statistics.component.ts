@@ -38,7 +38,8 @@ export class DescriptiveStatisticsComponent implements OnInit {
     pieChartOptions: any = {
         legend: {
             display: true,
-            position: 'right'
+            position: 'right',
+            onClick: false
         },
         plugins: {
             datalabels: {

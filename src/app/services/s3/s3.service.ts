@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Hierarchy } from '../../models/hierarchy';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { BranchingService } from '../branching/branching.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class S3Service {
 
-    constructor(private http: HttpClient) {
+    private s3Path = '../reporting-s3/jobs/SummaryComponentStats/runs/';
+    private branchPath: string;
+    private branchPathSubscription: Subscription;
+
+    constructor(private http: HttpClient, private branchingService: BranchingService) {
+        this.branchPathSubscription = this.branchingService.getBranchPath().subscribe(data => this.branchPath = data);
     }
 
     getConceptStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet1.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet1.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('CONCEPTS: ', response);
@@ -39,7 +45,7 @@ export class S3Service {
     }
 
     getDescriptionStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet2.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet2.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('DESCRIPTIONS: ', response);
@@ -63,7 +69,7 @@ export class S3Service {
     }
 
     getRelationshipStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet3.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet3.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('RELATIONSHIPS: ', response);
@@ -87,7 +93,7 @@ export class S3Service {
     }
 
     getAxiomStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet4.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet4.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('AXIOMS: ', response);
@@ -111,7 +117,7 @@ export class S3Service {
     }
 
     getInactivationStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>('../reporting-s3/jobs/SummaryComponentStats/runs/MAIN/latest/sheet6.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet6.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('INACTIVATIONS: ', response);

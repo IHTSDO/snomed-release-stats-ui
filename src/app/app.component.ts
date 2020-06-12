@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import 'jquery';
 import { Title } from '@angular/platform-browser';
-import { AuthoringService } from './services/authoring/authoring.service';
 import { BranchingService } from './services/branching/branching.service';
 import { S3Service } from './services/s3/s3.service';
+import { AuthoringService } from './services/authoring/authoring.service';
 
 @Component({
     selector: 'app-root',
@@ -12,7 +12,7 @@ import { S3Service } from './services/s3/s3.service';
 })
 export class AppComponent implements OnInit {
 
-    versions: object;
+    versions: any;
     environment: string;
 
     constructor(private authoringService: AuthoringService,
@@ -27,13 +27,17 @@ export class AppComponent implements OnInit {
 
         this.authoringService.getVersions().subscribe(versions => {
             this.versions = versions;
+
+            this.versions = this.versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
+            const latest = this.versions.shift();
+            const previous = this.versions.shift();
+
+            const path = 'SnomedCT_InternationalRF2_PRODUCTION_'
+                + latest.effectiveDate + 'T120000Z---SnomedCT_InternationalRF2_PRODUCTION_'
+                + previous.effectiveDate + 'T120000Z';
+            this.branchingService.setBranchPath(path);
         });
 
-        this.authoringService.getUIConfiguration().subscribe(config => {
-            this.authoringService.uiConfiguration = config;
-        });
-
-        this.branchingService.setBranchPath('MAIN');
         this.assignFavicon();
     }
 
