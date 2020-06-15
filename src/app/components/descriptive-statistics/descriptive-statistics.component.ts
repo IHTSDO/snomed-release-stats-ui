@@ -157,7 +157,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'total');
 
         data.forEach(item => {
-            if (parseInt(item.total, 10) > 4000) {
+            if (dataSet.data.length < 10) {
                 labels.push(item.name.slice(0, -item.semTag.length));
                 dataSet.data.push(Math.floor((parseInt(item.total, 10) / total) * 100));
             }
