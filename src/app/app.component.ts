@@ -30,9 +30,9 @@ export class AppComponent implements OnInit {
 
             this.versions = this.versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
             const latest = this.versions.shift();
+            const previous = this.versions.shift();
             this.title = 'SNOMED CT Release Statistics International Edition ' + latest.version;
             this.titleService.setTitle(this.title);
-            const previous = this.versions.shift();
 
             const path = 'SnomedCT_InternationalRF2_PRODUCTION_'
                 + latest.effectiveDate + 'T120000Z---SnomedCT_InternationalRF2_PRODUCTION_'
