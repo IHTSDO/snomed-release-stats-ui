@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
     versions: any;
     environment: string;
+    title: string;
 
     constructor(private authoringService: AuthoringService,
                 private branchingService: BranchingService,
@@ -22,7 +23,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('SNOMED CT Release Statistics');
         this.environment = window.location.host.split(/[.]/)[0].split(/[-]/)[0];
 
         this.authoringService.getVersions().subscribe(versions => {
@@ -30,6 +30,8 @@ export class AppComponent implements OnInit {
 
             this.versions = this.versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
             const latest = this.versions.shift();
+            this.title = 'SNOMED CT Release Statistics International Edition ' + latest.version;
+            this.titleService.setTitle(this.title);
             const previous = this.versions.shift();
 
             const path = 'SnomedCT_InternationalRF2_PRODUCTION_'
