@@ -5,20 +5,16 @@
             <thead>
             <tr>
                 <th scope="col">Hierarchy</th>
-                <th scope="col">Inactivated Concepts</th>
-                <th scope="col">of Hierarchy Inactivated</th>
-                <th scope="col">of All Inactivated</th>
+                <th scope="col">Overall Inactivated Concepts</th>
+                <th scope="col">% of Hierarchy Inactivated</th>
+                <th scope="col">% of All Inactivated</th>
                 <th scope="col">As Ambigous</th>
                 <th scope="col">As Moved Elsewhere</th>
-                <th scope="col">As Concept Non Current</th>
                 <th scope="col">As Duplicate</th>
                 <th scope="col">As Erroneous</th>
-                <th scope="col">As Inappropriate</th>
                 <th scope="col">As Limited</th>
                 <th scope="col">As Outdated</th>
-                <th scope="col">As Pending Move</th>
                 <th scope="col">As Non Conformance</th>
-                <th scope="col">As Not Equivalent</th>
             </tr>
             </thead>
             <tbody>
@@ -27,34 +23,26 @@
                 <td>{{overviewRow.inactivated | number}}</td>
                 <td>{{overviewRow.inactivated ? (percentage(overviewRow.inactivated, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{overviewRow.inactivated ? (percentage(overviewRow.inactivated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.ambiguous, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.movedElsewhere, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.conceptNonCurrent, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.duplicate, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.erroneous, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.inappropriate, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.limited, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.outdated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.pendingMove, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.nonConformance, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{overviewRow.inactivated ? (percentage(overviewRow.notEquivalent, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{overviewRow.ambiguous}}</td>
+                <td>{{overviewRow.movedElsewhere}}</td>
+                <td>{{overviewRow.duplicate}}</td>
+                <td>{{overviewRow.erroneous}}</td>
+                <td>{{overviewRow.limited}}</td>
+                <td>{{overviewRow.outdated}}</td>
+                <td>{{overviewRow.nonConformance}}</td>
             </tr>
             <tr *ngFor="let row of tableRows">
                 <td>{{row.name}}</td>
                 <td>{{row.inactivated | number}}</td>
                 <td>{{row.inactivated ? (percentage(row.inactivated, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.inactivated ? (percentage(row.inactivated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.ambiguous, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.movedElsewhere, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.conceptNonCurrent, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.duplicate, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.erroneous, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.inappropriate, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.limited, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.outdated, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.pendingMove, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.nonConformance, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-                <td>{{row.inactivated ? (percentage(row.notEquivalent, row.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
+                <td>{{row.ambiguous}}</td>
+                <td>{{row.movedElsewhere}}</td>
+                <td>{{row.duplicate}}</td>
+                <td>{{row.erroneous}}</td>
+                <td>{{row.limited}}</td>
+                <td>{{row.outdated}}</td>
+                <td>{{row.nonConformance}}</td>
             </tr>
             </tbody>
         </table>

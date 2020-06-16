@@ -15,5 +15,17 @@ div.descriptive-statistics {
     div.secondary-charts {
         margin-bottom: 8rem;
     }
+
+    @media (max-width: 1440px) {
+        div.col-6 {
+            padding-left: 10%;
+            max-width: 90%;
+            flex: 0 0 90%;
+        }
+
+        div.pie {
+            padding-bottom: 3rem;
+        }
+    }
 }
 

@@ -76,13 +76,6 @@ export class DescriptiveStatisticsComponent implements OnInit {
         plugins: {
             datalabels: {
                 color: '#EEEEEE'
-                // formatter: (value) => {
-                //     if (value < 1) {
-                //         return '';
-                //     } else {
-                //         return value;
-                //     }
-                // },
             }
         }
     };
