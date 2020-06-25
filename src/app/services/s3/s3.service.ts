@@ -37,6 +37,7 @@ export class S3Service {
                 hierarchy.sd = parseInt(item['New SD'], 10);
                 hierarchy.p = parseInt(item['New P'], 10);
                 hierarchy.total = parseInt(item['Total'], 10);
+                hierarchy.totalActive = parseInt(item['Total Active'], 10);
                 report.push(hierarchy);
             });
 
