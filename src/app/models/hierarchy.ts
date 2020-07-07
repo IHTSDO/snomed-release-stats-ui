@@ -13,6 +13,7 @@ export class Hierarchy {
     sd: number;
     p: number;
     total: number;
+    totalActive: number;
     conceptsAffected: number;
     ambiguous: number;
     movedElsewhere: number;

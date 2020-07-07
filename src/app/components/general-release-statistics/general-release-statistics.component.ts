@@ -33,8 +33,8 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
             this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0);
 
             concepts.forEach(item => {
-                this.overviewRow.total += item.total;
-                this.tableRows.push({name: item.name, total: item.total, descriptions: null, relationships: null});
+                this.overviewRow.total += item.totalActive;
+                this.tableRows.push({name: item.name, total: item.totalActive, descriptions: null, relationships: null});
             });
 
             this.s3Service.getDescriptionStatistics().subscribe(descriptions => {

@@ -125,14 +125,14 @@ export class DescriptiveStatisticsComponent implements OnInit {
         let total = 0;
 
         data.forEach(item => {
-            total += parseInt(item.total, 10);
+            total += parseInt(item.totalActive, 10);
         });
 
-        data = this.parameterSort(data, 'total');
+        data = this.parameterSort(data, 'totalActive');
 
         data.forEach(item => {
-            labels.push(item.name.slice(0, -item.semTag.length));
-            dataSet.data.push(Math.floor((parseInt(item.total, 10) / total) * 100));
+            labels.push(item.name.replace(/ *\([^)]*\) */g, ''));
+            dataSet.data.push(Math.floor((parseInt(item.totalActive, 10) / total) * 100));
         });
 
         this.chart1Data = new GraphData(labels, [dataSet]);
@@ -144,15 +144,15 @@ export class DescriptiveStatisticsComponent implements OnInit {
         let total = 0;
 
         data.forEach(item => {
-            total += parseInt(item.total, 10);
+            total += parseInt(item.totalActive, 10);
         });
 
-        data = this.parameterSort(data, 'total');
+        data = this.parameterSort(data, 'totalActive');
 
         data.forEach(item => {
             if (dataSet.data.length < 10) {
-                labels.push(item.name.slice(0, -item.semTag.length));
-                dataSet.data.push(Math.floor((parseInt(item.total, 10) / total) * 100));
+                labels.push(item.name.replace(/ *\([^)]*\) */g, ''));
+                dataSet.data.push(Math.floor((parseInt(item.totalActive, 10) / total) * 100));
             }
         });
 
@@ -161,7 +161,6 @@ export class DescriptiveStatisticsComponent implements OnInit {
 
     constructChart3Data(data) {
         const dataSet = new DataSet([], this.backgroundColors);
-        const labels: string[] = [];
         let total = 0;
 
         data.forEach(item => {
@@ -171,7 +170,6 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'newlyCreated');
 
         data.forEach(item => {
-            labels.push(item.name.slice(0, -item.semTag.length));
             dataSet.data.push(parseInt(item.newlyCreated, 10));
         });
 
@@ -179,12 +177,11 @@ export class DescriptiveStatisticsComponent implements OnInit {
             dataSet.data = false;
         }
 
-        this.chart3Data = new GraphData(labels, [dataSet]);
+        this.chart3Data = new GraphData(null, [dataSet]);
     }
 
     constructChart4Data(data) {
         const dataSet = new DataSet([], this.backgroundColors);
-        const labels: string[] = [];
         let total = 0;
 
         data.forEach(item => {
@@ -194,7 +191,6 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'inactivated');
 
         data.forEach(item => {
-            labels.push(item.name.slice(0, -item.semTag.length));
             dataSet.data.push(parseInt(item.inactivated, 10));
         });
 
@@ -202,12 +198,11 @@ export class DescriptiveStatisticsComponent implements OnInit {
             dataSet.data = false;
         }
 
-        this.chart4Data = new GraphData(labels, [dataSet]);
+        this.chart4Data = new GraphData(null, [dataSet]);
     }
 
     constructChart5Data(data) {
         const dataSet = new DataSet([], this.backgroundColors);
-        const labels: string[] = [];
         let total = 0;
 
         data.forEach(item => {
@@ -217,7 +212,6 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'changedStatus');
 
         data.forEach(item => {
-            labels.push(item.name.slice(0, -item.semTag.length));
             dataSet.data.push(parseInt(item.changedStatus, 10));
         });
 
@@ -225,7 +219,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
             dataSet.data = false;
         }
 
-        this.chart5Data = new GraphData(labels, [dataSet]);
+        this.chart5Data = new GraphData(null, [dataSet]);
     }
 
     parameterSort(array, name) {
