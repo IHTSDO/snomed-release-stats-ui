@@ -22,18 +22,24 @@
         <div class="row">
             <div class="col-4">
                 <h2 class="m-5">New Concepts</h2>
-                <p-chart *ngIf="chart3Data?.data" id="pieChart2" type="pie" [data]="chart3Data" [options]="countPieChartOptions"></p-chart>
-                <div *ngIf="!chart3Data?.data">- No new concepts -</div>
+                <p-chart *ngIf="dataExists(chart3Data); else elseBlock" id="pieChart2" type="pie" [data]="chart3Data" [options]="countPieChartOptions"></p-chart>
+                <ng-template #elseBlock>
+                    <div>- No new concepts -</div>
+                </ng-template>
             </div>
             <div class="col-4">
                 <h2 class="m-5">Inactivated Concepts</h2>
-                <p-chart *ngIf="chart4Data?.data" id="pieChart3" type="pie" [data]="chart4Data" [options]="countPieChartOptions"></p-chart>
-                <div *ngIf="!chart4Data?.data">- No inactivated concepts -</div>
+                <p-chart *ngIf="dataExists(chart4Data); else elseBlock" id="pieChart3" type="pie" [data]="chart4Data" [options]="countPieChartOptions"></p-chart>
+                <ng-template #elseBlock>
+                    <div>- No inactivated concepts -</div>
+                </ng-template>
             </div>
             <div class="col-4">
                 <h2 class="m-5">Status Definitions Changed</h2>
-                <p-chart *ngIf="chart5Data?.data" id="pieChart4" type="pie" [data]="chart5Data" [options]="countPieChartOptions"></p-chart>
-                <div *ngIf="!chart5Data?.data">- No status definitions changed -</div>
+                <p-chart *ngIf="dataExists(chart5Data); else elseBlock" id="pieChart4" type="pie" [data]="chart5Data" [options]="countPieChartOptions"></p-chart>
+                <ng-template #elseBlock>
+                    <div>- No status definitions changed -</div>
+                </ng-template>
             </div>
         </div>
     </div>

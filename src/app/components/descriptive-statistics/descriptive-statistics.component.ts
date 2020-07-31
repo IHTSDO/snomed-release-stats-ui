@@ -70,12 +70,21 @@ export class DescriptiveStatisticsComponent implements OnInit {
     };
     countPieChartOptions: any = {
         legend: {
-            display: false,
-            position: 'right'
+            display: false
+        },
+        tooltips: {
+            enabled: true
         },
         plugins: {
             datalabels: {
-                color: '#EEEEEE'
+                color: '#EEEEEE',
+                formatter: (value) => {
+                    if (value < 100) {
+                        return '';
+                    } else {
+                        return value;
+                    }
+                },
             }
         }
     };
@@ -161,6 +170,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
 
     constructChart3Data(data) {
         const dataSet = new DataSet([], this.backgroundColors);
+        const labels: string[] = [];
         let total = 0;
 
         data.forEach(item => {
@@ -170,18 +180,16 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'newlyCreated');
 
         data.forEach(item => {
+            labels.push(item.name.replace(/ *\([^)]*\) */g, ''));
             dataSet.data.push(parseInt(item.newlyCreated, 10));
         });
 
-        if (dataSet.data.every(item => item === 0)) {
-            dataSet.data = false;
-        }
-
-        this.chart3Data = new GraphData(null, [dataSet]);
+        this.chart3Data = new GraphData(labels, [dataSet]);
     }
 
     constructChart4Data(data) {
         const dataSet = new DataSet([], this.backgroundColors);
+        const labels: string[] = [];
         let total = 0;
 
         data.forEach(item => {
@@ -191,18 +199,16 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'inactivated');
 
         data.forEach(item => {
+            labels.push(item.name.replace(/ *\([^)]*\) */g, ''));
             dataSet.data.push(parseInt(item.inactivated, 10));
         });
 
-        if (dataSet.data.every(item => item === 0)) {
-            dataSet.data = false;
-        }
-
-        this.chart4Data = new GraphData(null, [dataSet]);
+        this.chart4Data = new GraphData(labels, [dataSet]);
     }
 
     constructChart5Data(data) {
         const dataSet = new DataSet([], this.backgroundColors);
+        const labels: string[] = [];
         let total = 0;
 
         data.forEach(item => {
@@ -212,14 +218,15 @@ export class DescriptiveStatisticsComponent implements OnInit {
         data = this.parameterSort(data, 'changedStatus');
 
         data.forEach(item => {
+            labels.push(item.name.replace(/ *\([^)]*\) */g, ''));
             dataSet.data.push(parseInt(item.changedStatus, 10));
         });
 
-        if (dataSet.data.every(item => item === 0)) {
-            dataSet.data = false;
-        }
+        this.chart5Data = new GraphData(labels, [dataSet]);
+    }
 
-        this.chart5Data = new GraphData(null, [dataSet]);
+    dataExists(chartData) {
+        return !(!chartData || chartData.datasets[0].data.every(item => item === 0));
     }
 
     parameterSort(array, name) {
