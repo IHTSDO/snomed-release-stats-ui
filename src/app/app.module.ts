@@ -1,4 +1,3 @@
-// FRAMEWORK IMPORTS
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -8,10 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-// COMPONENT IMPORTS
 import { SnomedNavbarComponent } from './components/snomed-navbar/snomed-navbar.component';
 import { SnomedFooterComponent } from './components/snomed-footer/snomed-footer.component';
-// PIPE IMPORTS
 import { AuthoringService } from './services/authoring/authoring.service';
 import { ChartModule } from 'primeng/chart';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,9 +21,6 @@ import { DescriptiveStatisticsComponent } from './components/descriptive-statist
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 import { S3Service } from './services/s3/s3.service';
 import { BranchingService } from './services/branching/branching.service';
-
-// SERVICE IMPORTS
-
 
 @NgModule({
     declarations: [
