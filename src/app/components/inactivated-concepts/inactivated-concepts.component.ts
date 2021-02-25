@@ -54,7 +54,6 @@ export class InactivatedConceptsComponent implements OnInit {
             this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
             concepts.forEach(item => {
-                this.overviewRow.inactivated += item.inactivated;
                 this.overviewRow.total += item.total;
             });
 
@@ -71,6 +70,7 @@ export class InactivatedConceptsComponent implements OnInit {
                     this.overviewRow.pendingMove += item.pendingMove;
                     this.overviewRow.nonConformance += item.nonConformance;
                     this.overviewRow.notEquivalent += item.notEquivalent;
+                    this.overviewRow.inactivated += item.inactivations;
 
                     this.tableRows.push(
                         {
