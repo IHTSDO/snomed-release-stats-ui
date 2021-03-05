@@ -12,19 +12,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngIf="overviewRow">
-                <td>{{overviewRow.name}}</td>
-                <td>{{overviewRow.total | number}}</td>
-                <td>{{percentage(overviewRow.total) | number:'1.2-2'}}%</td>
-                <td>{{overviewRow.descriptions | number}}</td>
-                <td>{{overviewRow.relationships | number}}</td>
-            </tr>
             <tr *ngFor="let row of tableRows">
                 <td>{{row.name}}</td>
                 <td>{{row.total | number}}</td>
                 <td>{{percentage(row.total) | number:'1.2-2'}}%</td>
                 <td>{{row.descriptions | number}}</td>
                 <td>{{row.relationships | number}}</td>
+            </tr>
+            <tr *ngIf="overviewRow">
+                <td class="font-weight-bold">Total</td>
+                <td class="font-weight-bold">{{overviewRow.total | number}}</td>
+                <td class="font-weight-bold">{{percentage(overviewRow.total) | number:'1.2-2'}}%</td>
+                <td class="font-weight-bold">{{overviewRow.descriptions | number}}</td>
+                <td class="font-weight-bold">{{overviewRow.relationships | number}}</td>
             </tr>
             </tbody>
         </table>
