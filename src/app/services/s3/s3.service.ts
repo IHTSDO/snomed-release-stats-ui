@@ -118,7 +118,7 @@ export class S3Service {
     }
 
     getInactivationStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet6.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet7.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             console.log('INACTIVATIONS: ', response);
