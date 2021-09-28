@@ -5,10 +5,10 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
+        "build:prod": "ng build --configuration production",
         "test": "jest",
-        "lint": "ng lint",
-        "e2e": "ng e2e",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "lint": "ng lint"
     },
     "browserslist": [
         "last 2 Chrome versions",

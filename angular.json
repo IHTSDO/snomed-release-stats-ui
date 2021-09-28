@@ -61,6 +61,7 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
+                            "baseHref": "/qa/",
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
