@@ -17,6 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "baseHref": "/",
                         "aot": true,
                         "outputPath": "dist/snomed-release-stats-ui",
                         "index": "src/index.html",
@@ -41,7 +42,7 @@
                         ],
                         "scripts": [
                             "./node_modules/jquery/dist/jquery.min.js",
-                            "./node_modules/popper.js/dist/umd/popper.min.js",
+                            "./node_modules/@popperjs/core/dist/umd/popper.min.js",
                             "./node_modules/bootstrap/dist/js/bootstrap.min.js",
                             "./node_modules/chart.js/dist/Chart.js"
                         ]
@@ -60,10 +61,10 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
+                            "baseHref": "/qa/",
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "aot": true,
                             "extractLicenses": true,
@@ -76,8 +77,7 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "snomed-release-stats-ui:build",
-                        "liveReload": false,
-                        "baseHref": "/"
+                        "liveReload": false
                     },
                     "configurations": {
                         "production": {
