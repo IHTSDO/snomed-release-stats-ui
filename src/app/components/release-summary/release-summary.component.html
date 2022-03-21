@@ -1,0 +1,48 @@
+<div class="release-summary mt-5">
+    <div class="container-fluid">
+        <h1 class="text-center p-5">Release Summary</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="text-center"></th>
+                <th colspan="3" class="text-center bg-tonys-pink">Concept</th>
+                <th colspan="3" class="text-center bg-perano">Description</th>
+                <th colspan="3" class="text-center bg-spring-rain">Text Definition</th>
+                <th colspan="3" class="text-center bg-vanilla">Language Refset</th>
+                <th colspan="3" class="text-center bg-tonys-pink">Axiom</th>
+                <th colspan="3" class="text-center bg-perano">Stated Relationship</th>
+                <th colspan="3" class="text-center bg-spring-rain">Inferred Relationship</th>
+            </tr>
+            <tr>
+                <th *ngFor="let row of titleRow; let index = index" [class]="calculateColour(index)">{{row | titleFormatter}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of tableRows | dateOrder:'effectiveTime'">
+                <td>{{row.effectiveTime | dateFormatter}}</td>
+                <td>{{row.conceptsNew}}</td>
+                <td>{{row.conceptsModified}}</td>
+                <td>{{row.conceptsTotal}}</td>
+                <td>{{row.descriptionsNew}}</td>
+                <td>{{row.descriptionsModified}}</td>
+                <td>{{row.descriptionsTotal}}</td>
+                <td>{{row.textDefinitionNew}}</td>
+                <td>{{row.textDefinitionModified}}</td>
+                <td>{{row.textDefinitionTotal}}</td>
+                <td>{{row.languageRefsetNew}}</td>
+                <td>{{row.languageRefsetModified}}</td>
+                <td>{{row.languageRefsetTotal}}</td>
+                <td>{{row.axiomNew}}</td>
+                <td>{{row.axiomModified}}</td>
+                <td>{{row.axiomTotal}}</td>
+                <td>{{row.statedNew}}</td>
+                <td>{{row.statedModified}}</td>
+                <td>{{row.statedTotal}}</td>
+                <td>{{row.inferredNew}}</td>
+                <td>{{row.inferredModified}}</td>
+                <td>{{row.inferredTotal}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

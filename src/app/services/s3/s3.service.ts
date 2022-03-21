@@ -10,7 +10,7 @@ import { BranchingService } from '../branching/branching.service';
 })
 export class S3Service {
 
-    private s3Path = '../reporting-s3/jobs/SummaryComponentStats/runs/';
+    private s3Path = '../reporting-s3/jobs/SummaryComponentStats/';
     private branchPath: string;
     private branchPathSubscription: Subscription;
 
@@ -19,10 +19,8 @@ export class S3Service {
     }
 
     getConceptStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet1.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet1.json').pipe(map(response => {
             const report: Hierarchy[] = [];
-
-            console.log('CONCEPTS: ', response);
 
             response.forEach(item => {
                 const hierarchy: Hierarchy = new Hierarchy();
@@ -46,10 +44,8 @@ export class S3Service {
     }
 
     getDescriptionStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet2.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet2.json').pipe(map(response => {
             const report: Hierarchy[] = [];
-
-            console.log('DESCRIPTIONS: ', response);
 
             response.forEach(item => {
                 const hierarchy: Hierarchy = new Hierarchy();
@@ -70,10 +66,8 @@ export class S3Service {
     }
 
     getRelationshipStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet3.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet3.json').pipe(map(response => {
             const report: Hierarchy[] = [];
-
-            console.log('RELATIONSHIPS: ', response);
 
             response.forEach(item => {
                 const hierarchy: Hierarchy = new Hierarchy();
@@ -94,10 +88,8 @@ export class S3Service {
     }
 
     getAxiomStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet4.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet4.json').pipe(map(response => {
             const report: Hierarchy[] = [];
-
-            console.log('AXIOMS: ', response);
 
             response.forEach(item => {
                 const hierarchy: Hierarchy = new Hierarchy();
@@ -118,10 +110,8 @@ export class S3Service {
     }
 
     getInactivationStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.branchPath + '/latest/sheet7.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet7.json').pipe(map(response => {
             const report: Hierarchy[] = [];
-
-            console.log('INACTIVATIONS: ', response);
 
             response.forEach(item => {
                 const hierarchy: Hierarchy = new Hierarchy();
@@ -149,5 +139,9 @@ export class S3Service {
 
             return report;
         }));
+    }
+
+    getReleaseSummary(): Observable<any> {
+        return this.http.get(this.s3Path + 'ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json');
     }
 }
