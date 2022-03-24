@@ -22,12 +22,12 @@
                 <td>{{row.newConcepts ? (percentage(row.p, row.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
             <tr *ngIf="overviewRow">
-                <td class="font-weight-bold">Total</td>
-                <td class="font-weight-bold">{{overviewRow.newConcepts | number}}</td>
-                <td class="font-weight-bold">{{overviewRow.newConcepts ? (percentage(overviewRow.newConcepts, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
-                <td class="font-weight-bold">{{overviewRow.newConcepts ? (percentage(overviewRow.total, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
-                <td class="font-weight-bold">{{overviewRow.newConcepts ? (percentage(overviewRow.sd, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
-                <td class="font-weight-bold">{{overviewRow.newConcepts ? (percentage(overviewRow.p, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
+                <td class="fw-bolder">Total</td>
+                <td class="fw-bolder">{{overviewRow.newConcepts | number}}</td>
+                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.newConcepts, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.total, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.sd, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
+                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.p, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
             </tbody>
         </table>

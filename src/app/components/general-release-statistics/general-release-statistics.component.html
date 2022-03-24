@@ -20,11 +20,11 @@
                 <td>{{row.relationships | number}}</td>
             </tr>
             <tr *ngIf="overviewRow">
-                <td class="font-weight-bold">Total</td>
-                <td class="font-weight-bold">{{overviewRow.total | number}}</td>
-                <td class="font-weight-bold">{{percentage(overviewRow.total) | number:'1.2-2'}}%</td>
-                <td class="font-weight-bold">{{overviewRow.descriptions | number}}</td>
-                <td class="font-weight-bold">{{overviewRow.relationships | number}}</td>
+                <td class="fw-bolder">Total</td>
+                <td class="fw-bolder">{{overviewRow.total | number}}</td>
+                <td class="fw-bolder">{{percentage(overviewRow.total) | number:'1.2-2'}}%</td>
+                <td class="fw-bolder">{{overviewRow.descriptions | number}}</td>
+                <td class="fw-bolder">{{overviewRow.relationships | number}}</td>
             </tr>
             </tbody>
         </table>

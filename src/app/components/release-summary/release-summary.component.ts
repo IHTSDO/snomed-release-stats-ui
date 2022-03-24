@@ -37,6 +37,7 @@ export class ReleaseSummaryComponent implements OnInit {
 
     titleRow: string[];
     tableRows: TableRow[] = [];
+    aggregator = false;
 
     tableColours = [
         'bg-tonys-pink',

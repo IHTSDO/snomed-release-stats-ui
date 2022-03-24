@@ -25,6 +25,7 @@ import { ReleaseSummaryComponent } from './components/release-summary/release-su
 import { TitleFormatterPipe } from './pipes/title-formatter.pipe';
 import { DateOrderPipe } from './pipes/date-order.pipe';
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
+import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { DateFormatterPipe } from './pipes/date-formatter.pipe';
         ReleaseSummaryComponent,
         TitleFormatterPipe,
         DateOrderPipe,
-        DateFormatterPipe
+        DateFormatterPipe,
+        DateAggregatorPipe
     ],
     imports: [
         BrowserModule,
