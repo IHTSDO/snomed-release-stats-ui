@@ -4,16 +4,16 @@
         <button *ngIf="!aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="aggregator = true">to 6 MONTHLY RELEASES</button>
         <button *ngIf="aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="aggregator = false">to INDIVIDUAL RELEASES</button>
         <table class="table table-striped">
-            <thead>
+            <thead class="sticky-top">
             <tr class="border-bottom-0">
-                <th class="text-center">Release</th>
-                <th colspan="3" class="text-center bg-tonys-pink">Concept</th>
-                <th colspan="3" class="text-center bg-perano">Description</th>
-                <th colspan="3" class="text-center bg-spring-rain">Text Definition</th>
-                <th colspan="3" class="text-center bg-vanilla">Language Refset</th>
-                <th colspan="3" class="text-center bg-tonys-pink">Axiom</th>
-                <th colspan="3" class="text-center bg-perano">Stated Relationship</th>
-                <th colspan="3" class="text-center bg-spring-rain">Inferred Relationship</th>
+                <th class="text-center border-0">Release</th>
+                <th colspan="3" class="text-center border-0 bg-tonys-pink">Concept</th>
+                <th colspan="3" class="text-center border-0 bg-perano">Description</th>
+                <th colspan="3" class="text-center border-0 bg-spring-rain">Text Definition</th>
+                <th colspan="3" class="text-center border-0 bg-vanilla">Language Refset</th>
+                <th colspan="3" class="text-center border-0 bg-tonys-pink">Axiom</th>
+                <th colspan="3" class="text-center border-0 bg-perano">Stated Relationship</th>
+                <th colspan="3" class="text-center border-0 bg-spring-rain">Inferred Relationship</th>
             </tr>
             <tr>
                 <th *ngFor="let row of titleRow; let index = index" [class]="calculateColour(index)">{{row | titleFormatter}}</th>

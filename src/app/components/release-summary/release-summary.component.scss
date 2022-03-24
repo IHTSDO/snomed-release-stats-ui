@@ -8,7 +8,8 @@ $vanilla: #D0C2A6;
 div.release-summary {
     font-weight: 300;
     position: relative;
-    overflow-y: auto;
+    overflow-y: scroll;
+    height: calc(100vh - 12rem);
 
     h1, h2 {
         font-weight: 400;
@@ -22,11 +23,12 @@ div.release-summary {
     }
 
     table {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         margin-bottom: 4rem;
-        overflow: scroll;
 
         thead {
+            background-color: $white;
+
             tr {
                 th {
                     &.bg-tonys-pink {
