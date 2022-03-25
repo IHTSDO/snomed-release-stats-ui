@@ -5,9 +5,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class DateAggregatorPipe implements PipeTransform {
 
-    newItems: any[] = [];
-    skippedItems: any[] = [];
-
     transform(items: any[], param: boolean): any {
         if (!items) {
             return [];
@@ -17,23 +14,26 @@ export class DateAggregatorPipe implements PipeTransform {
             return items;
         }
 
+        const newItems: any[] = [];
+        const skippedItems: any[] = [];
+
         items.forEach(item => {
-            this.addRow(item);
+            this.addRow(newItems, skippedItems, item);
         });
 
-        this.skippedItems.forEach(item => {
-            this.newItems.forEach(existingItem => {
+        skippedItems.forEach(item => {
+            newItems.forEach(existingItem => {
                 if (existingItem.effectiveTime === item.effectiveTime) {
                     this.addValues(existingItem, item);
                 }
             });
         });
 
-        this.skippedItems.forEach(item => {
+        skippedItems.forEach(item => {
             if (!this.isJanuaryRelease(item.effectiveTime) && !this.isJulyRelease(item.effectiveTime)) {
                 const nextRelease = this.findNextRelease(item.effectiveTime);
 
-                this.newItems.find(existingItem => {
+                newItems.find(existingItem => {
                     if (existingItem.effectiveTime === nextRelease) {
                         this.addValues(existingItem, item);
                     }
@@ -41,7 +41,7 @@ export class DateAggregatorPipe implements PipeTransform {
             }
         });
 
-        return this.newItems;
+        return newItems;
     }
 
     isJanuaryRelease(input: string): boolean {
@@ -65,15 +65,15 @@ export class DateAggregatorPipe implements PipeTransform {
         }
     }
 
-    addRow(input: any): void {
+    addRow(newItems: any[], skippedItems: any[], input: any): void {
         if (this.isJanuaryRelease(input.effectiveTime) || this.isJulyRelease(input.effectiveTime)) {
-            if (this.newItems.find(item => item.effectiveTime === input.effectiveTime)) {
-                this.skippedItems.push(input);
+            if (newItems.find(item => item.effectiveTime === input.effectiveTime)) {
+                skippedItems.push(input);
             } else {
-                this.newItems.push(input);
+                newItems.push(input);
             }
         } else {
-            this.skippedItems.push(input);
+            skippedItems.push(input);
         }
     }
 

@@ -35,6 +35,8 @@ export class TableRow {
 })
 export class ReleaseSummaryComponent implements OnInit {
 
+
+    rawTableRows: TableRow[] = [];
     titleRow: string[];
     tableRows: TableRow[] = [];
     aggregator = false;
@@ -57,7 +59,7 @@ export class ReleaseSummaryComponent implements OnInit {
             this.titleRow = data['columnHeadings'];
 
             data['releases'].forEach(item => {
-                this.tableRows.push(
+                this.rawTableRows.push(
                     {
                         effectiveTime: item.effectiveTime,
                         conceptsNew: item['data'][0],
@@ -83,6 +85,8 @@ export class ReleaseSummaryComponent implements OnInit {
                         inferredTotal:  item['data'][20]
                     });
             });
+
+            this.tableRows = this.cloneObject(this.rawTableRows);
         });
     }
 
@@ -92,5 +96,14 @@ export class ReleaseSummaryComponent implements OnInit {
         } else {
             return this.tableColours[Math.ceil(index / 3) - 1];
         }
+    }
+
+    resetTable(): void {
+        this.aggregator = false;
+        this.tableRows = this.cloneObject(this.rawTableRows);
+    }
+
+    cloneObject(object): any {
+        return JSON.parse(JSON.stringify(object));
     }
 }

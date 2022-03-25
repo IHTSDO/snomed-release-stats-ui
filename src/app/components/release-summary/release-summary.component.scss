@@ -17,6 +17,7 @@ div.release-summary {
 
     button {
         position: absolute;
+        font-size: 1.2rem;
         top: 2rem;
         right: 2rem;
         color: white;
@@ -45,6 +46,16 @@ div.release-summary {
 
                     &.bg-vanilla {
                         background-color: lighten($vanilla, 20%);
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    &:first-child {
+                        font-weight: 500;
                     }
                 }
             }
