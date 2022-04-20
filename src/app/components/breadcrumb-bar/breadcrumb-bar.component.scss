@@ -8,10 +8,11 @@ nav.navbar {
 
     a {
         line-height: 3rem;
+        color: $alto-white;
 
         &:hover, &.active {
             text-decoration: none;
-            background-color: $river-bed-lighter;
+            background-color: $bootstrap-dark;
         }
     }
 }

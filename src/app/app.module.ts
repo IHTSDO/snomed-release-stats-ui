@@ -21,6 +21,11 @@ import { DescriptiveStatisticsComponent } from './components/descriptive-statist
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 import { S3Service } from './services/s3/s3.service';
 import { BranchingService } from './services/branching/branching.service';
+import { ReleaseSummaryComponent } from './components/release-summary/release-summary.component';
+import { TitleFormatterPipe } from './pipes/title-formatter.pipe';
+import { DateOrderPipe } from './pipes/date-order.pipe';
+import { DateFormatterPipe } from './pipes/date-formatter.pipe';
+import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
 
 @NgModule({
     declarations: [
@@ -33,7 +38,12 @@ import { BranchingService } from './services/branching/branching.service';
         ConceptChangesCountsComponent,
         PatternsComponent,
         DescriptiveStatisticsComponent,
-        BreadcrumbBarComponent
+        BreadcrumbBarComponent,
+        ReleaseSummaryComponent,
+        TitleFormatterPipe,
+        DateOrderPipe,
+        DateFormatterPipe,
+        DateAggregatorPipe
     ],
     imports: [
         BrowserModule,

@@ -5,15 +5,17 @@ nav {
         height: 4rem;
         font-size: 1.6rem;
 
-        &:link {
+        &:hover {
             text-decoration: none;
         }
 
         span.title {
             font-weight: 300;
+            color: $alto-white;
             letter-spacing: 1.5px;
             line-height: 4rem;
             vertical-align: top;
+            cursor: pointer;
         }
 
         img.logo {
@@ -68,18 +70,35 @@ nav {
             display: inline-block;
 
             a {
+                min-width: 8rem;
                 font-size: 1.4rem;
                 height: 3rem;
                 color: $white;
-                background-color: $river-bed;
+                background-color: $bootstrap-dark;
                 line-height: 2rem;
                 font-weight: 300;
                 letter-spacing: 0.2rem;
+                cursor: pointer;
+
+                &.add {
+                    background-color: $fruit-salad;
+                }
+
+                &.loading {
+                    min-width: unset;
+
+                    div {
+                        color: $alto-white;
+                    }
+                }
             }
 
             div.dropdown-menu {
-                background-color: $river-bed;
+                background-color: $bootstrap-dark;
                 z-index: auto;
+                height: auto;
+                overflow-y: scroll;
+                max-height: 80vh;
 
                 &.show {
                     display: block;
@@ -90,10 +109,44 @@ nav {
                     z-index: auto;
 
                     &:hover {
-                        background-color: $river-bed;
+                        background-color: darken($bootstrap-dark, 10%);
                         cursor: pointer;
                     }
                 }
+            }
+        }
+    }
+
+    div.user {
+        color: $alto-white;
+        height: 3rem;
+        font-size: 1.2rem;
+
+        span {
+            line-height: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+        }
+
+        img {
+            height: 3rem;
+            width: 3rem;
+        }
+    }
+
+    div.logout {
+        color: $alto-white;
+        cursor: pointer;
+        height: 3rem;
+
+        span {
+            font-size: 1.2rem;
+            line-height: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+
+            &:hover {
+                color: $cerulean;
             }
         }
     }

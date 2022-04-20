@@ -1,10 +1,8 @@
 <div class="concept-changes-counts m-5 pb-5">
-    <div class="container-xl">
-        <h1 class="text-center p-5">
-            Concepts Changed (relative to previous published release)
-            <span *ngIf="!percentages" class="rounded-lg p-2 float-right bg-wisteria-lighter" (click)="percentages = true">to Percentages</span>
-            <span *ngIf="percentages" class="rounded-lg p-2 float-right bg-wisteria-lighter" (click)="percentages = false">to Counts</span>
-        </h1>
+    <div class="container-xl position-relative">
+        <h1 class="text-center p-5">Concepts Changed (relative to previous published release)</h1>
+        <button *ngIf="!percentages" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="percentages = true">View Percentages</button>
+        <button *ngIf="percentages" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="percentages = false">View Numerics</button>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -24,11 +22,11 @@
                 <td>{{row.descriptionChanged | number}}</td>
             </tr>
             <tr *ngIf="overviewRow">
-                <td class="font-weight-bold">Total</td>
-                <td class="font-weight-bold">{{overviewRow.statedChanged + overviewRow.inferredChanged + overviewRow.descriptionChanged | number}}</td>
-                <td class="font-weight-bold">{{overviewRow.statedChanged | number}}</td>
-                <td class="font-weight-bold">{{overviewRow.inferredChanged | number}}</td>
-                <td class="font-weight-bold">{{overviewRow.descriptionChanged | number}}</td>
+                <td class="fw-bolder">Total</td>
+                <td class="fw-bolder">{{overviewRow.statedChanged + overviewRow.inferredChanged + overviewRow.descriptionChanged | number}}</td>
+                <td class="fw-bolder">{{overviewRow.statedChanged | number}}</td>
+                <td class="fw-bolder">{{overviewRow.inferredChanged | number}}</td>
+                <td class="fw-bolder">{{overviewRow.descriptionChanged | number}}</td>
             </tr>
             </tbody>
             <tbody *ngIf="percentages">
@@ -49,11 +47,11 @@
                 </ng-container>
             </tr>
             <tr *ngIf="overviewRow">
-                <td class="font-weight-bold">Total</td>
-                <td class="font-weight-bold">{{percentage(overviewRow.statedChanged + overviewRow.inferredChanged + overviewRow.descriptionChanged, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td class="font-weight-bold">{{percentage(overviewRow.statedChanged, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td class="font-weight-bold">{{percentage(overviewRow.inferredChanged, overviewRow.total) | number:'1.2-2'}}%</td>
-                <td class="font-weight-bold">{{percentage(overviewRow.descriptionChanged, overviewRow.total) | number:'1.2-2'}}%</td>
+                <td class="fw-bolder">Total</td>
+                <td class="fw-bolder">{{percentage(overviewRow.statedChanged + overviewRow.inferredChanged + overviewRow.descriptionChanged, overviewRow.total) | number:'1.2-2'}}%</td>
+                <td class="fw-bolder">{{percentage(overviewRow.statedChanged, overviewRow.total) | number:'1.2-2'}}%</td>
+                <td class="fw-bolder">{{percentage(overviewRow.inferredChanged, overviewRow.total) | number:'1.2-2'}}%</td>
+                <td class="fw-bolder">{{percentage(overviewRow.descriptionChanged, overviewRow.total) | number:'1.2-2'}}%</td>
             </tr>
             </tbody>
         </table>

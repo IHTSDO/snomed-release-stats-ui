@@ -1,0 +1,50 @@
+<div class="release-summary mt-5">
+    <div class="container-fluid" *ngIf="tableRows.length">
+        <h1 class="text-center p-5">Release Summary</h1>
+        <button *ngIf="!aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="aggregator = true">View 6 Monthly Releases</button>
+        <button *ngIf="aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="resetTable()">View All Releases</button>
+        <table class="table table-striped">
+            <thead class="sticky-top">
+            <tr class="border-bottom-0">
+                <th class="text-center border-0">Release</th>
+                <th colspan="3" class="text-center border-0 bg-tonys-pink">Concept</th>
+                <th colspan="3" class="text-center border-0 bg-perano">Description</th>
+                <th colspan="3" class="text-center border-0 bg-spring-rain">Text Definition</th>
+                <th colspan="3" class="text-center border-0 bg-vanilla">Language Refset</th>
+                <th colspan="3" class="text-center border-0 bg-tonys-pink">Axiom</th>
+                <th colspan="3" class="text-center border-0 bg-perano">Stated Relationship</th>
+                <th colspan="3" class="text-center border-0 bg-spring-rain">Inferred Relationship</th>
+            </tr>
+            <tr>
+                <th *ngFor="let row of titleRow; let index = index" [class]="calculateColour(index)">{{row | titleFormatter}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of tableRows | dateAggregator:aggregator | dateOrder:'effectiveTime'">
+                <td class="text-center">{{row.effectiveTime | dateFormatter}}</td>
+                <td>{{row.conceptsNew | number}}</td>
+                <td>{{row.conceptsModified | number}}</td>
+                <td>{{row.conceptsTotal | number}}</td>
+                <td>{{row.descriptionsNew | number}}</td>
+                <td>{{row.descriptionsModified | number}}</td>
+                <td>{{row.descriptionsTotal | number}}</td>
+                <td>{{row.textDefinitionNew | number}}</td>
+                <td>{{row.textDefinitionModified | number}}</td>
+                <td>{{row.textDefinitionTotal | number}}</td>
+                <td>{{row.languageRefsetNew | number}}</td>
+                <td>{{row.languageRefsetModified | number}}</td>
+                <td>{{row.languageRefsetTotal | number}}</td>
+                <td>{{row.axiomNew | number}}</td>
+                <td>{{row.axiomModified | number}}</td>
+                <td>{{row.axiomTotal | number}}</td>
+                <td>{{row.statedNew | number}}</td>
+                <td>{{row.statedModified | number}}</td>
+                <td>{{row.statedTotal | number}}</td>
+                <td>{{row.inferredNew | number}}</td>
+                <td>{{row.inferredModified | number}}</td>
+                <td>{{row.inferredTotal | number}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
