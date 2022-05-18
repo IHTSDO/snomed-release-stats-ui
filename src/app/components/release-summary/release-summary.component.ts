@@ -25,6 +25,9 @@ export class TableRow {
         public inferredNew: number,
         public inferredModified: number,
         public inferredTotal: number,
+        public concreteRelationshipNew: number,
+        public concreteRelationshipModified: number,
+        public concreteRelationshipTotal: number
     ) {}
 }
 
@@ -48,7 +51,8 @@ export class ReleaseSummaryComponent implements OnInit {
         'bg-vanilla',
         'bg-tonys-pink',
         'bg-perano',
-        'bg-spring-rain'
+        'bg-spring-rain',
+        'bg-vanilla'
     ];
 
     constructor(private s3Service: S3Service) {
@@ -82,7 +86,10 @@ export class ReleaseSummaryComponent implements OnInit {
                         statedTotal:  item['data'][17],
                         inferredNew: item['data'][18],
                         inferredModified: item['data'][19],
-                        inferredTotal:  item['data'][20]
+                        inferredTotal:  item['data'][20],
+                        concreteRelationshipNew:  item['data'][21],
+                        concreteRelationshipModified:  item['data'][22],
+                        concreteRelationshipTotal:  item['data'][23]
                     });
             });
 
