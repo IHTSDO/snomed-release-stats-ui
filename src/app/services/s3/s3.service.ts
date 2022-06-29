@@ -4,22 +4,32 @@ import { Hierarchy } from '../../models/hierarchy';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BranchingService } from '../branching/branching.service';
+import {PathingService} from '../pathing/pathing.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class S3Service {
 
-    private s3Path = '../reporting-s3/jobs/SummaryComponentStats/';
+    private s3Path = '../reporting-s3/jobs/SummaryComponentStats';
+    private extension = 'Extensions';
+    private activeS3Path = '../reporting-s3/jobs/SummaryComponentStats';
     private branchPath: string;
     private branchPathSubscription: Subscription;
 
-    constructor(private http: HttpClient, private branchingService: BranchingService) {
+    activeBranch: any;
+    activeBranchSubscription: Subscription;
+
+    constructor(private http: HttpClient, private branchingService: BranchingService, private pathingService: PathingService) {
         this.branchPathSubscription = this.branchingService.getBranchPath().subscribe(data => this.branchPath = data);
+        this.activeBranchSubscription = this.pathingService.getActiveBranch().subscribe(data => {
+            this.activeBranch = data;
+            this.updateS3Path();
+        });
     }
 
     getConceptStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet1.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.activeS3Path + '/runs/' + this.branchPath + '/latest/sheet1.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -44,7 +54,7 @@ export class S3Service {
     }
 
     getDescriptionStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet2.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.activeS3Path + '/runs/' + this.branchPath + '/latest/sheet2.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -66,7 +76,7 @@ export class S3Service {
     }
 
     getRelationshipStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet3.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.activeS3Path + '/runs/' + this.branchPath + '/latest/sheet3.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -88,7 +98,7 @@ export class S3Service {
     }
 
     getAxiomStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet4.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.activeS3Path + '/runs/' + this.branchPath + '/latest/sheet4.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -110,7 +120,7 @@ export class S3Service {
     }
 
     getInactivationStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet7.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.activeS3Path + '/runs/' + this.branchPath + '/latest/sheet7.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -142,6 +152,14 @@ export class S3Service {
     }
 
     getReleaseSummary(): Observable<any> {
-        return this.http.get(this.s3Path + 'ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json');
+        return this.http.get(this.activeS3Path + '/ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json');
+    }
+
+    updateS3Path() {
+        if (this.activeBranch?.shortName === 'SNOMEDCT') {
+            this.activeS3Path = this.s3Path;
+        } else {
+            this.activeS3Path = this.s3Path + this.extension;
+        }
     }
 }

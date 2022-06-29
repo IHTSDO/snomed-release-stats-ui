@@ -30,6 +30,10 @@ div.release-summary {
         thead {
             background-color: $white;
 
+            &.sticky-top {
+                z-index: 1010;
+            }
+
             tr {
                 th {
                     &.bg-tonys-pink {

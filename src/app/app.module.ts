@@ -26,6 +26,9 @@ import { TitleFormatterPipe } from './pipes/title-formatter.pipe';
 import { DateOrderPipe } from './pipes/date-order.pipe';
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
+import {AlphabeticalPipe} from './pipes/alphabetical/alphabetical.pipe';
+import {PathingService} from './services/pathing/pathing.service';
+import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe';
 
 @NgModule({
     declarations: [
@@ -43,7 +46,9 @@ import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
         TitleFormatterPipe,
         DateOrderPipe,
         DateFormatterPipe,
-        DateAggregatorPipe
+        DateAggregatorPipe,
+        AlphabeticalPipe,
+        ManagedServicePipe
     ],
     imports: [
         BrowserModule,
@@ -58,6 +63,7 @@ import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
         AuthoringService,
         BranchingService,
         S3Service,
+        PathingService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,

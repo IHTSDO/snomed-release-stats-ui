@@ -4,6 +4,31 @@
         <span class="title text-athens-grey">{{title}}</span>
     </a>
 
+    <ul *ngIf="branches; else loading" class="dropdown-nav me-auto my-2">
+        <li class="nav-item dropdown">
+            <a class="nav-link px-3 rounded dropdown-toggle text-end" id="branchDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{activeBranch?.name}}
+            </a>
+            <div class="dropdown-menu py-0" aria-labelledby="branchDropdown">
+                <ng-container *ngFor="let branch of branches | alphabetical:'branchPath' | managedService">
+                    <a class="dropdown-item ps-3" (click)="setBranch(branch)">{{branch?.name}}</a>
+                </ng-container>
+            </div>
+        </li>
+    </ul>
+
+    <ng-template #loading>
+        <ul class="dropdown-nav me-auto my-2">
+            <li class="nav-item">
+                <a class="nav-link px-3 rounded loading">
+                    <div class="spinner-border" style="font-size: 1rem" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </ng-template>
+
     <ng-container [ngSwitch]="environment">
         <div *ngSwitchCase="'local'" class="banner text-white local"></div>
         <div *ngSwitchCase="'dev'" class="banner text-white dev"></div>

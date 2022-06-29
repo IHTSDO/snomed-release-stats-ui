@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { S3Service } from '../../services/s3/s3.service';
+import {Subscription} from 'rxjs';
+import {PathingService} from '../../services/pathing/pathing.service';
 
 export class GraphData {
     labels: string[];
@@ -111,14 +113,25 @@ export class DescriptiveStatisticsComponent implements OnInit {
         '#367ba5'
     ];
 
+    activeBranch: any;
+    activeBranchSubscription: Subscription;
 
-
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private pathingService: PathingService) {
+        this.activeBranchSubscription = this.pathingService.getActiveBranch().subscribe(data => {
+            if (this.activeBranch && this.activeBranch.shortName !== data['shortName']) {
+                this.getStats();
+            }
+            this.activeBranch = data;
+        });
     }
 
     public pieChartPlugins = [pluginDataLabels];
 
     ngOnInit(): void {
+        this.getStats();
+    }
+
+    getStats() {
         this.s3Service.getConceptStatistics().subscribe(data => {
             this.constructChart1Data(data);
             this.constructChart2Data(data);

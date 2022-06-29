@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
+import {Subscription} from 'rxjs';
+import {PathingService} from '../../services/pathing/pathing.service';
 
 export class TableRow {
     name: string;
@@ -46,10 +48,26 @@ export class InactivatedConceptsComponent implements OnInit {
     overviewRow: TableRow;
     tableRows: TableRow[] = [];
 
-    constructor(private s3Service: S3Service) {
+    activeBranch: any;
+    activeBranchSubscription: Subscription;
+
+    constructor(private s3Service: S3Service, private pathingService: PathingService) {
+        this.activeBranchSubscription = this.pathingService.getActiveBranch().subscribe(data => {
+            if (this.activeBranch && this.activeBranch.shortName !== data['shortName']) {
+                this.getStats();
+            }
+            this.activeBranch = data;
+        });
     }
 
     ngOnInit(): void {
+        this.getStats();
+    }
+
+    getStats() {
+        this.tableRows = [];
+        this.overviewRow = null;
+
         this.s3Service.getConceptStatistics().subscribe(concepts => {
             this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
