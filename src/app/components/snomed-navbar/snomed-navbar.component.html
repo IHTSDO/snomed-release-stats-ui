@@ -1,17 +1,17 @@
 <nav class="navbar sticky-top navbar-dark bg-dark p-2 pe-2">
     <a class="logo" routerLink="/descriptive-statistics">
         <img class="logo me-2 p-0" src="/qa/assets/small_logo.png">
-        <span class="title text-athens-grey">{{title}}</span>
+        <span class="title text-athens-grey">{{titleService.getTitle()}}</span>
     </a>
 
-    <ul *ngIf="branches; else loading" class="dropdown-nav me-auto my-2">
+    <ul *ngIf="extensions; else loading" class="dropdown-nav me-auto my-2">
         <li class="nav-item dropdown">
             <a class="nav-link px-3 rounded dropdown-toggle text-end" id="branchDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{activeBranch?.name}}
+                {{activeExtension?.name}}
             </a>
             <div class="dropdown-menu py-0" aria-labelledby="branchDropdown">
-                <ng-container *ngFor="let branch of branches | alphabetical:'branchPath' | managedService">
-                    <a class="dropdown-item ps-3" (click)="setBranch(branch)">{{branch?.name}}</a>
+                <ng-container *ngFor="let extension of extensions | alphabetical:'branchPath' | managedService">
+                    <a class="dropdown-item ps-3" (click)="setExtension(extension)">{{extension?.name}}</a>
                 </ng-container>
             </div>
         </li>

@@ -20,14 +20,12 @@ import { PatternsComponent } from './components/patterns/patterns.component';
 import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 import { S3Service } from './services/s3/s3.service';
-import { BranchingService } from './services/branching/branching.service';
 import { ReleaseSummaryComponent } from './components/release-summary/release-summary.component';
 import { TitleFormatterPipe } from './pipes/title-formatter.pipe';
 import { DateOrderPipe } from './pipes/date-order.pipe';
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
 import {AlphabeticalPipe} from './pipes/alphabetical/alphabetical.pipe';
-import {PathingService} from './services/pathing/pathing.service';
 import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe';
 
 @NgModule({
@@ -61,9 +59,7 @@ import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe'
     ],
     providers: [
         AuthoringService,
-        BranchingService,
         S3Service,
-        PathingService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,

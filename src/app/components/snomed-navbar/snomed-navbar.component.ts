@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {PathingService} from '../../services/pathing/pathing.service';
+import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AuthoringService} from '../../services/authoring/authoring.service';
 import {Title} from '@angular/platform-browser';
-import {BranchingService} from '../../services/branching/branching.service';
+import {S3Service} from '../../services/s3/s3.service';
 
 @Component({
     selector: 'app-snomed-navbar',
@@ -13,57 +12,72 @@ import {BranchingService} from '../../services/branching/branching.service';
 export class SnomedNavbarComponent implements OnInit {
 
     environment: string;
-    @Input() title: string;
-
-    branches: any;
-    branchesSubscription: Subscription;
-    activeBranch: any;
-    activeBranchSubscription: Subscription;
-
     path: string;
 
     versions: any;
+    versionsSubscription: Subscription;
+    extensions: any;
+    extensionsSubscription: Subscription;
+    activeExtension: any;
+    activeExtensionSubscription: Subscription;
 
-    constructor(private pathingService: PathingService,
-                private authoringService: AuthoringService,
-                private titleService: Title,
-                private branchingService: BranchingService) {
+    constructor(private authoringService: AuthoringService,
+                public titleService: Title,
+                private s3service: S3Service) {
         this.environment = window.location.host.split(/[.]/)[0].split(/[-]/)[0];
-        this.branchesSubscription = this.pathingService.getBranches().subscribe(data => this.branches = data);
-        this.activeBranchSubscription = this.pathingService.getActiveBranch().subscribe(data => this.activeBranch = data);
+        this.versionsSubscription = this.authoringService.getVersions().subscribe(data => this.versions = data);
+        this.extensionsSubscription = this.authoringService.getExtensions().subscribe(data => this.extensions = data);
+        this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
     }
 
     ngOnInit() {
-        this.pathingService.httpGetBranches().subscribe(branches => {
-            this.pathingService.setBranches(branches);
-            if (!this.path) {
-                this.pathingService.setActiveBranch(branches[0]);
+        this.authoringService.httpGetExtensions().subscribe(extensions => {
+            this.authoringService.setExtensions(extensions);
+            this.authoringService.setActiveExtension(extensions[0]);
+
+            this.authoringService.httpGetVersions('SNOMEDCT').subscribe(versions => {
+                this.authoringService.setVersions(versions);
+            });
+        });
+
+        this.getVersions('SNOMEDCT');
+    }
+
+    getVersions(extension: string) {
+        this.authoringService.httpGetVersions(extension).subscribe(versions => {
+            this.authoringService.setVersions(versions);
+
+            if (extension === 'SNOMEDCT') {
+                console.log('international:', extension);
+                const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
+                const latest = localVersions.shift();
+                const previous = localVersions.shift();
+                this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
+
+                const path = '/runs/SnomedCT_InternationalRF2_PRODUCTION_' + latest.effectiveDate + 'T120000Z'
+                    + '---' +
+                    'SnomedCT_InternationalRF2_PRODUCTION_' + previous.effectiveDate + 'T120000Z';
+                this.s3service.setFilePath(path);
+
+            } else {
+                console.log('managedService:', extension);
+                this.authoringService.httpGetBranchMetadata(extension).subscribe(metadata => {
+                    const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
+                    const latest = localVersions.shift();
+                    const previous = localVersions.shift();
+                    this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
+
+                    const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate + 'T120000Z'
+                        + '---' +
+                        'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate + 'T120000Z';
+                    this.s3service.setFilePath(path);
+                });
             }
         });
     }
 
-    getVersions() {
-        this.authoringService.getVersions().subscribe(versions => {
-            this.versions = versions;
-
-            this.versions = this.versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
-            const latest = this.versions.shift();
-            const previous = this.versions.shift();
-            this.title = 'SNOMED CT Release Statistics International Edition ' + latest.version;
-            this.titleService.setTitle(this.title);
-
-            console.log('versions: ', this.versions);
-            console.log('latest: ', latest);
-            console.log('previous: ', previous);
-
-            const path = 'SnomedCT_InternationalRF2_PRODUCTION_'
-                + latest.effectiveDate + 'T120000Z---SnomedCT_InternationalRF2_PRODUCTION_'
-                + previous.effectiveDate + 'T120000Z';
-            this.branchingService.setBranchPath(path);
-        });
-    }
-
-    setBranch(branch) {
-        this.pathingService.setActiveBranch(branch);
+    setExtension(extension) {
+        this.authoringService.setActiveExtension(extension);
+        this.getVersions(extension.shortName);
     }
 }

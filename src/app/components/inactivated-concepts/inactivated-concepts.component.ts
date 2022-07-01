@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
-import {PathingService} from '../../services/pathing/pathing.service';
+import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class TableRow {
     name: string;
@@ -48,15 +48,16 @@ export class InactivatedConceptsComponent implements OnInit {
     overviewRow: TableRow;
     tableRows: TableRow[] = [];
 
-    activeBranch: any;
-    activeBranchSubscription: Subscription;
+    activeExtension: any;
+    activeExtensionSubscription: Subscription;
 
-    constructor(private s3Service: S3Service, private pathingService: PathingService) {
-        this.activeBranchSubscription = this.pathingService.getActiveBranch().subscribe(data => {
-            if (this.activeBranch && this.activeBranch.shortName !== data['shortName']) {
+    constructor(private s3Service: S3Service,
+                private authoringService: AuthoringService) {
+        this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(extension => {
+            if (this.activeExtension && this.activeExtension.shortName !== extension['shortName']) {
                 this.getStats();
             }
-            this.activeBranch = data;
+            this.activeExtension = extension;
         });
     }
 
