@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {S3Service} from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
-import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class TableRow {
     constructor(
@@ -57,16 +56,13 @@ export class ReleaseSummaryComponent implements OnInit {
         'bg-vanilla'
     ];
 
-    activeExtension: any;
-    activeExtensionSubscription: Subscription;
+    rsFilePath: any;
+    rsFilePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service,
-                private authoringService: AuthoringService) {
-        this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(extension => {
-            if (this.activeExtension && this.activeExtension.shortName !== extension['shortName']) {
-                this.getStats();
-            }
-            this.activeExtension = extension;
+    constructor(private s3Service: S3Service) {
+        this.rsFilePathSubscription = this.s3Service.getRSFilePath().subscribe(rsFilePath => {
+            this.rsFilePath = rsFilePath;
+            this.getStats();
         });
     }
 
@@ -75,6 +71,7 @@ export class ReleaseSummaryComponent implements OnInit {
     }
 
     getStats() {
+        this.rawTableRows = [];
         this.tableRows = [];
 
         this.s3Service.getReleaseSummary().subscribe(data => {
@@ -113,6 +110,14 @@ export class ReleaseSummaryComponent implements OnInit {
 
             this.tableRows = this.cloneObject(this.rawTableRows);
         });
+    }
+
+    calculateTopTitleColour(index: number): string {
+        if (index === 0) {
+            return '';
+        } else {
+            return this.tableColours[Math.ceil(index) - 1];
+        }
     }
 
     calculateColour(index: number): string {

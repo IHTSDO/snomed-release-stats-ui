@@ -10,16 +10,18 @@ import { HttpClient } from '@angular/common/http';
 export class S3Service {
 
     private filePath = new Subject<string>();
+    private rsFilePath = new Subject<string>();
 
     localFilePath: any;
     localFilePathSubscription: Subscription;
+    localRSFilePath: any;
+    localRSFilePathSubscription: Subscription;
 
     private s3Path = '../reporting-s3/jobs/SummaryComponentStats';
 
     constructor(private http: HttpClient) {
-        this.localFilePathSubscription = this.getFilePath().subscribe(data => {
-            this.localFilePath = data;
-        });
+        this.localFilePathSubscription = this.getFilePath().subscribe(data => this.localFilePath = data);
+        this.localRSFilePathSubscription = this.getRSFilePath().subscribe(data => this.localRSFilePath = data);
     }
 
     getConceptStatistics(): Observable<Hierarchy[]> {
@@ -146,7 +148,7 @@ export class S3Service {
     }
 
     getReleaseSummary(): Observable<any> {
-        return this.http.get(this.s3Path + '/ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json');
+        return this.http.get(this.s3Path + this.localRSFilePath);
     }
 
     // Setters & Getters: FilePath
@@ -156,5 +158,14 @@ export class S3Service {
 
     getFilePath(): Observable<string> {
         return this.filePath.asObservable();
+    }
+
+    // Setters & Getters: RSFilePath
+    setRSFilePath(path) {
+        this.rsFilePath.next(path);
+    }
+
+    getRSFilePath(): Observable<string> {
+        return this.rsFilePath.asObservable();
     }
 }

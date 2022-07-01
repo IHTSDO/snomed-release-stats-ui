@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
-import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class TableRow {
     name: string;
@@ -32,16 +31,13 @@ export class ConceptChangesCountsComponent implements OnInit {
     tableRows: TableRow[] = [];
     percentages = false;
 
-    activeExtension: any;
-    activeExtensionSubscription: Subscription;
+    filePath: any;
+    filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service,
-                private authoringService: AuthoringService) {
-        this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(extension => {
-            if (this.activeExtension && this.activeExtension.shortName !== extension['shortName']) {
-                this.getStats();
-            }
-            this.activeExtension = extension;
+    constructor(private s3Service: S3Service) {
+        this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
+            this.filePath = filePath;
+            this.getStats();
         });
     }
 

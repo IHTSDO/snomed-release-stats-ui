@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
-import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class GraphData {
     labels: string[];
@@ -113,24 +112,11 @@ export class DescriptiveStatisticsComponent implements OnInit {
         '#367ba5'
     ];
 
-    activeExtension: any;
-    activeExtensionSubscription: Subscription;
-
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service,
-                private authoringService: AuthoringService) {
-        // this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(extension => {
-        //     console.log('DESCRIPTIVE STATS extension updated: ', extension);
-        //     // if (this.activeExtension && this.activeExtension.shortName !== extension['shortName']) {
-        //         this.getStats();
-        //     // }
-        //     this.activeExtension = extension;
-        // });
+    constructor(private s3Service: S3Service) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
-            console.log('DESCRIPTIVE STATS filePath updated: ', filePath);
-
             this.filePath = filePath;
             this.getStats();
         });

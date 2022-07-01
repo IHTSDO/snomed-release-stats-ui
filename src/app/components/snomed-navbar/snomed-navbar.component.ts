@@ -48,7 +48,6 @@ export class SnomedNavbarComponent implements OnInit {
             this.authoringService.setVersions(versions);
 
             if (extension === 'SNOMEDCT') {
-                console.log('international:', extension);
                 const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
                 const latest = localVersions.shift();
                 const previous = localVersions.shift();
@@ -59,8 +58,9 @@ export class SnomedNavbarComponent implements OnInit {
                     'SnomedCT_InternationalRF2_PRODUCTION_' + previous.effectiveDate + 'T120000Z';
                 this.s3service.setFilePath(path);
 
+                const rsPath = '/ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json';
+                this.s3service.setRSFilePath(rsPath);
             } else {
-                console.log('managedService:', extension);
                 this.authoringService.httpGetBranchMetadata(extension).subscribe(metadata => {
                     const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
                     const latest = localVersions.shift();
@@ -71,6 +71,9 @@ export class SnomedNavbarComponent implements OnInit {
                         + '---' +
                         'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate + 'T120000Z';
                     this.s3service.setFilePath(path);
+
+                    const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
+                    this.s3service.setRSFilePath(rsPath);
                 });
             }
         });

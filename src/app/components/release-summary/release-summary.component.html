@@ -6,15 +6,7 @@
         <table class="table table-striped">
             <thead class="sticky-top">
             <tr class="border-bottom-0">
-                <th class="text-center border-0">Release</th>
-                <th colspan="3" class="text-center border-0 bg-tonys-pink">Concept</th>
-                <th colspan="3" class="text-center border-0 bg-perano">Description</th>
-                <th colspan="3" class="text-center border-0 bg-spring-rain">Text Definition</th>
-                <th colspan="3" class="text-center border-0 bg-vanilla">Language Refset</th>
-                <th colspan="3" class="text-center border-0 bg-tonys-pink">Axiom</th>
-                <th colspan="3" class="text-center border-0 bg-perano">Stated Relationship</th>
-                <th colspan="3" class="text-center border-0 bg-spring-rain">Inferred Relationship</th>
-                <th colspan="3" class="text-center border-0 bg-vanilla">Concrete Relationship</th>
+                <th [attr.colspan]="index === 0 ? 1 : 3" *ngFor="let row of titleRow | duplicateFilter; let index = index" class="text-center border-0" [class]="calculateTopTitleColour(index)">{{row | topTitleFormatter}}</th>
             </tr>
             <tr>
                 <th *ngFor="let row of titleRow; let index = index" [class]="calculateColour(index)">{{row | titleFormatter}}</th>
@@ -44,9 +36,9 @@
                 <td>{{row.inferredNew | number}}</td>
                 <td>{{row.inferredModified | number}}</td>
                 <td>{{row.inferredTotal | number}}</td>
-                <td>{{row.concreteRelationshipNew | number}}</td>
-                <td>{{row.concreteRelationshipModified | number}}</td>
-                <td>{{row.concreteRelationshipTotal | number}}</td>
+                <td [class.p-0]="!row.concreteRelationshipNew">{{row.concreteRelationshipNew | number}}</td>
+                <td [class.p-0]="!row.concreteRelationshipModified">{{row.concreteRelationshipModified | number}}</td>
+                <td [class.p-0]="!row.concreteRelationshipTotal">{{row.concreteRelationshipTotal | number}}</td>
             </tr>
             </tbody>
         </table>

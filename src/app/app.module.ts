@@ -27,6 +27,8 @@ import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
 import {AlphabeticalPipe} from './pipes/alphabetical/alphabetical.pipe';
 import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe';
+import { TopTitleFormatterPipe } from './pipes/topTitleFormatter/top-title-formatter.pipe';
+import { DuplicateFilterPipe } from './pipes/duplicateFilter/duplicate-filter.pipe';
 
 @NgModule({
     declarations: [
@@ -46,7 +48,9 @@ import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe'
         DateFormatterPipe,
         DateAggregatorPipe,
         AlphabeticalPipe,
-        ManagedServicePipe
+        ManagedServicePipe,
+        TopTitleFormatterPipe,
+        DuplicateFilterPipe
     ],
     imports: [
         BrowserModule,
