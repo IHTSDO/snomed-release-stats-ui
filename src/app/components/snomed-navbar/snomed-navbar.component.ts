@@ -50,12 +50,13 @@ export class SnomedNavbarComponent implements OnInit {
             if (extension === 'SNOMEDCT') {
                 const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
                 const latest = localVersions.shift();
+
                 const previous = localVersions.shift();
                 this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
 
-                const path = '/runs/SnomedCT_InternationalRF2_PRODUCTION_' + latest.effectiveDate + 'T120000Z'
+                const path = '/runs/SnomedCT_InternationalRF2_PRODUCTION_' + latest.effectiveDate
                     + '---' +
-                    'SnomedCT_InternationalRF2_PRODUCTION_' + previous.effectiveDate + 'T120000Z';
+                    'SnomedCT_InternationalRF2_PRODUCTION_' + previous.effectiveDate;
                 this.s3service.setFilePath(path);
 
                 const rsPath = '/ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json';
@@ -64,16 +65,24 @@ export class SnomedNavbarComponent implements OnInit {
                 this.authoringService.httpGetBranchMetadata(extension).subscribe(metadata => {
                     const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
                     const latest = localVersions.shift();
-                    const previous = localVersions.shift();
                     this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
 
-                    const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate + 'T120000Z'
-                        + '---' +
-                        'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate + 'T120000Z';
-                    this.s3service.setFilePath(path);
+                    if (localVersions) {
+                        if (localVersions.length) {
+                            const previous = localVersions.shift();
+                            const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
+                                + '---' +
+                                'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate;
+                            this.s3service.setFilePath(path);
+                        } else {
+                            const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
+                                + '---empty-rf2-snapshot';
+                            this.s3service.setFilePath(path);
+                        }
 
-                    const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
-                    this.s3service.setRSFilePath(rsPath);
+                        const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
+                        this.s3service.setRSFilePath(rsPath);
+                    }
                 });
             }
         });
