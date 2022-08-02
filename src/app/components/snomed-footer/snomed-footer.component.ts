@@ -5,13 +5,10 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './snomed-footer.component.html',
     styleUrls: ['./snomed-footer.component.scss']
 })
-export class SnomedFooterComponent implements OnInit {
+export class SnomedFooterComponent {
 
     year: number = new Date().getFullYear();
     constructor() {
-    }
-
-    ngOnInit() {
     }
 
 }
