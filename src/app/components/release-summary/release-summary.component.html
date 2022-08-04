@@ -36,9 +36,9 @@
                 <td>{{row.inferredNew | number}}</td>
                 <td>{{row.inferredModified | number}}</td>
                 <td>{{row.inferredTotal | number}}</td>
-                <td [class.p-0]="!row.concreteRelationshipNew">{{row.concreteRelationshipNew | number}}</td>
-                <td [class.p-0]="!row.concreteRelationshipModified">{{row.concreteRelationshipModified | number}}</td>
-                <td [class.p-0]="!row.concreteRelationshipTotal">{{row.concreteRelationshipTotal | number}}</td>
+                <td *ngIf="row.concreteRelationshipNew !== '0'" [class.p-0]="!row.concreteRelationshipNew">{{row.concreteRelationshipNew | number}}</td>
+                <td *ngIf="row.concreteRelationshipModified !== '0'" [class.p-0]="!row.concreteRelationshipModified">{{row.concreteRelationshipModified | number}}</td>
+                <td *ngIf="row.concreteRelationshipTotal !== '0'" [class.p-0]="!row.concreteRelationshipTotal">{{row.concreteRelationshipTotal | number}}</td>
             </tr>
             </tbody>
         </table>
