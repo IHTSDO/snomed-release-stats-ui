@@ -1,8 +1,11 @@
 <div class="release-summary mt-5">
     <div class="container-fluid" *ngIf="tableRows.length">
         <h1 class="text-center p-5">Release Summary</h1>
-        <button *ngIf="!aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="aggregator = true">View 6 Monthly Releases</button>
-        <button *ngIf="aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="resetTable()">View All Releases</button>
+        <ng-container *ngIf="activeExtension?.shortName === 'SNOMEDCT' || activeExtension === undefined">
+            <button *ngIf="!aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="aggregator = true">View 6 Monthly Releases</button>
+            <button *ngIf="aggregator" class="btn me-3 mb-3 bg-cerulean bg-cerulean-hover" (click)="resetTable()">View All Releases</button>
+        </ng-container>
+
         <table class="table table-striped">
             <thead class="sticky-top">
             <tr class="border-bottom-0">

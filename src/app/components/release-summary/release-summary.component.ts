@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {S3Service} from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class TableRow {
     constructor(
@@ -58,12 +59,15 @@ export class ReleaseSummaryComponent implements OnInit {
 
     rsFilePath: any;
     rsFilePathSubscription: Subscription;
+    activeExtension: any;
+    activeExtensionSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private authoringService: AuthoringService) {
         this.rsFilePathSubscription = this.s3Service.getRSFilePath().subscribe(rsFilePath => {
             this.rsFilePath = rsFilePath;
             this.getStats();
         });
+        this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
     }
 
     ngOnInit(): void {
