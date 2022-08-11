@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {S3Service} from '../../services/s3/s3.service';
+import {Subscription} from 'rxjs';
+import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class TableRow {
     constructor(
@@ -55,10 +57,27 @@ export class ReleaseSummaryComponent implements OnInit {
         'bg-vanilla'
     ];
 
-    constructor(private s3Service: S3Service) {
+    rsFilePath: any;
+    rsFilePathSubscription: Subscription;
+    activeExtension: any;
+    activeExtensionSubscription: Subscription;
+
+    constructor(private s3Service: S3Service, private authoringService: AuthoringService) {
+        this.rsFilePathSubscription = this.s3Service.getRSFilePath().subscribe(rsFilePath => {
+            this.rsFilePath = rsFilePath;
+            this.getStats();
+        });
+        this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
     }
 
     ngOnInit(): void {
+        this.getStats();
+    }
+
+    getStats() {
+        this.rawTableRows = [];
+        this.tableRows = [];
+
         this.s3Service.getReleaseSummary().subscribe(data => {
             this.titleRow = data['columnHeadings'];
 
@@ -95,6 +114,14 @@ export class ReleaseSummaryComponent implements OnInit {
 
             this.tableRows = this.cloneObject(this.rawTableRows);
         });
+    }
+
+    calculateTopTitleColour(index: number): string {
+        if (index === 0) {
+            return '';
+        } else {
+            return this.tableColours[Math.ceil(index) - 1];
+        }
     }
 
     calculateColour(index: number): string {

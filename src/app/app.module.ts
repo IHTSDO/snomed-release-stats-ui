@@ -20,12 +20,15 @@ import { PatternsComponent } from './components/patterns/patterns.component';
 import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
 import { S3Service } from './services/s3/s3.service';
-import { BranchingService } from './services/branching/branching.service';
 import { ReleaseSummaryComponent } from './components/release-summary/release-summary.component';
 import { TitleFormatterPipe } from './pipes/title-formatter.pipe';
 import { DateOrderPipe } from './pipes/date-order.pipe';
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
+import {AlphabeticalPipe} from './pipes/alphabetical/alphabetical.pipe';
+import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe';
+import { TopTitleFormatterPipe } from './pipes/topTitleFormatter/top-title-formatter.pipe';
+import { DuplicateFilterPipe } from './pipes/duplicateFilter/duplicate-filter.pipe';
 
 @NgModule({
     declarations: [
@@ -43,7 +46,11 @@ import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
         TitleFormatterPipe,
         DateOrderPipe,
         DateFormatterPipe,
-        DateAggregatorPipe
+        DateAggregatorPipe,
+        AlphabeticalPipe,
+        ManagedServicePipe,
+        TopTitleFormatterPipe,
+        DuplicateFilterPipe
     ],
     imports: [
         BrowserModule,
@@ -56,7 +63,6 @@ import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
     ],
     providers: [
         AuthoringService,
-        BranchingService,
         S3Service,
         {
             provide: HTTP_INTERCEPTORS,

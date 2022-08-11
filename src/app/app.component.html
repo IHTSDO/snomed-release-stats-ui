@@ -1,4 +1,4 @@
 <app-snomed-navbar [title]="title"></app-snomed-navbar>
 <app-breadcrumb-bar></app-breadcrumb-bar>
-<router-outlet *ngIf="versions"></router-outlet>
+<router-outlet *ngIf="versions && extensions && activeExtension"></router-outlet>
 <app-snomed-footer></app-snomed-footer>

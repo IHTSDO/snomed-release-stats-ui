@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import { Hierarchy } from '../../models/hierarchy';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { BranchingService } from '../branching/branching.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class S3Service {
 
-    private s3Path = '../reporting-s3/jobs/SummaryComponentStats/';
-    private branchPath: string;
-    private branchPathSubscription: Subscription;
+    private filePath = new Subject<string>();
+    private rsFilePath = new Subject<string>();
 
-    constructor(private http: HttpClient, private branchingService: BranchingService) {
-        this.branchPathSubscription = this.branchingService.getBranchPath().subscribe(data => this.branchPath = data);
+    localFilePath: any;
+    localFilePathSubscription: Subscription;
+    localRSFilePath: any;
+    localRSFilePathSubscription: Subscription;
+
+    private s3Path = '../reporting-s3/jobs/SummaryComponentStats';
+
+    constructor(private http: HttpClient) {
+        this.localFilePathSubscription = this.getFilePath().subscribe(data => this.localFilePath = data);
+        this.localRSFilePathSubscription = this.getRSFilePath().subscribe(data => this.localRSFilePath = data);
     }
 
     getConceptStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet1.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet1.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -44,7 +50,7 @@ export class S3Service {
     }
 
     getDescriptionStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet2.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet2.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -66,7 +72,7 @@ export class S3Service {
     }
 
     getRelationshipStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet3.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet3.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -88,7 +94,7 @@ export class S3Service {
     }
 
     getAxiomStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet4.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet4.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -110,7 +116,7 @@ export class S3Service {
     }
 
     getInactivationStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + 'runs/' + this.branchPath + '/latest/sheet7.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet7.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
@@ -142,6 +148,24 @@ export class S3Service {
     }
 
     getReleaseSummary(): Observable<any> {
-        return this.http.get(this.s3Path + 'ReleaseSummaries/InternationalRF2/InternationalRF2_ReleaseSummaries.json');
+        return this.http.get(this.s3Path + this.localRSFilePath);
+    }
+
+    // Setters & Getters: FilePath
+    setFilePath(path) {
+        this.filePath.next(path);
+    }
+
+    getFilePath(): Observable<string> {
+        return this.filePath.asObservable();
+    }
+
+    // Setters & Getters: RSFilePath
+    setRSFilePath(path) {
+        this.rsFilePath.next(path);
+    }
+
+    getRSFilePath(): Observable<string> {
+        return this.rsFilePath.asObservable();
     }
 }

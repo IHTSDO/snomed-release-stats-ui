@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
+import {Subscription} from 'rxjs';
 
 export class TableRow {
     name: string;
@@ -30,11 +31,24 @@ export class ConceptChangesCountsComponent implements OnInit {
     tableRows: TableRow[] = [];
     percentages = false;
 
-    constructor(private s3Service: S3Service) {
+    filePath: any;
+    filePathSubscription: Subscription;
 
+    constructor(private s3Service: S3Service) {
+        this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
+            this.filePath = filePath;
+            this.getStats();
+        });
     }
 
     ngOnInit(): void {
+        this.getStats();
+    }
+
+    getStats() {
+        this.tableRows = [];
+        this.overviewRow = null;
+
         this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0, 0, 0);
 
         this.s3Service.getConceptStatistics().subscribe(concepts => {

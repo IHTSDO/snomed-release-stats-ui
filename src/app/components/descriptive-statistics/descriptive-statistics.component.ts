@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { S3Service } from '../../services/s3/s3.service';
+import {Subscription} from 'rxjs';
 
 export class GraphData {
     labels: string[];
@@ -111,14 +112,23 @@ export class DescriptiveStatisticsComponent implements OnInit {
         '#367ba5'
     ];
 
-
+    filePath: any;
+    filePathSubscription: Subscription;
 
     constructor(private s3Service: S3Service) {
+        this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
+            this.filePath = filePath;
+            this.getStats();
+        });
     }
 
     public pieChartPlugins = [pluginDataLabels];
 
     ngOnInit(): void {
+        this.getStats();
+    }
+
+    getStats() {
         this.s3Service.getConceptStatistics().subscribe(data => {
             this.constructChart1Data(data);
             this.constructChart2Data(data);
