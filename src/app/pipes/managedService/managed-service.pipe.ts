@@ -22,7 +22,8 @@ export class ManagedServicePipe implements PipeTransform {
             if (item.shortName !== 'SNOMEDCT-BE' &&
                 item.shortName !== 'SNOMEDCT-US' &&
                 item.shortName !== 'SNOMEDCT-NL' &&
-                item.shortName !== 'SNOMEDCT-AU') {
+                item.shortName !== 'SNOMEDCT-AU' &&
+                item.shortName !== 'SNOMEDCT-AT') {
                 return item;
             }
         });
