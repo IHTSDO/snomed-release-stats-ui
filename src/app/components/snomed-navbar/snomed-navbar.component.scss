@@ -97,7 +97,7 @@ nav {
                 background-color: $bootstrap-dark;
                 z-index: auto;
                 height: auto;
-                overflow-y: scroll;
+                overflow-y: auto;
                 max-height: 80vh;
 
                 &.show {
