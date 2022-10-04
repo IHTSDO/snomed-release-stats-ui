@@ -65,6 +65,7 @@ export class ReleaseSummaryComponent implements OnInit {
     constructor(private s3Service: S3Service, private authoringService: AuthoringService) {
         this.rsFilePathSubscription = this.s3Service.getRSFilePath().subscribe(rsFilePath => {
             this.rsFilePath = rsFilePath;
+            this.aggregator = false;
             this.getStats();
         });
         this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
