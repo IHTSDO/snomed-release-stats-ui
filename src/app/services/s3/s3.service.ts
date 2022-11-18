@@ -94,7 +94,7 @@ export class S3Service {
     }
 
     getAxiomStatistics(): Observable<Hierarchy[]> {
-        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet4.json').pipe(map(response => {
+        return this.http.get<Hierarchy[]>(this.s3Path + this.localFilePath + '/latest/sheet5.json').pipe(map(response => {
             const report: Hierarchy[] = [];
 
             response.forEach(item => {
