@@ -19,11 +19,8 @@ export class ManagedServicePipe implements PipeTransform {
         });
 
         items = items.filter(item => {
-            if (item.shortName !== 'SNOMEDCT-BE' &&
-                item.shortName !== 'SNOMEDCT-US' &&
-                item.shortName !== 'SNOMEDCT-NL' &&
-                item.shortName !== 'SNOMEDCT-AU' &&
-                item.shortName !== 'SNOMEDCT-AT') {
+            if (item.shortName !== 'SNOMEDCT-US' &&
+                item.shortName !== 'SNOMEDCT-AU') {
                 return item;
             }
         });
