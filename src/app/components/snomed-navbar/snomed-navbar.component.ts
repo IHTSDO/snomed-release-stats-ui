@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {AuthoringService} from '../../services/authoring/authoring.service';
 import {Title} from '@angular/platform-browser';
 import {S3Service} from '../../services/s3/s3.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-snomed-navbar',
@@ -23,7 +24,8 @@ export class SnomedNavbarComponent implements OnInit {
 
     constructor(private authoringService: AuthoringService,
                 public titleService: Title,
-                private s3service: S3Service) {
+                private s3service: S3Service,
+                private toastr: ToastrService) {
         this.environment = window.location.host.split(/[.]/)[0].split(/[-]/)[0];
         this.versionsSubscription = this.authoringService.getVersions().subscribe(data => this.versions = data);
         this.extensionsSubscription = this.authoringService.getExtensions().subscribe(data => this.extensions = data);
@@ -67,21 +69,25 @@ export class SnomedNavbarComponent implements OnInit {
                     const latest = localVersions.shift();
                     this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
 
-                    if (localVersions) {
-                        if (localVersions.length) {
-                            const previous = localVersions.shift();
-                            const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
-                                + '---' +
-                                'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate;
-                            this.s3service.setFilePath(path);
-                        } else {
-                            const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
-                                + '---empty-rf2-snapshot';
-                            this.s3service.setFilePath(path);
-                        }
+                    if (metadata.defaultNamespace) {
+                        if (localVersions) {
+                            if (localVersions.length) {
+                                const previous = localVersions.shift();
+                                const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
+                                    + '---' +
+                                    'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate;
+                                this.s3service.setFilePath(path);
+                            } else {
+                                const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
+                                    + '---empty-rf2-snapshot';
+                                this.s3service.setFilePath(path);
+                            }
 
-                        const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
-                        this.s3service.setRSFilePath(rsPath);
+                            const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
+                            this.s3service.setRSFilePath(rsPath);
+                        }
+                    } else {
+                        this.toastr.error('metadata.defaultNamespace not populated', 'ERROR');
                     }
                 });
             }
