@@ -61,7 +61,7 @@ import {ToastrModule} from 'ngx-toastr';
         NgbTypeaheadModule,
         ChartModule,
         AppRoutingModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot()
     ],
     providers: [
         AuthoringService,

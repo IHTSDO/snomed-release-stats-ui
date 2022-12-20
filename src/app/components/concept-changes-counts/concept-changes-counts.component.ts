@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
@@ -34,7 +35,7 @@ export class ConceptChangesCountsComponent implements OnInit {
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();
@@ -69,6 +70,8 @@ export class ConceptChangesCountsComponent implements OnInit {
                     this.overviewRow.statedChanged += axiom.conceptsAffected;
                     this.tableRows[index].statedChanged = axiom.conceptsAffected;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
 
             this.s3Service.getRelationshipStatistics().subscribe(relationships => {
@@ -76,6 +79,8 @@ export class ConceptChangesCountsComponent implements OnInit {
                     this.overviewRow.inferredChanged += relationship.conceptsAffected;
                     this.tableRows[index].inferredChanged = relationship.conceptsAffected;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
 
             this.s3Service.getDescriptionStatistics().subscribe(descriptions => {
@@ -83,7 +88,11 @@ export class ConceptChangesCountsComponent implements OnInit {
                     this.overviewRow.descriptionChanged += description.conceptsAffected;
                     this.tableRows[index].descriptionChanged = description.conceptsAffected;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 

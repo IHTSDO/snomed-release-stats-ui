@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
@@ -31,7 +32,7 @@ export class NewConceptsComponent implements OnInit {
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();
@@ -63,6 +64,8 @@ export class NewConceptsComponent implements OnInit {
                         p: item.p
                     });
             });
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 

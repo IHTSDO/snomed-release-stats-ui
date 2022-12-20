@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {S3Service} from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {AuthoringService} from '../../services/authoring/authoring.service';
+import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     constructor(
@@ -62,7 +63,7 @@ export class ReleaseSummaryComponent implements OnInit {
     activeExtension: any;
     activeExtensionSubscription: Subscription;
 
-    constructor(private s3Service: S3Service, private authoringService: AuthoringService) {
+    constructor(private s3Service: S3Service, private authoringService: AuthoringService, private toastr: ToastrService) {
         this.rsFilePathSubscription = this.s3Service.getRSFilePath().subscribe(rsFilePath => {
             this.rsFilePath = rsFilePath;
             this.aggregator = false;
@@ -114,6 +115,8 @@ export class ReleaseSummaryComponent implements OnInit {
             });
 
             this.tableRows = this.cloneObject(this.rawTableRows);
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 

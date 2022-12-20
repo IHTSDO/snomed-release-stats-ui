@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 export class GraphData {
     labels: string[];
@@ -115,7 +116,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();
@@ -135,6 +136,8 @@ export class DescriptiveStatisticsComponent implements OnInit {
             this.constructChart3Data(data);
             this.constructChart4Data(data);
             this.constructChart5Data(data);
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 
