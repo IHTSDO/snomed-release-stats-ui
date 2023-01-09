@@ -45,7 +45,9 @@ export class ReleaseSummaryComponent implements OnInit {
     rawTableRows: TableRow[] = [];
     titleRow: string[];
     tableRows: TableRow[] = [];
-    aggregator = false;
+    aggregator: any;
+    aggregatorSubscription: Subscription;
+    aggregated: boolean = false;
 
     tableColours = [
         'bg-tonys-pink',
@@ -66,10 +68,10 @@ export class ReleaseSummaryComponent implements OnInit {
     constructor(private s3Service: S3Service, private authoringService: AuthoringService, private toastr: ToastrService) {
         this.rsFilePathSubscription = this.s3Service.getRSFilePath().subscribe(rsFilePath => {
             this.rsFilePath = rsFilePath;
-            this.aggregator = false;
             this.getStats();
         });
         this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
+        this.aggregatorSubscription = this.authoringService.getAggregator().subscribe(data => this.aggregator = data);
     }
 
     ngOnInit(): void {
@@ -137,7 +139,7 @@ export class ReleaseSummaryComponent implements OnInit {
     }
 
     resetTable(): void {
-        this.aggregator = false;
+        this.aggregated = false;
         this.tableRows = this.cloneObject(this.rawTableRows);
     }
 

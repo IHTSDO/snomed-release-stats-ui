@@ -96,6 +96,11 @@ export class SnomedNavbarComponent implements OnInit {
 
     setExtension(extension) {
         this.authoringService.setActiveExtension(extension);
+        if (extension.shortName === 'SNOMEDCT') {
+            this.authoringService.setAggregator(true);
+        } else {
+            this.authoringService.setAggregator(false);
+        }
         this.getVersions(extension.shortName);
     }
 }
