@@ -5,13 +5,13 @@ import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
-    total: number;
+    totalActive: number;
     descriptions: number;
     relationships: number;
 
-    constructor(name, total, descriptions, relationships) {
+    constructor(name, totalActive, descriptions, relationships) {
         this.name = name;
-        this.total = total;
+        this.totalActive = totalActive;
         this.descriptions = descriptions;
         this.relationships = relationships;
     }
@@ -49,8 +49,8 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
             this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0);
 
             concepts.forEach(item => {
-                this.overviewRow.total += item.totalActive;
-                this.tableRows.push({name: item.name, total: item.totalActive, descriptions: null, relationships: null});
+                this.overviewRow.totalActive += item.totalActive;
+                this.tableRows.push({name: item.name, totalActive: item.totalActive, descriptions: null, relationships: null});
             }, error => {
                 this.toastr.error('Data not found in S3', 'ERROR');
             });
@@ -78,6 +78,6 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
     }
 
     percentage(a) {
-        return (a / this.overviewRow.total) * 100;
+        return (a / this.overviewRow.totalActive) * 100;
     }
 }

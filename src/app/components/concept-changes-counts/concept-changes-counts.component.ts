@@ -9,15 +9,15 @@ export class TableRow {
     statedChanged: number;
     inferredChanged: number;
     descriptionChanged: number;
-    total: number;
+    totalActive: number;
 
-    constructor(name, changed, statedChanged, inferredChanged, descriptionChanged, total) {
+    constructor(name, changed, statedChanged, inferredChanged, descriptionChanged, totalActive) {
         this.name = name;
         this.changed = changed;
         this.statedChanged = statedChanged;
         this.inferredChanged = inferredChanged;
         this.descriptionChanged = descriptionChanged;
-        this.total = total;
+        this.totalActive = totalActive;
     }
 }
 
@@ -30,7 +30,6 @@ export class ConceptChangesCountsComponent implements OnInit {
 
     overviewRow: TableRow;
     tableRows: TableRow[] = [];
-    percentages = false;
 
     filePath: any;
     filePathSubscription: Subscription;
@@ -54,14 +53,14 @@ export class ConceptChangesCountsComponent implements OnInit {
 
         this.s3Service.getConceptStatistics().subscribe(concepts => {
             concepts.forEach(concept => {
-                this.overviewRow.total += concept.total;
+                this.overviewRow.totalActive += concept.totalActive;
                 this.tableRows.push({
                     name: concept.name,
                     changed: 0,
                     statedChanged: 0,
                     inferredChanged: 0,
                     descriptionChanged: 0,
-                    total: concept.total
+                    totalActive: concept.totalActive
                 });
             });
 
