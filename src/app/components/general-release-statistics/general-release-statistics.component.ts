@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
-    total: number;
+    totalActive: number;
     descriptions: number;
     relationships: number;
 
-    constructor(name, total, descriptions, relationships) {
+    constructor(name, totalActive, descriptions, relationships) {
         this.name = name;
-        this.total = total;
+        this.totalActive = totalActive;
         this.descriptions = descriptions;
         this.relationships = relationships;
     }
@@ -29,7 +30,7 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();
@@ -48,8 +49,10 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
             this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0);
 
             concepts.forEach(item => {
-                this.overviewRow.total += item.totalActive;
-                this.tableRows.push({name: item.name, total: item.totalActive, descriptions: null, relationships: null});
+                this.overviewRow.totalActive += item.totalActive;
+                this.tableRows.push({name: item.name, totalActive: item.totalActive, descriptions: null, relationships: null});
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
 
             this.s3Service.getDescriptionStatistics().subscribe(descriptions => {
@@ -57,6 +60,8 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
                     this.overviewRow.descriptions += item.total;
                     this.tableRows[index].descriptions = item.total;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
 
             this.s3Service.getRelationshipStatistics().subscribe(relationships => {
@@ -64,11 +69,15 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
                     this.overviewRow.relationships += item.total;
                     this.tableRows[index].relationships = item.total;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 
     percentage(a) {
-        return (a / this.overviewRow.total) * 100;
+        return (a / this.overviewRow.totalActive) * 100;
     }
 }

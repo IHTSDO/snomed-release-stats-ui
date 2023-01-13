@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
@@ -8,15 +9,15 @@ export class TableRow {
     statedChanged: number;
     inferredChanged: number;
     descriptionChanged: number;
-    total: number;
+    totalActive: number;
 
-    constructor(name, changed, statedChanged, inferredChanged, descriptionChanged, total) {
+    constructor(name, changed, statedChanged, inferredChanged, descriptionChanged, totalActive) {
         this.name = name;
         this.changed = changed;
         this.statedChanged = statedChanged;
         this.inferredChanged = inferredChanged;
         this.descriptionChanged = descriptionChanged;
-        this.total = total;
+        this.totalActive = totalActive;
     }
 }
 
@@ -29,12 +30,11 @@ export class ConceptChangesCountsComponent implements OnInit {
 
     overviewRow: TableRow;
     tableRows: TableRow[] = [];
-    percentages = false;
 
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();
@@ -53,14 +53,14 @@ export class ConceptChangesCountsComponent implements OnInit {
 
         this.s3Service.getConceptStatistics().subscribe(concepts => {
             concepts.forEach(concept => {
-                this.overviewRow.total += concept.total;
+                this.overviewRow.totalActive += concept.totalActive;
                 this.tableRows.push({
                     name: concept.name,
                     changed: 0,
                     statedChanged: 0,
                     inferredChanged: 0,
                     descriptionChanged: 0,
-                    total: concept.total
+                    totalActive: concept.totalActive
                 });
             });
 
@@ -69,6 +69,8 @@ export class ConceptChangesCountsComponent implements OnInit {
                     this.overviewRow.statedChanged += axiom.conceptsAffected;
                     this.tableRows[index].statedChanged = axiom.conceptsAffected;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
 
             this.s3Service.getRelationshipStatistics().subscribe(relationships => {
@@ -76,6 +78,8 @@ export class ConceptChangesCountsComponent implements OnInit {
                     this.overviewRow.inferredChanged += relationship.conceptsAffected;
                     this.tableRows[index].inferredChanged = relationship.conceptsAffected;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
 
             this.s3Service.getDescriptionStatistics().subscribe(descriptions => {
@@ -83,7 +87,11 @@ export class ConceptChangesCountsComponent implements OnInit {
                     this.overviewRow.descriptionChanged += description.conceptsAffected;
                     this.tableRows[index].descriptionChanged = description.conceptsAffected;
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 

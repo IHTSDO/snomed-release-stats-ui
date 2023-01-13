@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
     inactivated: number;
-    total: number;
+    totalActive: number;
     ambiguous: number;
     movedElsewhere: number;
     conceptNonCurrent: number;
@@ -18,11 +19,11 @@ export class TableRow {
     nonConformance: number;
     notEquivalent: number;
 
-    constructor(name, inactivated, total, ambiguous, movedElsewhere, conceptNonCurrent, duplicate, erroneous, inappropriate,
+    constructor(name, inactivated, totalActive, ambiguous, movedElsewhere, conceptNonCurrent, duplicate, erroneous, inappropriate,
                 limited, outdated, pendingMove, nonConformance, notEquivalent) {
         this.name = name;
         this.inactivated = inactivated;
-        this.total = total;
+        this.totalActive = totalActive;
         this.ambiguous = ambiguous;
         this.movedElsewhere = movedElsewhere;
         this.conceptNonCurrent = conceptNonCurrent;
@@ -50,7 +51,7 @@ export class InactivatedConceptsComponent implements OnInit {
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service) {
+    constructor(private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();
@@ -69,7 +70,7 @@ export class InactivatedConceptsComponent implements OnInit {
             this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
             concepts.forEach(item => {
-                this.overviewRow.total += item.total;
+                this.overviewRow.totalActive += item.totalActive;
             });
 
             this.s3Service.getInactivationStatistics().subscribe(inactivations => {
@@ -91,7 +92,7 @@ export class InactivatedConceptsComponent implements OnInit {
                         {
                             name: item.name,
                             inactivated: item.inactivations,
-                            total: 0,
+                            totalActive: 0,
                             ambiguous: item.ambiguous,
                             movedElsewhere: item.movedElsewhere,
                             conceptNonCurrent: item.conceptNonCurrent,
@@ -106,7 +107,11 @@ export class InactivatedConceptsComponent implements OnInit {
                         }
                     );
                 });
+            }, error => {
+                this.toastr.error('Data not found in S3', 'ERROR');
             });
+        }, error => {
+            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 

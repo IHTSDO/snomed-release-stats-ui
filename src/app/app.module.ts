@@ -29,6 +29,7 @@ import {AlphabeticalPipe} from './pipes/alphabetical/alphabetical.pipe';
 import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe';
 import { TopTitleFormatterPipe } from './pipes/topTitleFormatter/top-title-formatter.pipe';
 import { DuplicateFilterPipe } from './pipes/duplicateFilter/duplicate-filter.pipe';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import { DuplicateFilterPipe } from './pipes/duplicateFilter/duplicate-filter.pi
         NgbTypeaheadModule,
         ChartModule,
         AppRoutingModule,
+        ToastrModule.forRoot()
     ],
     providers: [
         AuthoringService,

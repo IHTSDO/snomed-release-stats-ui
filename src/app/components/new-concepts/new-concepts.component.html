@@ -6,17 +6,15 @@
             <tr>
                 <th scope="col">Hierarchy</th>
                 <th scope="col">New Concepts</th>
-                <th scope="col">New in Hierarchy</th>
                 <th scope="col">New in Release</th>
-                <th scope="col">Added as SD</th>
-                <th scope="col">Added as P</th>
+                <th scope="col">Sufficiently Defined</th>
+                <th scope="col">Primitive</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let row of tableRows">
                 <td>{{row.name}}</td>
                 <td>{{row.newConcepts | number}}</td>
-                <td>{{row.newConcepts ? (percentage(row.newConcepts, row.total) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.newConcepts ? (percentage(row.newConcepts, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.newConcepts ? (percentage(row.sd, row.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
                 <td>{{row.newConcepts ? (percentage(row.p, row.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
@@ -24,8 +22,7 @@
             <tr *ngIf="overviewRow">
                 <td class="fw-bolder">Total</td>
                 <td class="fw-bolder">{{overviewRow.newConcepts | number}}</td>
-                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.newConcepts, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
-                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.total, overviewRow.total) | number:'1.2-2') + '%' : '-'}}</td>
+                <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.totalActive, overviewRow.totalActive) | number:'1.2-2') + '%' : '-'}}</td>
                 <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.sd, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
                 <td class="fw-bolder">{{overviewRow.newConcepts ? (percentage(overviewRow.p, overviewRow.newConcepts) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
