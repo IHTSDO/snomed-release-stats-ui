@@ -45,9 +45,6 @@ export class ReleaseSummaryComponent implements OnInit {
     rawTableRows: TableRow[] = [];
     titleRow: string[];
     tableRows: TableRow[] = [];
-    aggregator: any;
-    aggregatorSubscription: Subscription;
-    aggregated: boolean = false;
 
     tableColours = [
         'bg-tonys-pink',
@@ -71,7 +68,6 @@ export class ReleaseSummaryComponent implements OnInit {
             this.getStats();
         });
         this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
-        this.aggregatorSubscription = this.authoringService.getAggregator().subscribe(data => this.aggregator = data);
     }
 
     ngOnInit(): void {
@@ -139,7 +135,6 @@ export class ReleaseSummaryComponent implements OnInit {
     }
 
     resetTable(): void {
-        this.aggregated = false;
         this.tableRows = this.cloneObject(this.rawTableRows);
     }
 

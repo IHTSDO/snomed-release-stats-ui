@@ -12,7 +12,6 @@ export class AuthoringService {
     public environmentEndpoint: string;
 
     private versions = new Subject();
-    private aggregator = new BehaviorSubject(true);
 
     private extensions = new Subject();
     private activeExtension = new Subject();
@@ -32,15 +31,6 @@ export class AuthoringService {
 
     httpGetVersions(extension: string): Observable<Versions> {
         return this.http.get<Versions>('../snowstorm/snomed-ct/codesystems/' + extension + '/versions?showFutureVersions=false');
-    }
-
-    // AGGREGATOR
-    setAggregator(aggregator) {
-        this.aggregator.next(aggregator);
-    }
-
-    getAggregator() {
-        return this.aggregator.asObservable();
     }
 
     // EXTENSIONS

@@ -24,7 +24,6 @@ import { ReleaseSummaryComponent } from './components/release-summary/release-su
 import { TitleFormatterPipe } from './pipes/title-formatter.pipe';
 import { DateOrderPipe } from './pipes/date-order.pipe';
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
-import { DateAggregatorPipe } from './pipes/date-aggregator.pipe';
 import {AlphabeticalPipe} from './pipes/alphabetical/alphabetical.pipe';
 import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe';
 import { TopTitleFormatterPipe } from './pipes/topTitleFormatter/top-title-formatter.pipe';
@@ -47,7 +46,6 @@ import {ToastrModule} from 'ngx-toastr';
         TitleFormatterPipe,
         DateOrderPipe,
         DateFormatterPipe,
-        DateAggregatorPipe,
         AlphabeticalPipe,
         ManagedServicePipe,
         TopTitleFormatterPipe,
