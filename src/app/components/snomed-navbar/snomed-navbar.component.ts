@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AuthoringService} from '../../services/authoring/authoring.service';
 import {Title} from '@angular/platform-browser';
@@ -10,7 +10,7 @@ import {ToastrService} from 'ngx-toastr';
     templateUrl: './snomed-navbar.component.html',
     styleUrls: ['./snomed-navbar.component.scss']
 })
-export class SnomedNavbarComponent implements OnInit {
+export class SnomedNavbarComponent {
 
     environment: string;
     path: string;
@@ -33,9 +33,6 @@ export class SnomedNavbarComponent implements OnInit {
         this.extensionsSubscription = this.authoringService.getExtensions().subscribe(data => this.extensions = data);
         this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
         this.viewSubscription = this.authoringService.getView().subscribe(data => this.view = data);
-    }
-
-    ngOnInit() {
     }
 
     getVersions(extension: string) {
