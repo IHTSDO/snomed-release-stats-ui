@@ -16,6 +16,8 @@ export class AuthoringService {
     private extensions = new Subject();
     private activeExtension = new Subject();
 
+    private view = new BehaviorSubject('descriptive-statistics');
+
     constructor(private http: HttpClient) {
         this.environmentEndpoint = window.location.origin + '/';
     }
@@ -50,7 +52,16 @@ export class AuthoringService {
         return this.activeExtension.asObservable();
     }
 
-    httpGetExtensions(): Observable<Versions> {
+    // VIEW
+    setView(view) {
+        this.view.next(view);
+    }
+
+    getView() {
+        return this.view.asObservable();
+    }
+
+    httpGetExtensions(): Observable<any> {
         return this.http.get('/snowstorm/snomed-ct/codesystems').pipe(map(data => {
             return data['items'];
         }));

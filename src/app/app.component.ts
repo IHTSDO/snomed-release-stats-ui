@@ -19,11 +19,14 @@ export class AppComponent implements OnInit {
     extensionsSubscription: Subscription;
     activeExtension: any;
     activeExtensionSubscription: Subscription;
+    view: string;
+    viewSubscription: Subscription;
 
     constructor(private authoringService: AuthoringService) {
         this.versionsSubscription = this.authoringService.getVersions().subscribe(data => this.versions = data);
         this.extensionsSubscription = this.authoringService.getExtensions().subscribe(data => this.extensions = data);
         this.activeExtensionSubscription = this.authoringService.getActiveExtension().subscribe(data => this.activeExtension = data);
+        this.viewSubscription = this.authoringService.getView().subscribe(data => this.view = data);
     }
 
     ngOnInit() {

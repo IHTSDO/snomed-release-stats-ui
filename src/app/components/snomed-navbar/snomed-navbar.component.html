@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-dark bg-dark p-2 pe-2">
-    <a class="logo" routerLink="/descriptive-statistics">
+    <a class="logo" routerLink="/">
         <img class="logo me-2 p-0" src="/qa/assets/small_logo.png">
         <span class="title text-athens-grey">{{titleService.getTitle()}}</span>
     </a>
@@ -11,7 +11,7 @@
             </a>
             <div class="dropdown-menu py-0" aria-labelledby="branchDropdown">
                 <ng-container *ngFor="let extension of extensions | alphabetical:'branchPath' | managedService">
-                    <a class="dropdown-item ps-3" (click)="setExtension(extension)">{{extension?.name}}</a>
+                    <a class="dropdown-item ps-3" [routerLink]="[extension.shortName, view]" (click)="setExtension(extension)">{{extension?.name}}</a>
                 </ng-container>
             </div>
         </li>
