@@ -76,21 +76,31 @@ export class BreadcrumbBarComponent implements OnInit {
                     this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
 
                     if (metadata.defaultNamespace) {
+                        let folder = '';
+                        if (extension !== 'SNOMEDCT-US') {
+                            folder = 'Extensions';
+                        }
+
                         if (localVersions) {
                             if (localVersions.length) {
                                 const previous = localVersions.shift();
-                                const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
+                                const path = folder + '/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
                                     + '---' +
                                     'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate;
                                 this.s3service.setFilePath(path);
                             } else {
-                                const path = 'Extensions/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
+                                const path = folder + '/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
                                     + '---empty-rf2-snapshot';
                                 this.s3service.setFilePath(path);
                             }
 
-                            const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
-                            this.s3service.setRSFilePath(rsPath);
+                            if (folder) {
+                                const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
+                                this.s3service.setRSFilePath(rsPath);
+                            } else {
+                                const rsPath = '/ReleaseSummaries/USEditionRF2/USEditionRF2_ReleaseSummaries.json';
+                                this.s3service.setRSFilePath(rsPath);
+                            }
                         }
                     } else {
                         this.toastr.error('metadata.defaultNamespace not populated', 'ERROR');
