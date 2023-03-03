@@ -1,8 +1,8 @@
 <nav class="navbar fixed-top p-0 bg-river-bed">
-    <a class="nav-item text-center col" routerLinkActive="active" routerLink="/descriptive-statistics">DESCRIPTIVE STATISTICS</a>
-    <a class="nav-item text-center col" routerLinkActive="active" routerLink="/generalReleaseStatistics">GENERAL RELEASE STATISTICS</a>
-    <a class="nav-item text-center col" routerLinkActive="active" routerLink="/newConcepts">NEW CONCEPTS</a>
-    <a class="nav-item text-center col" routerLinkActive="active" routerLink="/inactivatedConcepts">INACTIVATED CONCEPTS</a>
-    <a class="nav-item text-center col" routerLinkActive="active" routerLink="/conceptChangesCounts">CHANGES TO CONCEPTS</a>
-    <a class="nav-item text-center col" routerLinkActive="active" routerLink="/releaseSummary">RELEASE SUMMARY</a>
+    <a class="nav-item text-center col" routerLinkActive="active" [routerLink]="[activeExtension?.shortName, 'descriptive-statistics']" (click)="setView('descriptive-statistics')">DESCRIPTIVE STATISTICS</a>
+    <a class="nav-item text-center col" routerLinkActive="active" [routerLink]="[activeExtension?.shortName, 'general-release-statistics']" (click)="setView('general-release-statistics')">GENERAL RELEASE STATISTICS</a>
+    <a class="nav-item text-center col" routerLinkActive="active" [routerLink]="[activeExtension?.shortName, 'new-concepts']" (click)="setView('new-concepts')">NEW CONCEPTS</a>
+    <a class="nav-item text-center col" routerLinkActive="active" [routerLink]="[activeExtension?.shortName, 'inactivated-concepts']" (click)="setView('inactivated-concepts')">INACTIVATED CONCEPTS</a>
+    <a class="nav-item text-center col" routerLinkActive="active" [routerLink]="[activeExtension?.shortName, 'concept-changes-counts']" (click)="setView('concept-changes-counts')">CHANGES TO CONCEPTS</a>
+    <a class="nav-item text-center col" routerLinkActive="active" [routerLink]="[activeExtension?.shortName, 'release-summary']" (click)="setView('release-summary')">RELEASE SUMMARY</a>
 </nav>

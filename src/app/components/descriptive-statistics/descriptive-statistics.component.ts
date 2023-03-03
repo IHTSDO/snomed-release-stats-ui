@@ -3,6 +3,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {AuthoringService} from '../../services/authoring/authoring.service';
 
 export class GraphData {
     labels: string[];
@@ -116,7 +117,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
     filePath: any;
     filePathSubscription: Subscription;
 
-    constructor(private s3Service: S3Service, private toastr: ToastrService) {
+    constructor(private authoringService: AuthoringService, private s3Service: S3Service, private toastr: ToastrService) {
         this.filePathSubscription = this.s3Service.getFilePath().subscribe(filePath => {
             this.filePath = filePath;
             this.getStats();

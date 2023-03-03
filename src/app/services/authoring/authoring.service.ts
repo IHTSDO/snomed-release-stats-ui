@@ -12,10 +12,11 @@ export class AuthoringService {
     public environmentEndpoint: string;
 
     private versions = new Subject();
-    private aggregator = new BehaviorSubject(true);
 
     private extensions = new Subject();
     private activeExtension = new Subject();
+
+    private view = new BehaviorSubject('descriptive-statistics');
 
     constructor(private http: HttpClient) {
         this.environmentEndpoint = window.location.origin + '/';
@@ -32,15 +33,6 @@ export class AuthoringService {
 
     httpGetVersions(extension: string): Observable<Versions> {
         return this.http.get<Versions>('../snowstorm/snomed-ct/codesystems/' + extension + '/versions?showFutureVersions=false');
-    }
-
-    // AGGREGATOR
-    setAggregator(aggregator) {
-        this.aggregator.next(aggregator);
-    }
-
-    getAggregator() {
-        return this.aggregator.asObservable();
     }
 
     // EXTENSIONS
@@ -60,7 +52,16 @@ export class AuthoringService {
         return this.activeExtension.asObservable();
     }
 
-    httpGetExtensions(): Observable<Versions> {
+    // VIEW
+    setView(view) {
+        this.view.next(view);
+    }
+
+    getView() {
+        return this.view.asObservable();
+    }
+
+    httpGetExtensions(): Observable<any> {
         return this.http.get('/snowstorm/snomed-ct/codesystems').pipe(map(data => {
             return data['items'];
         }));

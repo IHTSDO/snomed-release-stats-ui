@@ -1,4 +1,12 @@
 <app-snomed-navbar [title]="title"></app-snomed-navbar>
 <app-breadcrumb-bar></app-breadcrumb-bar>
-<router-outlet *ngIf="versions && extensions && activeExtension"></router-outlet>
-<app-snomed-footer></app-snomed-footer>
+<!--<router-outlet *ngIf="versions && extensions && activeExtension"></router-outlet>-->
+<ng-container *ngIf="versions && extensions && activeExtension">
+    <app-descriptive-statistics *ngIf="view === 'descriptive-statistics'"></app-descriptive-statistics>
+    <app-general-release-statistics *ngIf="view === 'general-release-statistics'"></app-general-release-statistics>
+    <app-new-concepts *ngIf="view === 'new-concepts'"></app-new-concepts>
+    <app-inactivated-concepts *ngIf="view === 'inactivated-concepts'"></app-inactivated-concepts>
+    <app-concept-changes-counts *ngIf="view === 'concept-changes-counts'"></app-concept-changes-counts>
+    <app-release-summary *ngIf="view === 'release-summary'"></app-release-summary>
+    <app-snomed-footer *ngIf="view === 'snomed-footer'"></app-snomed-footer>
+</ng-container>
