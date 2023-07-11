@@ -4,25 +4,24 @@
     "newProjectRoot": "projects",
     "projects": {
         "snomed-release-stats-ui": {
-            "root": "",
-            "sourceRoot": "src",
             "projectType": "application",
-            "prefix": "app",
             "schematics": {
                 "@schematics/angular:component": {
                     "style": "scss"
                 }
             },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "baseHref": "/",
                         "outputPath": "dist/snomed-release-stats-ui",
                         "index": "src/index.html",
                         "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "src/tsconfig.app.json",
+                        "tsConfig": "tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",
                             "src/favicon_grey.ico",
@@ -34,95 +33,65 @@
                         "styles": [
                             "./node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "./node_modules/@fortawesome/fontawesome-free/css/all.css",
-                            "./node_modules/primeicons/primeicons.css",
-                            "./node_modules/primeng/resources/themes/nova-light/theme.css",
-                            "./node_modules/primeng/resources/primeng.min.css",
+                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                            "node_modules/primeng/resources/primeng.min.css",
                             "src/styles.scss"
                         ],
                         "scripts": [
                             "./node_modules/jquery/dist/jquery.min.js",
                             "./node_modules/@popperjs/core/dist/umd/popper.min.js",
-                            "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-                            "./node_modules/chart.js/dist/Chart.js"
+                            "./node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [
                                 {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "fileReplacements": [
+                                    "type": "initial",
+                                    "maximumWarning": "1mb",
+                                    "maximumError": "2mb"
+                                },
                                 {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.ts"
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "16kb",
+                                    "maximumError": "32kb"
                                 }
                             ],
-                            "baseHref": "/qa/"
+                            "outputHashing": "all"
                         },
                         "development": {
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "namedChunks": false,
-                            "aot": true,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "snomed-release-stats-ui:build",
                         "liveReload": false
                     },
                     "configurations": {
                         "production": {
                             "browserTarget": "snomed-release-stats-ui:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "snomed-release-stats-ui:build:development"
                         }
-                    }
+                    },
+                    "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
                         "browserTarget": "snomed-release-stats-ui:build"
                     }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "src/test.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "src/tsconfig.spec.json",
-                        "karmaConfig": "src/karma.conf.js",
-                        "styles": [
-                            "src/styles.scss"
-                        ],
-                        "scripts": [],
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ]
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-eslint/builder:lint",
-                    "options": {
-                        "lintFilePatterns": [
-                            "src/**/*.ts",
-                            "src/**/*.html"
-                        ]
-                    }
                 }
             }
         }
-    },
-    "defaultProject": "snomed-release-stats-ui",
-    "cli": {
-        "analytics": false
     }
 }
