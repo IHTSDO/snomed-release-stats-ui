@@ -39,12 +39,14 @@ export class DescriptiveStatisticsComponent implements OnInit {
     chart5Data: any;
 
     pieChartOptions: any = {
-        legend: {
-            display: true,
-            position: 'right',
-            onClick: false
-        },
+        aspectRatio: 2,
         plugins: {
+            legend: {
+                display: true,
+                position: 'right',
+                onClick: false
+            },
+
             datalabels: {
                 color: '#EEEEEE',
                 formatter: (value) => {
@@ -58,11 +60,11 @@ export class DescriptiveStatisticsComponent implements OnInit {
         }
     };
     barChartOptions: any = {
-        legend: {
-            display: false,
-            position: 'bottom'
-        },
         plugins: {
+            legend: {
+                display: false,
+                position: 'bottom'
+            },
             datalabels: {
                 color: '#EEEEEE',
                 formatter: (value) => {
@@ -72,13 +74,13 @@ export class DescriptiveStatisticsComponent implements OnInit {
         }
     };
     countPieChartOptions: any = {
-        legend: {
-            display: false
-        },
-        tooltips: {
-            enabled: true
-        },
         plugins: {
+            tooltip: {
+                enabled: true
+            },
+            legend: {
+                display: false
+            },
             datalabels: {
                 color: '#EEEEEE',
                 formatter: (value) => {

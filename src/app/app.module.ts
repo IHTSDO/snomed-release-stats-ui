@@ -10,7 +10,6 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SnomedNavbarComponent } from './components/snomed-navbar/snomed-navbar.component';
 import { SnomedFooterComponent } from './components/snomed-footer/snomed-footer.component';
 import { AuthoringService } from './services/authoring/authoring.service';
-import { ChartModule } from 'primeng/chart';
 import { AppRoutingModule } from './app-routing.module';
 import { GeneralReleaseStatisticsComponent } from './components/general-release-statistics/general-release-statistics.component';
 import { NewConceptsComponent } from './components/new-concepts/new-concepts.component';
@@ -29,6 +28,7 @@ import { ManagedServicePipe } from './pipes/managedService/managed-service.pipe'
 import { TopTitleFormatterPipe } from './pipes/topTitleFormatter/top-title-formatter.pipe';
 import { DuplicateFilterPipe } from './pipes/duplicateFilter/duplicate-filter.pipe';
 import {ToastrModule} from 'ngx-toastr';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
     declarations: [
