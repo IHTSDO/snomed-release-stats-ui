@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ihtsdo.otf</groupId>
     <artifactId>snomed-release-statistics-ui</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.3.0</version>
     <properties>
         <packageName>${project.artifactId}</packageName>
     </properties>
