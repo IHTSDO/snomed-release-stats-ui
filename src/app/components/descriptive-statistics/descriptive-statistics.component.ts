@@ -228,14 +228,14 @@ export class DescriptiveStatisticsComponent implements OnInit {
         let total = 0;
 
         data.forEach(item => {
-            total += parseInt(item.changedStatus, 10);
+            total += parseInt(item.changed, 10);
         });
 
-        data = this.parameterSort(data, 'changedStatus');
+        data = this.parameterSort(data, 'changed');
 
         data.forEach(item => {
             labels.push(item.name.replace(/ *\([^)]*\) */g, ''));
-            dataSet.data.push(parseInt(item.changedStatus, 10));
+            dataSet.data.push(parseInt(item.changed, 10));
         });
 
         this.chart5Data = new GraphData(labels, [dataSet]);
