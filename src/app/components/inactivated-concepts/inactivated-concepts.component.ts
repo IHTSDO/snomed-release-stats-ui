@@ -86,12 +86,12 @@ export class InactivatedConceptsComponent implements OnInit {
                     this.overviewRow.pendingMove += item.pendingMove;
                     this.overviewRow.nonConformance += item.nonConformance;
                     this.overviewRow.notEquivalent += item.notEquivalent;
-                    this.overviewRow.inactivated += item.inactivations;
+                    this.overviewRow.inactivated += item.newlyCreated;
 
                     this.tableRows.push(
                         {
                             name: item.name,
-                            inactivated: item.inactivations,
+                            inactivated: item.newlyCreated,
                             totalActive: 0,
                             ambiguous: item.ambiguous,
                             movedElsewhere: item.movedElsewhere,
