@@ -45,6 +45,7 @@
                     },
                     "configurations": {
                         "production": {
+                            "baseHref": "/qa/",
                             "budgets": [
                                 {
                                     "type": "initial",
