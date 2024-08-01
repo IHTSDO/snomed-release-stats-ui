@@ -42,11 +42,11 @@ export class SnomedNavbarComponent {
             if (extension === 'SNOMEDCT') {
                 const localVersions = versions['items'].sort((a, b) => (a.version < b.version) ? 1 : -1);
                 const latest = localVersions.shift();
-
                 const previous = localVersions.shift();
                 this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
 
-                const path = '/runs/SnomedCT_InternationalRF2_PRODUCTION_' + latest.effectiveDate
+                const path = '/runs/' +
+                    'SnomedCT_InternationalRF2_PRODUCTION_' + latest.effectiveDate
                     + '---' +
                     'SnomedCT_InternationalRF2_PRODUCTION_' + previous.effectiveDate;
                 this.s3service.setFilePath(path);
@@ -60,31 +60,34 @@ export class SnomedNavbarComponent {
                     this.titleService.setTitle('SNOMEDCT Release Statistics ' + latest.version);
 
                     if (metadata.defaultNamespace) {
+                        const countryCodeUpperCase = this.activeExtension.countryCode.toUpperCase();
+
                         let folder = '';
-                        if (extension !== 'SNOMEDCT-US') {
+                        if ((countryCodeUpperCase !== 'US') && (countryCodeUpperCase !== 'NL')) {
                             folder = 'Extensions';
                         }
+
+                        const basePackageName = 'SnomedCT_ManagedService' + countryCodeUpperCase +
+                            '_PRODUCTION_' + countryCodeUpperCase + metadata.defaultNamespace + '_';
+
+                        const emptyPackageName = 'empty-rf2-snapshot';
 
                         if (localVersions) {
                             if (localVersions.length) {
                                 const previous = localVersions.shift();
-                                const path = folder + '/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
-                                    + '---' +
-                                    'SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + previous.effectiveDate;
+                                const path = folder + '/runs/' +
+                                    basePackageName + latest.effectiveDate + '---' + basePackageName + previous.effectiveDate;
                                 this.s3service.setFilePath(path);
                             } else {
-                                const path = folder + '/runs/SnomedCT_ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_PRODUCTION_' + this.activeExtension.countryCode.toUpperCase() + metadata.defaultNamespace + '_' + latest.effectiveDate
-                                    + '---empty-rf2-snapshot';
+                                const path = folder + '/runs/' +
+                                    basePackageName + latest.effectiveDate + '---' + emptyPackageName;
                                 this.s3service.setFilePath(path);
                             }
-
-                            if (folder) {
-                                const rsPath = 'Extensions/ReleaseSummaries/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '/ManagedService' + this.activeExtension.countryCode.toUpperCase() + '_ReleaseSummaries.json';
-                                this.s3service.setRSFilePath(rsPath);
-                            } else {
-                                const rsPath = '/ReleaseSummaries/USEditionRF2/USEditionRF2_ReleaseSummaries.json';
-                                this.s3service.setRSFilePath(rsPath);
-                            }
+                            const rsPath = folder +
+                                '/ReleaseSummaries' +
+                                '/ManagedService' + countryCodeUpperCase +
+                                '/ManagedService' + countryCodeUpperCase + '_ReleaseSummaries.json';
+                            this.s3service.setRSFilePath(rsPath);
                         }
                     } else {
                         this.toastr.error('metadata.defaultNamespace not populated', 'ERROR');
