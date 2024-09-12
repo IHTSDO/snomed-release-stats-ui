@@ -35,7 +35,7 @@ export class S3Service {
                     hierarchy.name = item['Hierarchy'];
                     hierarchy.semTag = item['SemTag'];
                     hierarchy.newlyCreated = parseInt(item['New'], 10);
-                    hierarchy.changedStatus = parseInt(item['Changed DefnStatus'], 10);
+                    hierarchy.changedStatus = parseInt(item['Changed'], 10);
                     hierarchy.inactivated = parseInt(item['Inactivated'], 10);
                     hierarchy.reactivated = parseInt(item['Reactivated'], 10);
                     hierarchy.newWithNewConcept = parseInt(item['New with New Concept'], 10);
