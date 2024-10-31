@@ -3,18 +3,21 @@ export class Hierarchy {
     name: string;
     semTag: string;
     newlyCreated: number;
-    relationships: number;
-    inactivations: number;
-    changedStatus: number;
     changed: number;
     inactivated: number;
     reactivated: number;
+    newInactive: number;
     newWithNewConcept: number;
+    movedModule: number;
+    changedInactive: number;
     sd: number;
     p: number;
-    total: number;
     totalActive: number;
+    total: number;
+    promoted: number;
+
     conceptsAffected: number;
+
     ambiguous: number;
     movedElsewhere: number;
     conceptNonCurrent: number;

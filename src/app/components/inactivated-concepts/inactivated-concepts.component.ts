@@ -5,8 +5,8 @@ import {ToastrService} from 'ngx-toastr';
 
 export class TableRow {
     name: string;
-    inactivated: number;
     totalActive: number;
+    inactivated: number;
     ambiguous: number;
     movedElsewhere: number;
     conceptNonCurrent: number;
@@ -19,11 +19,23 @@ export class TableRow {
     nonConformance: number;
     notEquivalent: number;
 
-    constructor(name, inactivated, totalActive, ambiguous, movedElsewhere, conceptNonCurrent, duplicate, erroneous, inappropriate,
-                limited, outdated, pendingMove, nonConformance, notEquivalent) {
+    constructor(name,
+                totalActive,
+                inactivated,
+                ambiguous,
+                movedElsewhere,
+                conceptNonCurrent,
+                duplicate,
+                erroneous,
+                inappropriate,
+                limited,
+                outdated,
+                pendingMove,
+                nonConformance,
+                notEquivalent) {
         this.name = name;
-        this.inactivated = inactivated;
         this.totalActive = totalActive;
+        this.inactivated = inactivated;
         this.ambiguous = ambiguous;
         this.movedElsewhere = movedElsewhere;
         this.conceptNonCurrent = conceptNonCurrent;
@@ -66,52 +78,61 @@ export class InactivatedConceptsComponent implements OnInit {
         this.tableRows = [];
         this.overviewRow = null;
 
-        this.s3Service.getConceptStatistics().subscribe(concepts => {
-            this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        this.overviewRow = new TableRow('SNOMED CT Concept (SNOMED RT+CTV3)', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            concepts.forEach(item => {
-                this.overviewRow.totalActive += item.totalActive;
+        this.s3Service.getConceptStatistics().subscribe(concepts => {
+            concepts.forEach(concept => {
+                this.overviewRow.totalActive += concept.totalActive;
+
+                this.tableRows.push({
+                    name: concept.name,
+                    totalActive: concept.totalActive,
+                    inactivated: 0,
+                    ambiguous: 0,
+                    movedElsewhere: 0,
+                    conceptNonCurrent: 0,
+                    duplicate: 0,
+                    erroneous: 0,
+                    inappropriate: 0,
+                    limited: 0,
+                    outdated: 0,
+                    pendingMove: 0,
+                    nonConformance: 0,
+                    notEquivalent: 0
+                });
             });
 
             this.s3Service.getInactivationStatistics().subscribe(inactivations => {
-                inactivations.forEach(item => {
-                    this.overviewRow.ambiguous += item.ambiguous;
-                    this.overviewRow.movedElsewhere += item.movedElsewhere;
-                    this.overviewRow.conceptNonCurrent += item.conceptNonCurrent;
-                    this.overviewRow.duplicate += item.duplicate;
-                    this.overviewRow.erroneous += item.erroneous;
-                    this.overviewRow.inappropriate += item.inappropriate;
-                    this.overviewRow.limited += item.limited;
-                    this.overviewRow.outdated += item.outdated;
-                    this.overviewRow.pendingMove += item.pendingMove;
-                    this.overviewRow.nonConformance += item.nonConformance;
-                    this.overviewRow.notEquivalent += item.notEquivalent;
-                    this.overviewRow.inactivated += item.inactivated;
+                inactivations.forEach((inactivation, index) => {
+                    this.overviewRow.inactivated += inactivation.newlyCreated;
+                    this.overviewRow.ambiguous += inactivation.ambiguous;
+                    this.overviewRow.movedElsewhere += inactivation.movedElsewhere;
+                    this.overviewRow.conceptNonCurrent += inactivation.conceptNonCurrent;
+                    this.overviewRow.duplicate += inactivation.duplicate;
+                    this.overviewRow.erroneous += inactivation.erroneous;
+                    this.overviewRow.inappropriate += inactivation.inappropriate;
+                    this.overviewRow.limited += inactivation.limited;
+                    this.overviewRow.outdated += inactivation.outdated;
+                    this.overviewRow.pendingMove += inactivation.pendingMove;
+                    this.overviewRow.nonConformance += inactivation.nonConformance;
+                    this.overviewRow.notEquivalent += inactivation.notEquivalent;
 
-                    this.tableRows.push(
-                        {
-                            name: item.name,
-                            inactivated: item.inactivated,
-                            totalActive: 0,
-                            ambiguous: item.ambiguous,
-                            movedElsewhere: item.movedElsewhere,
-                            conceptNonCurrent: item.conceptNonCurrent,
-                            duplicate: item.duplicate,
-                            erroneous: item.erroneous,
-                            inappropriate: item.inappropriate,
-                            limited: item.limited,
-                            outdated: item.outdated,
-                            pendingMove: item.pendingMove,
-                            nonConformance: item.nonConformance,
-                            notEquivalent: item.notEquivalent
-                        }
-                    );
+                    this.tableRows[index].inactivated = inactivation.newlyCreated;
+                    this.tableRows[index].ambiguous = inactivation.ambiguous;
+                    this.tableRows[index].movedElsewhere = inactivation.movedElsewhere;
+                    this.tableRows[index].conceptNonCurrent = inactivation.conceptNonCurrent;
+                    this.tableRows[index].duplicate = inactivation.duplicate;
+                    this.tableRows[index].erroneous = inactivation.erroneous;
+                    this.tableRows[index].inappropriate = inactivation.inappropriate;
+                    this.tableRows[index].limited = inactivation.limited;
+                    this.tableRows[index].outdated = inactivation.outdated;
+                    this.tableRows[index].pendingMove = inactivation.pendingMove;
+                    this.tableRows[index].nonConformance = inactivation.nonConformance;
+                    this.tableRows[index].notEquivalent = inactivation.notEquivalent;
                 });
             }, error => {
                 this.toastr.error('Data not found in S3', 'ERROR');
             });
-        }, error => {
-            this.toastr.error('Data not found in S3', 'ERROR');
         });
     }
 

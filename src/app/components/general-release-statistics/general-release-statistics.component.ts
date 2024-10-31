@@ -51,7 +51,12 @@ export class GeneralReleaseStatisticsComponent implements OnInit {
 
             concepts.forEach(item => {
                 this.overviewRow.totalActive += item.totalActive;
-                this.tableRows.push({name: item.name, totalActive: item.totalActive, descriptions: null, relationships: null});
+                this.tableRows.push({
+                    name: item.name,
+                    totalActive: item.totalActive,
+                    descriptions: 0,
+                    relationships: 0
+                });
             }, error => {
                 this.toastr.error('Data not found in S3', 'ERROR');
             });
