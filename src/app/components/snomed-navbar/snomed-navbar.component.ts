@@ -63,7 +63,7 @@ export class SnomedNavbarComponent {
                         const countryCodeUpperCase = this.activeExtension.countryCode.toUpperCase();
 
                         let folder = '';
-                        if ((countryCodeUpperCase !== 'US') && (countryCodeUpperCase !== 'NL')) {
+                        if ((countryCodeUpperCase !== 'US') && (countryCodeUpperCase !== 'NL') && (countryCodeUpperCase !== 'AU')) {
                             folder = 'Extensions';
                         }
 
