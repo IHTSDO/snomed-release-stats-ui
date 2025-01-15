@@ -55,14 +55,14 @@ export class NewConceptsComponent implements OnInit {
                 this.overviewRow.newConcepts += item.newlyCreated;
                 this.overviewRow.sd += item.sd;
                 this.overviewRow.p += item.p;
-                this.tableRows.push(
-                    {
-                        name: item.name,
-                        newConcepts: item.newlyCreated,
-                        totalActive: item.totalActive,
-                        sd: item.sd,
-                        p: item.p
-                    });
+
+                this.tableRows.push({
+                    name: item.name,
+                    newConcepts: item.newlyCreated,
+                    totalActive: item.totalActive,
+                    sd: item.sd,
+                    p: item.p
+                });
             });
         }, error => {
             this.toastr.error('Data not found in S3', 'ERROR');
