@@ -7,39 +7,18 @@
                 <th scope="col">Hierarchy</th>
                 <th scope="col">Inactivated Concepts</th>
                 <th scope="col">Inactivated in Release</th>
-<!--                <th scope="col">As Ambigous</th>-->
-<!--                <th scope="col">As Moved Elsewhere</th>-->
-<!--                <th scope="col">As Duplicate</th>-->
-<!--                <th scope="col">As Erroneous</th>-->
-<!--                <th scope="col">As Limited</th>-->
-<!--                <th scope="col">As Outdated</th>-->
-<!--                <th scope="col">As Non Conformance</th>-->
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let row of tableRows">
                 <td>{{row.name}}</td>
-                <td>{{row.inactivated | number}}</td>
-                <td>{{row.inactivated ? (percentage(row.inactivated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-<!--                <td>{{row.ambiguous}}</td>-->
-<!--                <td>{{row.movedElsewhere}}</td>-->
-<!--                <td>{{row.duplicate}}</td>-->
-<!--                <td>{{row.erroneous}}</td>-->
-<!--                <td>{{row.limited}}</td>-->
-<!--                <td>{{row.outdated}}</td>-->
-<!--                <td>{{row.nonConformance}}</td>-->
+                <td>{{row.newInactivations | number}}</td>
+                <td>{{row.newInactivations ? (percentage(row.newInactivations, overviewRow.newInactivations) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
             <tr *ngIf="overviewRow">
                 <td class="fw-bolder">Total</td>
-                <td class="fw-bolder">{{overviewRow.inactivated | number}}</td>
-                <td class="fw-bolder">{{overviewRow.inactivated ? (percentage(overviewRow.inactivated, overviewRow.inactivated) | number:'1.2-2') + '%' : '-'}}</td>
-<!--                <td class="fw-bolder">{{overviewRow.ambiguous}}</td>-->
-<!--                <td class="fw-bolder">{{overviewRow.movedElsewhere}}</td>-->
-<!--                <td class="fw-bolder">{{overviewRow.duplicate}}</td>-->
-<!--                <td class="fw-bolder">{{overviewRow.erroneous}}</td>-->
-<!--                <td class="fw-bolder">{{overviewRow.limited}}</td>-->
-<!--                <td class="fw-bolder">{{overviewRow.outdated}}</td>-->
-<!--                <td class="fw-bolder">{{overviewRow.nonConformance}}</td>-->
+                <td class="fw-bolder">{{overviewRow.newInactivations | number}}</td>
+                <td class="fw-bolder">{{overviewRow.newInactivations ? (percentage(overviewRow.newInactivations, overviewRow.newInactivations) | number:'1.2-2') + '%' : '-'}}</td>
             </tr>
             </tbody>
         </table>
