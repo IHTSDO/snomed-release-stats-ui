@@ -34,6 +34,7 @@
         "bootstrap": "^5.2.3",
         "chart.js": "^4.3.0",
         "chartjs-plugin-datalabels": "^2.2.0",
+        "cypress": "^14.2.1",
         "guid-typescript": "^1.0.9",
         "jquery": "^3.5.1",
         "ngx-clipboard": "^16.0.0",
@@ -50,6 +51,7 @@
         "@angular/cli": "~16.1.4",
         "@angular/compiler-cli": "^16.1.4",
         "@types/jasmine": "~4.3.0",
+        "cypress-mochawesome-reporter": "^3.8.2",
         "jasmine-core": "~4.6.0",
         "typescript": "~5.0.2"
     },
