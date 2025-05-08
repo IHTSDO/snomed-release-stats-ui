@@ -1,9 +1,9 @@
-export class StartPage {
+export default class StartPage {
 
-    urlBrowser = Cypress.env('URL_BROWSER');
+    urlBrowserReleaseStats = Cypress.env('URL_BROWSER') + '/qa/';
 
     visit() {
-        cy.visit(this.urlBrowser);
+        cy.visit(this.urlBrowserReleaseStats);
     }
 
     acceptCookies() {
@@ -12,10 +12,6 @@ export class StartPage {
 
     acceptLicenseAgreement() {
         cy.get('#license-modal').find('#accept-license-button-modal').click();
-    }
-
-    visitQaStatPage() {
-        cy.visit(this.urlBrowser + '/qa/');
     }
 
 }
