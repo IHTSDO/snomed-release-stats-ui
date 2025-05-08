@@ -1,9 +1,9 @@
-export class QaStatPage {   
-   
+export default class ReleaseStatsPage {
+
    selectTabByName(tabName: string) {
       cy.get('.fixed-top a').contains(tabName).click();
       cy.wait(3000);
-   }   
+   }
 
    selectEditionByName(editionName: string) {
       cy.get('#branchDropdown').click();
