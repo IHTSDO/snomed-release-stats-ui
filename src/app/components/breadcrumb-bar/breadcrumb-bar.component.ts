@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {AuthoringService} from '../../services/authoring/authoring.service';
 import {Subscription} from 'rxjs';
-import {Router} from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {S3Service} from '../../services/s3/s3.service';
 import {ToastrService} from 'ngx-toastr';
@@ -10,7 +10,8 @@ import {ToastrService} from 'ngx-toastr';
 @Component({
     selector: 'app-breadcrumb-bar',
     templateUrl: './breadcrumb-bar.component.html',
-    styleUrls: ['./breadcrumb-bar.component.scss']
+    styleUrls: ['./breadcrumb-bar.component.scss'],
+    imports: [RouterLinkActive, RouterLink]
 })
 export class BreadcrumbBarComponent implements OnInit {
 

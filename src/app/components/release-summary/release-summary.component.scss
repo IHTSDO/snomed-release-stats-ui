@@ -1,4 +1,5 @@
-@import 'src/variables.scss';
+@use 'src/variables' as *;
+@use "sass:color";
 
 $tonys-pink: #E98689;
 $perano: #9DC7F0;
@@ -37,19 +38,19 @@ div.release-summary {
             tr {
                 th {
                     &.bg-tonys-pink {
-                        background-color: lighten($tonys-pink, 20%);
+                        background-color: color.adjust($tonys-pink, $lightness: 20%);
                     }
 
                     &.bg-perano {
-                        background-color: lighten($perano, 20%);
+                        background-color: color.adjust($perano,$lightness: 20%);
                     }
 
                     &.bg-spring-rain {
-                        background-color: lighten($spring-rain, 20%);
+                        background-color: color.adjust($spring-rain,$lightness: 20%);
                     }
 
                     &.bg-vanilla {
-                        background-color: lighten($vanilla, 20%);
+                        background-color: color.adjust($vanilla, $lightness: 20%);
                     }
                 }
             }

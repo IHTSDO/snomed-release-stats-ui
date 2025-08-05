@@ -4,11 +4,16 @@ import {AuthoringService} from '../../services/authoring/authoring.service';
 import {Title} from '@angular/platform-browser';
 import {S3Service} from '../../services/s3/s3.service';
 import {ToastrService} from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
+import { NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { AlphabeticalPipe } from '../../pipes/alphabetical/alphabetical.pipe';
+import { ManagedServicePipe } from '../../pipes/managedService/managed-service.pipe';
 
 @Component({
     selector: 'app-snomed-navbar',
     templateUrl: './snomed-navbar.component.html',
-    styleUrls: ['./snomed-navbar.component.scss']
+    styleUrls: ['./snomed-navbar.component.scss'],
+    imports: [RouterLink, NgIf, NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, AlphabeticalPipe, ManagedServicePipe]
 })
 export class SnomedNavbarComponent {
 
