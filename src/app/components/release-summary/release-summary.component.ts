@@ -3,6 +3,12 @@ import {S3Service} from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {AuthoringService} from '../../services/authoring/authoring.service';
 import {ToastrService} from 'ngx-toastr';
+import { NgIf, NgFor, DecimalPipe } from '@angular/common';
+import { TitleFormatterPipe } from '../../pipes/title-formatter.pipe';
+import { DateOrderPipe } from '../../pipes/date-order.pipe';
+import { DateFormatterPipe } from '../../pipes/date-formatter.pipe';
+import { TopTitleFormatterPipe } from '../../pipes/topTitleFormatter/top-title-formatter.pipe';
+import { DuplicateFilterPipe } from '../../pipes/duplicateFilter/duplicate-filter.pipe';
 
 export class TableRow {
     constructor(
@@ -37,7 +43,8 @@ export class TableRow {
 @Component({
     selector: 'app-release-summary',
     templateUrl: './release-summary.component.html',
-    styleUrls: ['./release-summary.component.scss']
+    styleUrls: ['./release-summary.component.scss'],
+    imports: [NgIf, NgFor, DecimalPipe, TitleFormatterPipe, DateOrderPipe, DateFormatterPipe, TopTitleFormatterPipe, DuplicateFilterPipe]
 })
 export class ReleaseSummaryComponent implements OnInit {
 

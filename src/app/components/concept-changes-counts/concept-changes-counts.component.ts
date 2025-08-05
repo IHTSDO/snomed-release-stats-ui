@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import { NgFor, NgIf, DecimalPipe } from '@angular/common';
 
 export class TableRow {
     name: string;
@@ -24,7 +25,8 @@ export class TableRow {
 @Component({
     selector: 'app-concept-changes-counts',
     templateUrl: './concept-changes-counts.component.html',
-    styleUrls: ['./concept-changes-counts.component.scss']
+    styleUrls: ['./concept-changes-counts.component.scss'],
+    imports: [NgFor, NgIf, DecimalPipe]
 })
 export class ConceptChangesCountsComponent implements OnInit {
 

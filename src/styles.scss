@@ -1,6 +1,6 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'src/variables.scss';
-@import 'toastr';
+@use "sass:color";
+@use "src/variables" as *;
+
 
 html {
     font-size: 62.5%;
@@ -116,7 +116,7 @@ a {
     color: $cerulean;
 
     &:hover {
-        color: darken($cerulean, 20%);
+        color: color.adjust($cerulean,$lightness: -20%);
     }
 }
 

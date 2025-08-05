@@ -3,6 +3,7 @@ import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {AuthoringService} from '../../services/authoring/authoring.service';
+import { NgFor, NgIf, DecimalPipe } from '@angular/common';
 
 export class TableRow {
     name: string;
@@ -21,7 +22,8 @@ export class TableRow {
 @Component({
     selector: 'app-general-release-statistics',
     templateUrl: './general-release-statistics.component.html',
-    styleUrls: ['./general-release-statistics.component.scss']
+    styleUrls: ['./general-release-statistics.component.scss'],
+    imports: [NgFor, NgIf, DecimalPipe]
 })
 export class GeneralReleaseStatisticsComponent implements OnInit {
 

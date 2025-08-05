@@ -1,8 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
-@Pipe({
-    name: 'topTitleFormatter'
-})
+@Pipe({ name: 'topTitleFormatter' })
 export class TopTitleFormatterPipe implements PipeTransform {
 
     transform(title: string): string {

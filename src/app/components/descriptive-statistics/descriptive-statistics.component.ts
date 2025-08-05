@@ -4,6 +4,8 @@ import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {AuthoringService} from '../../services/authoring/authoring.service';
+import { UIChart } from 'primeng/chart';
+import { NgIf } from '@angular/common';
 
 export class GraphData {
     labels: string[];
@@ -28,7 +30,8 @@ export class DataSet {
 @Component({
     selector: 'app-descriptive-statistics',
     templateUrl: './descriptive-statistics.component.html',
-    styleUrls: ['./descriptive-statistics.component.scss']
+    styleUrls: ['./descriptive-statistics.component.scss'],
+    imports: [UIChart, NgIf]
 })
 export class DescriptiveStatisticsComponent implements OnInit {
 

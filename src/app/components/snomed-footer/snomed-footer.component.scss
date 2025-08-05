@@ -1,4 +1,5 @@
-@import 'src/variables.scss';
+@use 'src/variables' as *;
+@use 'sass:color';
 
 footer.footer {
     position: fixed;
