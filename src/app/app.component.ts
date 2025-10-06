@@ -4,7 +4,6 @@ import { AuthoringService } from './services/authoring/authoring.service';
 import {Subscription} from 'rxjs';
 import { SnomedNavbarComponent } from './components/snomed-navbar/snomed-navbar.component';
 import { BreadcrumbBarComponent } from './components/breadcrumb-bar/breadcrumb-bar.component';
-import { NgIf } from '@angular/common';
 import { DescriptiveStatisticsComponent } from './components/descriptive-statistics/descriptive-statistics.component';
 import { GeneralReleaseStatisticsComponent } from './components/general-release-statistics/general-release-statistics.component';
 import { NewConceptsComponent } from './components/new-concepts/new-concepts.component';
@@ -12,12 +11,13 @@ import { InactivatedConceptsComponent } from './components/inactivated-concepts/
 import { ConceptChangesCountsComponent } from './components/concept-changes-counts/concept-changes-counts.component';
 import { ReleaseSummaryComponent } from './components/release-summary/release-summary.component';
 import { SnomedFooterComponent } from './components/snomed-footer/snomed-footer.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    imports: [SnomedNavbarComponent, BreadcrumbBarComponent, NgIf, DescriptiveStatisticsComponent, GeneralReleaseStatisticsComponent, NewConceptsComponent, InactivatedConceptsComponent, ConceptChangesCountsComponent, ReleaseSummaryComponent, SnomedFooterComponent]
+    imports: [SnomedNavbarComponent, BreadcrumbBarComponent, CommonModule, DescriptiveStatisticsComponent, GeneralReleaseStatisticsComponent, NewConceptsComponent, InactivatedConceptsComponent, ConceptChangesCountsComponent, ReleaseSummaryComponent, SnomedFooterComponent]
 })
 export class AppComponent implements OnInit {
 

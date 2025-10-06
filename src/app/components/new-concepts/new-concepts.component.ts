@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import { NgFor, NgIf, DecimalPipe } from '@angular/common';
+import { NgFor, NgIf, DecimalPipe, CommonModule } from '@angular/common';
 
 export class TableRow {
     name: string;
@@ -24,7 +24,7 @@ export class TableRow {
     selector: 'app-new-concepts',
     templateUrl: './new-concepts.component.html',
     styleUrls: ['./new-concepts.component.scss'],
-    imports: [NgFor, NgIf, DecimalPipe]
+    imports: [CommonModule,DecimalPipe]
 })
 export class NewConceptsComponent implements OnInit {
 
