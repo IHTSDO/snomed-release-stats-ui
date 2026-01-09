@@ -1,6 +1,6 @@
 @use "sass:color";
 @use "src/variables" as *;
-
+@use 'toastr';
 
 html {
     font-size: 62.5%;
