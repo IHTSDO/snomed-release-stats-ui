@@ -17,7 +17,7 @@ export class S3Service {
     localRSFilePath: any;
     localRSFilePathSubscription: Subscription;
 
-    private s3Path = '../reporting-s3/jobs/SummaryComponentStats';
+    private s3Path = '../reporting-s3/jobs/BrowserReleaseStatsGenerator';
 
     constructor(private http: HttpClient) {
         this.localFilePathSubscription = this.getFilePath().subscribe(data => this.localFilePath = data);
