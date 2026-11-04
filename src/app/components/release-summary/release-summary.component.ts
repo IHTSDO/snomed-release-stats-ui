@@ -28,9 +28,6 @@ export class TableRow {
         public axiomNew: number,
         public axiomModified: number,
         public axiomTotal: number,
-        public statedNew: number,
-        public statedModified: number,
-        public statedTotal: number,
         public inferredNew: number,
         public inferredModified: number,
         public inferredTotal: number,
@@ -50,7 +47,7 @@ export class ReleaseSummaryComponent implements OnInit {
 
 
     rawTableRows: TableRow[] = [];
-    titleRow: string[];
+    titleRow: string[] = [];
     tableRows: TableRow[] = [];
 
     tableColours = [
@@ -86,7 +83,12 @@ export class ReleaseSummaryComponent implements OnInit {
         this.tableRows = [];
 
         this.s3Service.getReleaseSummary().subscribe(data => {
-            this.titleRow = data['columnHeadings'];
+            data['columnHeadings'].forEach((item) => {
+                // Exclude stated relationship data (15, 16, 17)
+                if (!(item.startsWith('Stated Relationship'))) {
+                    this.titleRow.push(item);
+                }
+            })
 
             data['releases'].forEach(item => {
                 this.rawTableRows.push(
@@ -107,9 +109,7 @@ export class ReleaseSummaryComponent implements OnInit {
                         axiomNew: item['data'][12],
                         axiomModified: item['data'][13],
                         axiomTotal:  item['data'][14],
-                        statedNew: item['data'][15],
-                        statedModified: item['data'][16],
-                        statedTotal:  item['data'][17],
+                        // Exclude stated relationship data (15, 16, 17)
                         inferredNew: item['data'][18],
                         inferredModified: item['data'][19],
                         inferredTotal:  item['data'][20],
