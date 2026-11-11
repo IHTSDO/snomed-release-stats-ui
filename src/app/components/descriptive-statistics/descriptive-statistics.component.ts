@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { S3Service } from '../../services/s3/s3.service';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
@@ -47,32 +47,69 @@ export class DescriptiveStatisticsComponent implements OnInit {
             legend: {
                 display: true,
                 position: 'right',
-                onClick: false
+                onClick: false,
+                labels: {
+                    generateLabels: (chart) => {
+                        const data = chart.data;
+                        if (!data.labels?.length || !data.datasets?.length) {
+                            return [];
+                        }
+                        const {labels: {pointStyle, color}} = chart.legend.options;
+                        const values = data.datasets[0].data;
+                        return data.labels.map((label, index) => {
+                            const style = chart.getDatasetMeta(0).controller.getStyle(index);
+                            return {
+                                text: `${label} (${values[index]}%)`,
+                                fillStyle: style.backgroundColor,
+                                strokeStyle: style.borderColor,
+                                fontColor: color,
+                                lineWidth: style.borderWidth,
+                                pointStyle: pointStyle,
+                                hidden: !chart.getDataVisibility(index),
+                                index: index
+                            };
+                        });
+                    }
+                }
             },
-
+            tooltip: {
+                callbacks: {
+                    label: (context) => `${context.label}: ${context.parsed}%`
+                }
+            },
             datalabels: {
                 color: '#EEEEEE',
                 formatter: (value) => {
                     if (value < 3) {
                         return '';
                     } else {
-                        return value += '%';
+                        return value + '%';
                     }
                 },
             }
         }
     };
     barChartOptions: any = {
+        scales: {
+            y: {
+                ticks: {
+                    callback: (value) => value + '%'
+                }
+            }
+        },
         plugins: {
             legend: {
                 display: false,
                 position: 'bottom'
             },
+            tooltip: {
+                callbacks: {
+                    label: (context) => `${context.parsed.y}%`
+                }
+            },
             datalabels: {
                 color: '#EEEEEE',
-                formatter: (value) => {
-                    return value += '%';
-                },
+                formatter: (value) => value + '%',
             }
         }
     };
@@ -129,7 +166,7 @@ export class DescriptiveStatisticsComponent implements OnInit {
         });
     }
 
-    public pieChartPlugins = [pluginDataLabels];
+    public chartPlugins = [ChartDataLabels];
 
     ngOnInit(): void {
         this.getStats();
