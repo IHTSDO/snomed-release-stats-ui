@@ -47,45 +47,15 @@ export class DescriptiveStatisticsComponent implements OnInit {
             legend: {
                 display: true,
                 position: 'right',
-                onClick: false,
-                labels: {
-                    generateLabels: (chart) => {
-                        const data = chart.data;
-                        if (!data.labels?.length || !data.datasets?.length) {
-                            return [];
-                        }
-                        const {labels: {pointStyle, color}} = chart.legend.options;
-                        const values = data.datasets[0].data;
-                        return data.labels.map((label, index) => {
-                            const style = chart.getDatasetMeta(0).controller.getStyle(index);
-                            return {
-                                text: `${label} (${values[index]}%)`,
-                                fillStyle: style.backgroundColor,
-                                strokeStyle: style.borderColor,
-                                fontColor: color,
-                                lineWidth: style.borderWidth,
-                                pointStyle: pointStyle,
-                                hidden: !chart.getDataVisibility(index),
-                                index: index
-                            };
-                        });
-                    }
-                }
+                onClick: false
             },
             tooltip: {
                 callbacks: {
-                    label: (context) => `${context.label}: ${context.parsed}%`
+                    label: (context) => `${context.parsed}%`
                 }
             },
             datalabels: {
-                color: '#EEEEEE',
-                formatter: (value) => {
-                    if (value < 3) {
-                        return '';
-                    } else {
-                        return value + '%';
-                    }
-                },
+                display: false
             }
         }
     };
